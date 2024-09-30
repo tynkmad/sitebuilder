@@ -1,0 +1,16 @@
+[
+    {
+      "customerid": 1672520,
+      "businessid": 11418308,
+      "documents": "[{\"name\":\"Eyecare.pdf\",\"title\":\"Health Tips\",\"size\":1713612,\"type\":\"pdf\",\"documentUrl\":\"https://lscdn.blob.core.windows.net/content/pro-manage/document/1672520/11418308/Eyecare.pdf\",\"uploadedBy\":43393806,\"uploadedOn\":\"2023-11-02T09:29:47.509Z\"},{\"name\":\"Oral Health and Hygiene.pdf\",\"title\":\"Health Care\",\"size\":874167,\"type\":\"pdf\",\"documentUrl\":\"https://lscdn.blob.core.windows.net/content/pro-manage/document/1672520/11418308/Oral%20Health%20and%20Hygiene.pdf\",\"uploadedBy\":43393806,\"uploadedOn\":\"2023-11-02T09:29:47.509Z\"}]",
+      "serviceArea": "Adyar,Velachery,Guindy,Anna nagar",
+      "MicrositeDomainUrl": "https://doctor.promanagetest.com/",
+      "IsMicrositeActive": true,
+      "gaTrack": null,
+      "ga4Track": null,
+      "indexType": true,
+      "clarityId": "",
+      "serviceAreaJson": null,
+      "webProfileTemplate": "{\"template\":[{\"backgroundColor\":\"#202F59\",\"textColor\":\"#FFFFFF\",\"type\":1},{\"backgroundColor\":\"#dd1652\",\"textColor\":\"#f4f4f4\",\"type\":2},{\"backgroundColor\":\"#ffffff\",\"textColor\":\"#212121\",\"type\":3}],\"refTemplateId\":8}"
+    }
+  ]

@@ -1,0 +1,74 @@
+@import './base.css';
+
+/* Icon fonts :: BEGIN */
+@font-face {
+    font-family: 'sk-icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://lscdn.blob.core.windows.net/content/fonts/sk-icons-sharp.woff2') format('woff2');
+}
+
+
+.sk-icons,
+.sk-icons-filled {
+    font-family: 'sk-icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.4rem;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.sk-icons-filled {
+    font-variation-settings: "FILL" 1;
+}
+
+/* Icon fonts :: END */
+
+:root {
+    --font-family-primary: "sf-pro-text", sans-serif;
+    --font-size-base: 1.6rem;
+    --line-height-large: 2;
+    --line-height-base: 1.5;
+    --line-height-small: 1.25;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+
+    --color-text-muted: #666666;
+    --template-gradient: radial-gradient(circle at bottom left, rgb(var(--color-rgb-primary) / 20%) 70%, rgb(var(--color-rgb-secondary) / 50%));
+
+    --gutter-base: 1.6rem;
+    --table-border-width: .1rem;
+    --table-header-background: #f6f8fc;
+    --table-border-color: #d4e5ff;
+
+    --color-primary: #2A5EFE;
+    --color-secondary: #011A65;
+    --color-on-primary: var(--color-white);
+    --color-on-secondary: var(--color-white);
+    --color-rgb-primary: 42 94 254;
+    --color-rgb-secondary: 1 26 101;
+    --color-body-background: #F1F3F7;
+    --color-body-color: #212121;
+}
+
+/* #region common base.css style overrides  */
+
+.appbar-title-group h4 {
+    margin-bottom: 0;
+}
+
+.sk-menu li a {
+    justify-content: flex-start;
+}
+
+/* #endregion common base.css style overrides  */

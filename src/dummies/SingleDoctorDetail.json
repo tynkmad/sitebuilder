@@ -1,0 +1,64 @@
+[
+    {
+        "profileId": 5,
+        "profileName": "Dr. Kutti Sai Swetha",
+        "mobileNumber": "9993330589",
+        "emailId": "arunkumarms@promanage.biz",
+        "isWhatsApp": true,
+        "education": "[\"MBBS from SRM Medical College Hospital and Research Centre, Chennai in 2014\",\"MD - Dermatology, Venereology & Leprosy from SRM Medical College Hospital and Research Centre, Chennai in 2020\"]",
+        "educationList": [
+            "MBBS from SRM Medical College Hospital and Research Centre, Chennai in 2014",
+            "MD - Dermatology, Venereology & Leprosy from SRM Medical College Hospital and Research Centre, Chennai in 2020"
+        ],
+        "specialistIn": "[\"Venereology & Leprosy  Dermatologist\",\"Cosmetologist\",\"Trichologist\"]",
+        "specialistInList": [
+            "Venereology & Leprosy  Dermatologist",
+            "Cosmetologist",
+            "Trichologist"
+        ],
+        "overallExperience": 8,
+        "languageKnown": "[\"Tamil\",\" English\",\" Telugu\"]",
+        "languageKnownList": [
+            "Tamil",
+            " English",
+            " Telugu"
+        ],
+        "consultationFees": 500.00,
+        "status": "True",
+        "isDeleted": false,
+        "businessId": 11528250,
+        "userPid": 0,
+        "profileUrl": null,
+        "profileAvailabilityJson": "[{\"SelectedDays\":[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\"],\"SelectedTimeSlots\":[\"11:00 AM to 08:00 PM\"]}]",
+        "aboutProfile": "Meet Dr. Kutti Sai Swetha, a highly skilled and compassionate Venereology & Leprosy Dermatologist, Cosmetologist, and Trichologist. With 8 years of experience, she is dedicated to providing exceptional care at SIA SKIN & HAIR CLINIC. Dr. Swetha holds an MBBS from SRM Medical College and an MD in Dermatology, Venereology & Leprosy from the same institution. Trust her expertise and personalized approach for all your skin, hair, and cosmetic concerns.",
+        "profileAvailabilitySlots": [
+            {
+                "selectedDays": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ],
+                "selectedTimeSlots": [
+                    "11:00 AM to 08:00 PM"
+                ]
+            }
+        ],
+        "profileImageUrl": "https://lscdn.blob.core.windows.net/content/pro-manage/sme/businessProfileImage/11528250/9993330589.jpg",
+        "address": "No 190/2A1A, 1st Floor, Raj towers, Rajiv Gandhi Salai, IT Highway, Next to Sathyabama Institute of Science, Semmancheri, Chennai, 600119",
+        "businessName": "SIA SKIN & HAIR CLINIC",
+        "appoinmentDuration": 30,
+        "isProfileAvailable": true,
+        "notAvailableFrom": null,
+        "notAvailableTo": null,
+        "timeZone": "Asia/Kolkata",
+        "countryCode": "+91",
+        "serviceFromYear": "2016",
+        "cityName": "Chennai",
+        "streetName": "No 190/2A1A, 1st Floor, Raj towers, Rajiv Gandhi Salai, IT Highway, Next to Sathyabama Institute of Science, Semmancheri",
+        "state": "Tamil Nadu",
+        "zipcode": "600119"
+    }
+]

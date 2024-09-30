@@ -1,0 +1,376 @@
+{
+    "businessProfileListResponse": null,
+    "businessProfileDetailResponse": {
+        "businessId": 11418308,
+        "followerCount": 0,
+        "messageCount": 0,
+        "reviewCount": 0,
+        "businessName": "Dr. KVM Nandakumar",
+        "cityName": "Chennai",
+        "areaName": "Perambur",
+        "rating": 0.0,
+        "score": 54.0,
+        "views": 0,
+        "website": "https://doctor.promanagetest.com/",
+        "mobileNo": "8080080800",
+        "mobileNo1": "",
+        "mobileNo2": "",
+        "stdCode": null,
+        "phoneNo": "",
+        "phoneNo1": "",
+        "phoneNo2": "",
+        "displayNumber": "8080080800",
+        "email": "",
+        "address": "Old Mahabalipuram Road, Perungudi,",
+        "profileHealth": "POOR",
+        "description": "Dr. KVM Nandakumar  serve all home related services in  Old Mahabalipuram Road, Perungudi,, Chennai,Tamil Nadu at  Chennai ,  Tamil Nadu ,  600096 ,  Perambur ",
+        "contactPerson": "Dr. KVM Nandakumar",
+        "businessUrl": "dr-kvm-nandakumar-perambur-chennai",
+        "gmbStoreCode": null,
+        "gmbLocationId": null,
+        "smaId": "1741",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "zipCode": "600096",
+        "regionId": 1,
+        "stateId": 92,
+        "locationId": 17,
+        "country": "India",
+        "stateName": "Tamil Nadu",
+        "profileGoogleStatus": 0,
+        "overAllProfileSyncStatus": 0,
+        "gmbVerifiedStatus": "Initiate Claim",
+        "isRefreshing": 0,
+        "subStatusId": 34,
+        "lastSyncDate": null,
+        "mapsUrl": null,
+        "subStatus": "Inprogress",
+        "googleSubStatus": "Initiate Claim",
+        "bingLocationId": null,
+        "bingStatusId": 1,
+        "customerId": 1672520,
+        "fbStoreLocationId": null,
+        "fbStoreLocationStatus": "Not Created Yet",
+        "aliasBusinessName": null,
+        "notificationMobileNo1": null,
+        "notificationMobileNo2": null,
+        "notificationEmailId1": null,
+        "notificationEmailId2": null,
+        "bvnMappedNumber": null,
+        "altBVNMappedNumber1": null,
+        "altBVNMappedNumber2": null,
+        "altBVNMappedNumber3": null,
+        "micrositeUrl": "https://doctor.promanagetest.com/",
+        "micrositeStatus": "Live",
+        "pendingEdits": null,
+        "pendingEditsOn": null,
+        "pendingEditProperties": null,
+        "hotfrogUrl": "https://www.hotfrog.in/company/9bbd10d162ac8910def8f4654a08b3cf",
+        "hotfrogStatus": "Live",
+        "subArea": "Adyar",
+        "landmark": "",
+        "facebookUrl": "",
+        "twitterUrl": "",
+        "youtubeUrl": "",
+        "linkedinUrl": "",
+        "instagramUrl": "",
+        "instagramTokenId": null,
+        "isMicrositeActive": true,
+        "micrositeDomainUrl": "https://doctor.promanagetest.com/",
+        "canHaveFoodMenus": false,
+        "mappLsURL": null,
+        "isAccessLost": false,
+        "locatedAt": "",
+        "pmTotalMediaCount": 13,
+        "sulekhaListingId": "11418308",
+        "isBillable": true,
+        "establishedYear": 0,
+        "promanageSiteStatus": "Live",
+        "promanagePageUrl": "https://www.promanage.biz/pmsme-test/doctor-in-perambur-chennai-11418308-profile",
+        "countryCode": "91",
+        "nriSulekhaListingId": "0",
+        "sulekhaPageUrl": "https://www.sulekha.com/dr-kvm-nandakumar-perambur-chennai-contact-address"
+    },
+    "businessWorkingHoursResponse": [
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 1,
+            "workingDayTo": 1,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "02:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        },
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 2,
+            "workingDayTo": 2,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "07:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        },
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 3,
+            "workingDayTo": 3,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "07:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        },
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 4,
+            "workingDayTo": 4,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "07:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        },
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 5,
+            "workingDayTo": 5,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "07:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        },
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 6,
+            "workingDayTo": 6,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "07:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        },
+        {
+            "businessId": 11418308,
+            "workingDayFrom": 7,
+            "workingDayTo": 7,
+            "workingHourFrom": "10:00 AM",
+            "workingHourTo": "05:00 PM",
+            "lunchHourFrom": null,
+            "lunchHourTo": null,
+            "_24HrsWorking": false
+        }
+    ],
+    "businessMediaResponse": [],
+    "profileLocalPostDetailResponse": null,
+    "profileServiceDetailResponse": null,
+    "kycDocumentDetailResponse": [],
+    "businessCategoryResponse": [
+        {
+            "isPrimary": true,
+            "categoryId": "nephrologist",
+            "categoryDisplayName": "Nephrologist",
+            "categoryDescription": null,
+            "categoryDescriptionList": "[{\"categoryId\":\"pediatrician\",\"description\":\"Dr. PMSME is a dedicated pediatrician with a deep passion for children's health. Their extensive training and experience in pediatrics make them a go-to expert for parents seeking the best care for their little ones. Dr. PMSME excels in diagnosing and treating a wide array of pediatric conditions, ensuring that children receive the specialized attention they need to thrive. Their compassionate nature and commitment to children's well-being set them apart as a top choice for pediatric care\"},{\"categoryId\":\"doctor\",\"description\":\"Dr. PMSME is a distinguished medical professional who specializes in pediatrics. With a wealth of knowledge and experience, Dr. PMSME is a trusted healthcare provider known for delivering top-notch patient care. Their expertise extends beyond the traditional role of a doctor, incorporating a holistic approach to medicine, focusing on patient education, and fostering long-term wellness.\"}]",
+            "viewMore": true
+        },
+        {
+            "isPrimary": false,
+            "categoryId": "pediatrician",
+            "categoryDisplayName": "Pediatrician",
+            "categoryDescription": "Dr. PMSME is a dedicated pediatrician with a deep passion for children's health. Their extensive training and experience in pediatrics make them a go-to expert for parents seeking the best care for their little ones. Dr. PMSME excels in diagnosing and treating a wide array of pediatric conditions, ensuring that children receive the specialized attention they need to thrive. Their compassionate nature and commitment to children's well-being set them apart as a top choice for pediatric care",
+            "categoryDescriptionList": "[{\"categoryId\":\"pediatrician\",\"description\":\"Dr. PMSME is a dedicated pediatrician with a deep passion for children's health. Their extensive training and experience in pediatrics make them a go-to expert for parents seeking the best care for their little ones. Dr. PMSME excels in diagnosing and treating a wide array of pediatric conditions, ensuring that children receive the specialized attention they need to thrive. Their compassionate nature and commitment to children's well-being set them apart as a top choice for pediatric care\"},{\"categoryId\":\"doctor\",\"description\":\"Dr. PMSME is a distinguished medical professional who specializes in pediatrics. With a wealth of knowledge and experience, Dr. PMSME is a trusted healthcare provider known for delivering top-notch patient care. Their expertise extends beyond the traditional role of a doctor, incorporating a holistic approach to medicine, focusing on patient education, and fostering long-term wellness.\"}]",
+            "viewMore": true
+        }
+    ],
+    "promanageServiceListResponse": [
+        {
+            "contentId": 1224369,
+            "businessId": 11418308,
+            "googleSubcategoryId": 5034,
+            "status": 2,
+            "jsonContent": "{\"IsCustomService\":true,\"GMBCategoryId\":\"doctor\",\"GMBServiceTypeId\":\"Chronic Disease Management\",\"GMBServiceDisplayName\":\"Chronic Disease Management\",\"Price\":\"0\",\"ServiceDescription\":\"Doctors manage chronic conditions like diabetes, hypertension, and heart disease, providing ongoing care, medications, and lifestyle recommendations.\",\"ServicePriceType\":0,\"GMBCategoryDisplayName\":null}",
+            "gmbCategoryId": "doctor",
+            "gmbCategoryDisplayName": "Doctor",
+            "gmbServiceTypeId": "Chronic Disease Management",
+            "gmbServiceDisplayName": "",
+            "statusMessage": "",
+            "profileServiceContent": {
+                "isCustomService": true,
+                "gmbCategoryId": "doctor",
+                "gmbServiceTypeId": "Chronic Disease Management",
+                "gmbServiceDisplayName": "Chronic Disease Management",
+                "price": "0",
+                "serviceDescription": "Doctors manage chronic conditions like diabetes, hypertension, and heart disease, providing ongoing care, medications, and lifestyle recommendations.",
+                "servicePriceType": 0,
+                "gmbCategoryDisplayName": null
+            }
+        },
+        {
+            "contentId": 1224368,
+            "businessId": 11418308,
+            "googleSubcategoryId": 5034,
+            "status": 2,
+            "jsonContent": "{\"IsCustomService\":true,\"GMBCategoryId\":\"doctor\",\"GMBServiceTypeId\":\"Diagnosis and Treatment\",\"GMBServiceDisplayName\":\"Diagnosis and Treatment\",\"Price\":\"0\",\"ServiceDescription\":\"Doctors diagnose illnesses and medical conditions through thorough assessments and tests, followed by appropriate treatment plans.\",\"ServicePriceType\":0,\"GMBCategoryDisplayName\":null}",
+            "gmbCategoryId": "doctor",
+            "gmbCategoryDisplayName": "Doctor",
+            "gmbServiceTypeId": "Diagnosis and Treatment",
+            "gmbServiceDisplayName": "",
+            "statusMessage": "",
+            "profileServiceContent": {
+                "isCustomService": true,
+                "gmbCategoryId": "doctor",
+                "gmbServiceTypeId": "Diagnosis and Treatment",
+                "gmbServiceDisplayName": "Diagnosis and Treatment",
+                "price": "0",
+                "serviceDescription": "Doctors diagnose illnesses and medical conditions through thorough assessments and tests, followed by appropriate treatment plans.",
+                "servicePriceType": 0,
+                "gmbCategoryDisplayName": null
+            }
+        },
+        {
+            "contentId": 1224367,
+            "businessId": 11418308,
+            "googleSubcategoryId": 5034,
+            "status": 2,
+            "jsonContent": "{\"IsCustomService\":true,\"GMBCategoryId\":\"doctor\",\"GMBServiceTypeId\":\"Emergency Care\",\"GMBServiceDisplayName\":\"Emergency Care\",\"Price\":\"0\",\"ServiceDescription\":\"In emergencies, doctors stabilize and treat critical conditions, including trauma, heart attacks, and severe injuries in hospitals and emergency rooms.\",\"ServicePriceType\":0,\"GMBCategoryDisplayName\":null}",
+            "gmbCategoryId": "doctor",
+            "gmbCategoryDisplayName": "Doctor",
+            "gmbServiceTypeId": "Emergency Care",
+            "gmbServiceDisplayName": "",
+            "statusMessage": "",
+            "profileServiceContent": {
+                "isCustomService": true,
+                "gmbCategoryId": "doctor",
+                "gmbServiceTypeId": "Emergency Care",
+                "gmbServiceDisplayName": "Emergency Care",
+                "price": "0",
+                "serviceDescription": "In emergencies, doctors stabilize and treat critical conditions, including trauma, heart attacks, and severe injuries in hospitals and emergency rooms.",
+                "servicePriceType": 0,
+                "gmbCategoryDisplayName": null
+            }
+        },
+        {
+            "contentId": 1224370,
+            "businessId": 11418308,
+            "googleSubcategoryId": 5034,
+            "status": 2,
+            "jsonContent": "{\"IsCustomService\":true,\"GMBCategoryId\":\"doctor\",\"GMBServiceTypeId\":\"Health Counseling\",\"GMBServiceDisplayName\":\"Health Counseling\",\"Price\":\"0\",\"ServiceDescription\":\"Doctors provide advice on nutrition, exercise, and mental health, offering guidance to improve a patient's well-being and quality of life.\",\"ServicePriceType\":0,\"GMBCategoryDisplayName\":null}",
+            "gmbCategoryId": "doctor",
+            "gmbCategoryDisplayName": "Doctor",
+            "gmbServiceTypeId": "Health Counseling",
+            "gmbServiceDisplayName": "",
+            "statusMessage": "",
+            "profileServiceContent": {
+                "isCustomService": true,
+                "gmbCategoryId": "doctor",
+                "gmbServiceTypeId": "Health Counseling",
+                "gmbServiceDisplayName": "Health Counseling",
+                "price": "0",
+                "serviceDescription": "Doctors provide advice on nutrition, exercise, and mental health, offering guidance to improve a patient's well-being and quality of life.",
+                "servicePriceType": 0,
+                "gmbCategoryDisplayName": null
+            }
+        },
+        {
+            "contentId": 1224371,
+            "businessId": 11418308,
+            "googleSubcategoryId": 5034,
+            "status": 2,
+            "jsonContent": "{\"IsCustomService\":true,\"GMBCategoryId\":\"doctor\",\"GMBServiceTypeId\":\"Preventive care\",\"GMBServiceDisplayName\":\"Preventive care\",\"Price\":\"0\",\"ServiceDescription\":\"Doctors offer guidance on preventive measures, such as vaccinations, screenings, and lifestyle changes to maintain overall health and prevent diseases.\",\"ServicePriceType\":0,\"GMBCategoryDisplayName\":null}",
+            "gmbCategoryId": "doctor",
+            "gmbCategoryDisplayName": "Doctor",
+            "gmbServiceTypeId": "Preventive care",
+            "gmbServiceDisplayName": "",
+            "statusMessage": "",
+            "profileServiceContent": {
+                "isCustomService": true,
+                "gmbCategoryId": "doctor",
+                "gmbServiceTypeId": "Preventive care",
+                "gmbServiceDisplayName": "Preventive care",
+                "price": "0",
+                "serviceDescription": "Doctors offer guidance on preventive measures, such as vaccinations, screenings, and lifestyle changes to maintain overall health and prevent diseases.",
+                "servicePriceType": 0,
+                "gmbCategoryDisplayName": null
+            }
+        }
+    ],
+    "specialHours": [],
+    "getBusinessListing": [
+        {
+            "name": "Google",
+            "url": "https://lscdn.blob.core.windows.net/content/promanage/google-logo.svg",
+            "status": "Initiate Claim",
+            "actionUrl": null
+        },
+        {
+            "name": "Microsite",
+            "url": "https://lscdn.blob.core.windows.net/content/promanage/microsite-logo.svg",
+            "status": "Live",
+            "actionUrl": "https://doctor.promanagetest.com/"
+        },
+        {
+            "name": "Hotfrog",
+            "url": "https://lscdn.blob.core.windows.net/content/promanage/hotfrog.svg",
+            "status": "Live",
+            "actionUrl": "https://www.hotfrog.in/company/9bbd10d162ac8910def8f4654a08b3cf"
+        },
+        {
+            "name": "Sulekha",
+            "url": "https://lscdn.blob.core.windows.net/content/promanage/sulekha-logo.svg",
+            "status": "Live",
+            "actionUrl": "https://www.sulekha.com/dr-kvm-nandakumar-perambur-chennai-contact-address"
+        },
+        {
+            "name": "Promanage",
+            "url": "https://lscdn.blob.core.windows.net/content/promanage/pm-icon.svg",
+            "status": "Live",
+            "actionUrl": "https://www.promanage.biz/pmsme-test/doctor-in-perambur-chennai-11418308-profile"
+        }
+    ],
+    "profileJobStatusList": [
+        {
+            "jobTypeId": 116,
+            "jobStatusId": 97,
+            "reason": null
+        },
+        {
+            "jobTypeId": 117,
+            "jobStatusId": 97,
+            "reason": null
+        },
+        {
+            "jobTypeId": 120,
+            "jobStatusId": 97,
+            "reason": null
+        },
+        {
+            "jobTypeId": 121,
+            "jobStatusId": 97,
+            "reason": null
+        },
+        {
+            "jobTypeId": 123,
+            "jobStatusId": 97,
+            "reason": null
+        }
+    ],
+    "profile": {
+        "good": null,
+        "moderate": null,
+        "poor": null,
+        "excellent": null,
+        "profileAlertMessage": null,
+        "isFromProfile": true,
+        "recommendations": {
+            "summary": [],
+            "info": []
+        },
+        "customerInfo": null
+    },
+    "serviceAreaList": null,
+    "deletedCategoryIdList": [],
+    "customerInfo": null
+}

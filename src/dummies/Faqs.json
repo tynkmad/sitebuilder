@@ -1,0 +1,42 @@
+[
+    {
+      "contentId": 79,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "question": "What is preventive care, and why is it important?",
+      "answer": "\nPreventive care involves measures like vaccinations, screenings, and lifestyle changes to avoid health problems. It's crucial as it helps catch potential issues early, reducing the risk of serious illnesses and improving overall well-being.",
+      "isActive": true
+    },
+    {
+      "contentId": 80,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "question": "How often should I see a doctor for a check-up?",
+      "answer": "\nThe frequency of check-ups varies by age and health status. Typically, adults should have a general check-up every 1-2 years, while those with chronic conditions or specific health concerns may need more frequent visits.",
+      "isActive": true
+    },
+    {
+      "contentId": 81,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "question": "What's the difference between a virus and a bacteria, and how are they treated differently?",
+      "answer": "\nViruses and bacteria are different types of microorganisms. Bacterial infections are often treated with antibiotics, while viral infections require antiviral medications (if available). The choice of treatment depends on the cause of the infection.",
+      "isActive": true
+    },
+    {
+      "contentId": 82,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "question": "What can I do to maintain a healthy lifestyle?",
+      "answer": "\nA healthy lifestyle includes a balanced diet, regular exercise, adequate sleep, stress management, and avoiding harmful habits like smoking and excessive alcohol consumption. Consulting a healthcare provider for personalized advice is also beneficial.",
+      "isActive": true
+    },
+    {
+      "contentId": 83,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "question": "How can I manage my stress and mental health?",
+      "answer": "\nStress management involves techniques like relaxation exercises, time management, and seeking support from mental health professionals. If you're struggling with mental health issues, it's essential to reach out to a therapist or counselor for guidance and treatment.",
+      "isActive": true
+    }
+  ]

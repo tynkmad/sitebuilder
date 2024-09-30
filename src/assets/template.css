@@ -1,0 +1,7 @@
+/* #region Common Styles :: BEGIN */
+
+section .sk-container {
+    padding: var(--gutter-xlarge) var(--gutter-base);
+}
+
+/* #endregion Common Styles :: END */

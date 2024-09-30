@@ -1,0 +1,44 @@
+[
+    {
+      "contentId": 697,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "keywords": "#doctor",
+      "isActive": true
+    },
+    {
+      "contentId": 698,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "keywords": "#healthcare",
+      "isActive": true
+    },
+    {
+      "contentId": 699,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "keywords": "#medical",
+      "isActive": true
+    },
+    {
+      "contentId": 700,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "keywords": "#healthylife",
+      "isActive": true
+    },
+    {
+      "contentId": 701,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "keywords": "#health",
+      "isActive": true
+    },
+    {
+      "contentId": 702,
+      "customerId": 1672520,
+      "businessId": 11418308,
+      "keywords": "#healthtips",
+      "isActive": true
+    }
+  ]
