@@ -6,7 +6,7 @@ import { useRoute, useRouter } from 'vue-router';
 import SkAppbar from 'rolex/skappbar.vue';
 import SkMenuBar from 'rolex/skMenuBar.vue';
 import SkDrawer from 'rolex/skdrawer.vue';
-import { ExtendedMainNavBarType } from './types/webProfileCreatorTypes';
+import { ExtendedMainNavBarType } from '@/types/webProfileBuilderTypes';
 
 // Define an interface for the reactive data structure
 interface IReactiveData {
