@@ -3,7 +3,7 @@
 
 <template>
   <main class="landing-page">
-    .hero>
+    Landing Page
   </main>
 </template>
 <style scoped>
