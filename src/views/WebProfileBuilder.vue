@@ -8,8 +8,60 @@ import WpAppbarTop1 from '@/components/WpAppbarTop1.vue';
 import WpHero1 from '@/components/WpHero1.vue';
 import WpFeaturedCTASection1 from '@/components/WpFeaturedCTASection1.vue';
 import WpAbout1 from '@/components/WpAbout1.vue';
-import { markRaw, reactive, watch } from 'vue';
+import { markRaw, onMounted, onUpdated, reactive, watch } from 'vue';
 import type { Component } from 'vue';
+
+// Import web vitals with the desired metrics
+import { onCLS, CLSMetricWithAttribution, onFCP, FCPMetricWithAttribution, onINP, INPMetricWithAttribution, onLCP, LCPMetricWithAttribution, onTTFB, TTFBMetricWithAttribution } from 'web-vitals/attribution';
+import Skbutton from 'rolex/skbutton.vue';
+
+//#region Webvitals
+
+// Capture CLS and LCP on component updates (optional)
+onUpdated(() => {
+  //#region working
+
+  // onLCP(({ name, value, attribution }: LCPMetricWithAttribution) => {
+  //   console.log(`LCP: ${name}, value: ${value}, whichElement: ${attribution.element}, timeToLoadElement: ${attribution.elementRenderDelay}, elementn corresponding to LCP: ${attribution.lcpEntry?.size}`);
+  // });
+  // onCLS(({ name, value, entries }: CLSMetricWithAttribution) => {
+  //   console.log(`CLS: ${name}, value: ${value}, entries:`, entries);
+  // });
+  // onINP(({ name, value, delta }: INPMetricWithAttribution) => {
+  //   console.log(`FID: ${name}, value: ${value}, delta: ${delta}`);
+  // });
+  // onTTFB(({ name, value }: TTFBMetricWithAttribution) => {
+  //   console.log(`TTFB: ${name}, value: ${value}`);
+  // });
+  // onFCP(({ name, value, navigationType, rating }: FCPMetricWithAttribution) => {
+  //   console.log(`FCP: ${name}, value: ${value}, rating: ${rating}, navigation type: ${navigationType}`);
+  // });
+  //#endregion working
+
+  //#region trying
+  
+  //#endregion trying
+});
+
+function calculateWebVitals(){
+  onLCP(({ name, value, attribution }: LCPMetricWithAttribution) => {
+    console.log(`LCP: ${name}, value: ${value}, whichElement: ${attribution.element}, timeToLoadElement: ${attribution.elementRenderDelay}, elementn corresponding to LCP: ${attribution.lcpEntry?.size}`);
+  });
+  onCLS(({ name, value, entries }: CLSMetricWithAttribution) => {
+    console.log(`CLS: ${name}, value: ${value}, entries:`, entries);
+  });
+  onINP(({ name, value, delta }: INPMetricWithAttribution) => {
+    console.log(`FID: ${name}, value: ${value}, delta: ${delta}`);
+  });
+  onTTFB(({ name, value }: TTFBMetricWithAttribution) => {
+    console.log(`TTFB: ${name}, value: ${value}`);
+  });
+  onFCP(({ name, value, navigationType, rating }: FCPMetricWithAttribution) => {
+    console.log(`FCP: ${name}, value: ${value}, rating: ${rating}, navigation type: ${navigationType}`);
+  });
+}
+//#endregion
+
 
 interface IcomponentItem {
   name: string;
@@ -57,16 +109,25 @@ const toggleCheckbox = (item: IcomponentItem): void => {
   // Toggle the isSelected property
   item.isSelected = !item.isSelected;
 };
+// ...
+
+
 // Watch for changes in the isSelected property of availableComponents
 watch(() => availableComponents.map(item => item.isSelected), () => {
   updateComponentsToAdd();
 }, { deep: true, immediate: true });
+
+
+
+
+
 </script>
 
 <template>
   <div class="base-layout">
     <aside class="key sk-sticky sk-sticky-2">
       <h3 class="sk-padding">Components</h3>
+      <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals"/>
       <nav>
         <ul>
           <!-- Loop for list of available components -->
@@ -95,7 +156,19 @@ watch(() => availableComponents.map(item => item.isSelected), () => {
   display: flex;
   font-family: 'sf-pro-text', sans-serif;
 }
-h1, h2, h3, h4, h5, h6, .sk-h1, .sk-h2, .sk-h3, .sk-h4, .sk-h5, .sk-h6{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.sk-h1,
+.sk-h2,
+.sk-h3,
+.sk-h4,
+.sk-h5,
+.sk-h6 {
   font-family: 'sf-pro-text', sans-serif;
   font-weight: var(--font-weight-medium, 500);
 }
@@ -140,6 +213,4 @@ h1, h2, h3, h4, h5, h6, .sk-h1, .sk-h2, .sk-h3, .sk-h4, .sk-h5, .sk-h6{
 .window {
   flex: 1 1 auto;
 }
-
-
 </style>
