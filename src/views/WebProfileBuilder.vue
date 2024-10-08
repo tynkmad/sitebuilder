@@ -88,7 +88,7 @@ const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem
       }
     }
     // Handle the empty state logic
-    reactiveData.showEmptyState = reactiveData.componentsToAdd.length === 2;
+    reactiveData.showEmptyState = reactiveData.componentsToAdd.length === 1;
   };
 
 }
@@ -109,8 +109,8 @@ watch(
         <ul>
           <template v-for="item in reactiveData.availableComponents" :key="item.name">
             <li v-if="!item.isMandatory" @click="updateComponentsToAdd(item)">
-              <Skcheckbox :chkid="`chkid_${item.name}`" :labelName="item.label" :isCheckbox="true" :isChecked="item.isSelected"
-                @change="updateComponentsToAdd(item)" @click.stop/>
+              <Skcheckbox :chkid="`chkid_${item.name}`" :labelName="item.label" :isCheckbox="true"
+                :isChecked="item.isSelected" @change="updateComponentsToAdd(item)" @click.stop />
             </li>
           </template>
         </ul>
@@ -119,8 +119,8 @@ watch(
     <main class="window">
       <component :is="component" v-for="(component, index) in reactiveData.componentsToAdd" :key="index" />
       <Skemptystate :showEmptyState="reactiveData.showEmptyState"
-      content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
-      emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
+        content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
+        emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
     </main>
   </div>
   <ThemeEditor />
@@ -130,55 +130,51 @@ watch(
 .base-layout {
   display: flex;
   font-family: 'sf-pro-text', sans-serif;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.sk-h1,
-.sk-h2,
-.sk-h3,
-.sk-h4,
-.sk-h5,
-.sk-h6 {
-  font-family: 'sf-pro-text', sans-serif;
-  font-weight: var(--font-weight-medium, 500);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .sk-h1,
+  .sk-h2,
+  .sk-h3,
+  .sk-h4,
+  .sk-h5,
+  .sk-h6 {
+    font-family: 'sf-pro-text', sans-serif;
+    font-weight: var(--font-weight-medium, 500);
+  }
 }
 
 .key {
   flex: 0 0 20rem;
-  border-right: .1rem solid var(--color-border);
+  border-right: 0.1rem solid var(--color-border);
   height: 100vh;
   overflow: overlay;
   position: sticky;
   top: 0;
-}
 
-.key nav {
-  display: flex;
-  flex-flow: column;
-  gap: var(--gutter-base);
-}
+  nav {
+    display: flex;
+    flex-flow: column;
+    gap: var(--gutter-base);
+  }
 
-.key li {
-  gap: .5rem;
-  align-items: center;
-  display: flex;
-  padding: var(--gutter-small) var(--gutter-base);
-  cursor: pointer;
-  transition: all .3s ease-in-out;
-}
+  li {
+    gap: 0.5rem;
+    align-items: center;
+    display: flex;
+    padding: var(--gutter-small) var(--gutter-base);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
-.key li:hover{
-  background: rgb(var(--color-rgb-primary) / 10%);
+    &:hover {
+      background: rgb(var(--color-rgb-primary) / 10%);
+    }
+  }
 }
-
-/* .key li:hover {
-  background: var(--color-primary-light);
-} */
 
 .window {
   flex: 1 1 auto;
