@@ -44,7 +44,7 @@ interface IwebProfileBuilder {
 const reactiveData = reactive<IwebProfileBuilder>({
   showEmptyState: true,
   availableComponents: [
-    { name: 'ThemeEditor', component: markRaw(ThemeEditor), label: 'Theme Editor', isSelected: true, isMandatory: true },
+    // { name: 'ThemeEditor', component: markRaw(ThemeEditor), label: 'Theme Editor', isSelected: true, isMandatory: true },
     { name: 'WpIcons', component: markRaw(WpIcons), label: 'Load Icons', isSelected: true, isMandatory: true },
     { name: 'WpQuickBarTop', component: markRaw(WpQuickBarTop), label: 'Quick Bar Top', isSelected: false },
     { name: 'WpHeaderBar', component: markRaw(WpHeaderBar), label: 'Header', isSelected: false },
@@ -103,8 +103,8 @@ watch(
 <template>
   <div class="base-layout">
     <aside class="key sk-sticky sk-sticky-2">
-      <h3 class="sk-padding">Components</h3>
-      <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals" />
+      <h3 class="sk-padding sk-h6">Components</h3>
+      <!-- <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals" /> -->
       <nav>
         <ul>
           <template v-for="item in reactiveData.availableComponents" :key="item.name">
@@ -118,12 +118,12 @@ watch(
     </aside>
     <main class="window">
       <component :is="component" v-for="(component, index) in reactiveData.componentsToAdd" :key="index" />
-
       <Skemptystate :showEmptyState="reactiveData.showEmptyState"
-        content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
-        emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
+      content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
+      emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
     </main>
   </div>
+  <ThemeEditor />
 </template>
 
 <style scoped>
@@ -169,11 +169,16 @@ h6,
   display: flex;
   padding: var(--gutter-small) var(--gutter-base);
   cursor: pointer;
+  transition: all .3s ease-in-out;
 }
 
-.key li:hover {
-  background: var(--color-primary-light);
+.key li:hover{
+  background: rgb(var(--color-rgb-primary) / 10%);
 }
+
+/* .key li:hover {
+  background: var(--color-primary-light);
+} */
 
 .window {
   flex: 1 1 auto;
