@@ -1,9 +1,8 @@
+<script setup>
+import SkEmptyState from 'rolex/skemptystate.vue'
+</script>
 <template>
-    <div class="sk-empty-state sk-show">
-        <div class="sk-empty-inner">
-            <img class="sk-image" width="300" height="300" src="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg">
-            <b>Select a component to start</b>
-            <p class="sk-no-record sk-flex">Click on the components on the left to add one by one.</p>
-        </div>
-    </div>
+    <SkEmptyState :showEmptyState="true" content="Click on the components on the left to add one by one."
+        contentTitle="Select a component to start"
+        emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
 </template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import EmptyComponent from '@/components/EmptyComponent.vue';
 import ThemeEditor from '@/components/ThemeEditor.vue';
 import WpQuickBarTop from '@/components/WpQuickBarTop.vue';
 import WpHeaderBar from '@/components/WpHeaderBar.vue';
@@ -8,60 +7,25 @@ import WpAppbarTop1 from '@/components/WpAppbarTop1.vue';
 import WpHero1 from '@/components/WpHero1.vue';
 import WpFeaturedCTASection1 from '@/components/WpFeaturedCTASection1.vue';
 import WpAbout1 from '@/components/WpAbout1.vue';
-import { markRaw, onMounted, onUpdated, reactive, watch } from 'vue';
+import { markRaw, reactive, watch } from 'vue';
 import type { Component } from 'vue';
-
-// Import web vitals with the desired metrics
-import { onCLS, CLSMetricWithAttribution, onFCP, FCPMetricWithAttribution, onINP, INPMetricWithAttribution, onLCP, LCPMetricWithAttribution, onTTFB, TTFBMetricWithAttribution } from 'web-vitals/attribution';
 import Skbutton from 'rolex/skbutton.vue';
+import Skcheckbox from 'rolex/skcheckbox.vue';
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals/attribution';
+import Skemptystate from 'rolex/skemptystate.vue';
 
-//#region Webvitals
-
-// Capture CLS and LCP on component updates (optional)
-onUpdated(() => {
-  //#region working
-
-  // onLCP(({ name, value, attribution }: LCPMetricWithAttribution) => {
-  //   console.log(`LCP: ${name}, value: ${value}, whichElement: ${attribution.element}, timeToLoadElement: ${attribution.elementRenderDelay}, elementn corresponding to LCP: ${attribution.lcpEntry?.size}`);
-  // });
-  // onCLS(({ name, value, entries }: CLSMetricWithAttribution) => {
-  //   console.log(`CLS: ${name}, value: ${value}, entries:`, entries);
-  // });
-  // onINP(({ name, value, delta }: INPMetricWithAttribution) => {
-  //   console.log(`FID: ${name}, value: ${value}, delta: ${delta}`);
-  // });
-  // onTTFB(({ name, value }: TTFBMetricWithAttribution) => {
-  //   console.log(`TTFB: ${name}, value: ${value}`);
-  // });
-  // onFCP(({ name, value, navigationType, rating }: FCPMetricWithAttribution) => {
-  //   console.log(`FCP: ${name}, value: ${value}, rating: ${rating}, navigation type: ${navigationType}`);
-  // });
-  //#endregion working
-
-  //#region trying
-  
-  //#endregion trying
-});
-
-function calculateWebVitals(){
-  onLCP(({ name, value, attribution }: LCPMetricWithAttribution) => {
-    console.log(`LCP: ${name}, value: ${value}, whichElement: ${attribution.element}, timeToLoadElement: ${attribution.elementRenderDelay}, elementn corresponding to LCP: ${attribution.lcpEntry?.size}`);
-  });
-  onCLS(({ name, value, entries }: CLSMetricWithAttribution) => {
-    console.log(`CLS: ${name}, value: ${value}, entries:`, entries);
-  });
-  onINP(({ name, value, delta }: INPMetricWithAttribution) => {
-    console.log(`FID: ${name}, value: ${value}, delta: ${delta}`);
-  });
-  onTTFB(({ name, value }: TTFBMetricWithAttribution) => {
-    console.log(`TTFB: ${name}, value: ${value}`);
-  });
-  onFCP(({ name, value, navigationType, rating }: FCPMetricWithAttribution) => {
-    console.log(`FCP: ${name}, value: ${value}, rating: ${rating}, navigation type: ${navigationType}`);
-  });
-}
+//#region WebVitals Optimization
+const logWebVital = (name: string, value: number, extra: any) => {
+  console.log(`${name}: ${value}`, extra);
+};
+const calculateWebVitals = () => {
+  onLCP(metric => logWebVital('LCP', metric.value, metric));
+  onCLS(metric => logWebVital('CLS', metric.value, metric.entries));
+  onINP(metric => logWebVital('INP', metric.value, metric.delta));
+  onTTFB(metric => logWebVital('TTFB', metric.value, {}));
+  onFCP(metric => logWebVital('FCP', metric.value, metric));
+};
 //#endregion
-
 
 interface IcomponentItem {
   name: string;
@@ -71,85 +35,96 @@ interface IcomponentItem {
   isMandatory?: boolean;
 }
 
-// Reactive array for components to be added
-const componentsToAdd = reactive<Component[]>([markRaw(EmptyComponent)]);
+interface IwebProfileBuilder {
+  showEmptyState: boolean;
+  availableComponents: Array<IcomponentItem>;
+  componentsToAdd: Array<Component>;
+}
 
-// Array for available components
-const availableComponents = reactive<IcomponentItem[]>([
-  { name: 'ThemeEditor', component: markRaw(ThemeEditor), label: 'Theme Editor', isSelected: true, isMandatory: true },
-  { name: 'WpIcons', component: markRaw(WpIcons), label: 'Load Icons', isSelected: true, isMandatory: true },
-  { name: 'WpQuickBarTop', component: markRaw(WpQuickBarTop), label: 'Quick Bar Top', isSelected: false },
-  { name: 'WpHeaderBar', component: markRaw(WpHeaderBar), label: 'Header', isSelected: false },
-  { name: 'WpAppbarTop1', component: markRaw(WpAppbarTop1), label: 'Appbar Top 1', isSelected: false },
-  { name: 'WpHero1', component: markRaw(WpHero1), label: 'Hero 1', isSelected: false },
-  { name: 'WpFeaturedCTASection1', component: markRaw(WpFeaturedCTASection1), label: 'Featured CTA 1', isSelected: false },
-  { name: 'WpAbout1', component: markRaw(WpAbout1), label: 'About us 1', isSelected: false },
-]);
+const reactiveData = reactive<IwebProfileBuilder>({
+  showEmptyState: true,
+  availableComponents: [
+    { name: 'ThemeEditor', component: markRaw(ThemeEditor), label: 'Theme Editor', isSelected: true, isMandatory: true },
+    { name: 'WpIcons', component: markRaw(WpIcons), label: 'Load Icons', isSelected: true, isMandatory: true },
+    { name: 'WpQuickBarTop', component: markRaw(WpQuickBarTop), label: 'Quick Bar Top', isSelected: false },
+    { name: 'WpHeaderBar', component: markRaw(WpHeaderBar), label: 'Header', isSelected: false },
+    { name: 'WpAppbarTop1', component: markRaw(WpAppbarTop1), label: 'Appbar Top 1', isSelected: false },
+    { name: 'WpHero1', component: markRaw(WpHero1), label: 'Hero 1', isSelected: false },
+    { name: 'WpFeaturedCTASection1', component: markRaw(WpFeaturedCTASection1), label: 'Featured CTA 1', isSelected: false },
+    { name: 'WpAbout1', component: markRaw(WpAbout1), label: 'About us 1', isSelected: false },
+  ],
+  componentsToAdd: [],
+});
 
-// Function to update componentsToAdd based on availableComponents
-const updateComponentsToAdd = () => {
-  // Clear current components
-  componentsToAdd.splice(0, componentsToAdd.length);
-
-  // Add selected components
-  availableComponents.forEach(item => {
-    if (item.isSelected) {
-      componentsToAdd.push(item.component);
-    }
-  });
-
-  // Add EmptyComponent if no components are selected
-  if (componentsToAdd.length === 0) {
-    componentsToAdd.push(EmptyComponent);
+// Function to update componentsToAdd based on availableComponents or a default array
+const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem>) => {
+  if (Array.isArray(components)) {
+    components.forEach((item) => {
+      // Add only if not already present in the array
+      if (!reactiveData.componentsToAdd.includes(item.component)) {
+        reactiveData.componentsToAdd.push(item.component);
+        // Set the component as selected
+        item.isSelected = true;
+      }
+    });
   }
-};
 
-// Methods
-const toggleCheckbox = (item: IcomponentItem): void => {
-  // Toggle the isSelected property
-  item.isSelected = !item.isSelected;
-};
-// ...
+  // Update the isSelected property based on newValue
+  else {
+    // Toggle selection state for a single component
+    const index: number = reactiveData.availableComponents.findIndex(comp => comp.name === components.name);
+    if (index !== -1) {
+      const selected = reactiveData.availableComponents[index];
+      selected.isSelected = !selected.isSelected;
 
+      // Add or remove the component based on isSelected status
+      if (selected.isSelected) {
+        reactiveData.componentsToAdd.push(selected.component);
+      } else {
+        const componentIndex = reactiveData.componentsToAdd.indexOf(selected.component);
+        if (componentIndex !== -1) {
+          reactiveData.componentsToAdd.splice(componentIndex, 1);
+        }
+      }
+    }
+    // Handle the empty state logic
+    reactiveData.showEmptyState = reactiveData.componentsToAdd.length === 2;
+  };
 
-// Watch for changes in the isSelected property of availableComponents
-watch(() => availableComponents.map(item => item.isSelected), () => {
-  updateComponentsToAdd();
-}, { deep: true, immediate: true });
-
-
-
-
-
+}
+// Watch for changes in isSelected directly
+watch(
+  () => reactiveData.availableComponents.map(item => item.isSelected),
+  () => updateComponentsToAdd(reactiveData.availableComponents.filter(item => item.isSelected)), // Corrected to pass array of selected components
+  { deep: true, immediate: true }
+);
 </script>
 
 <template>
   <div class="base-layout">
     <aside class="key sk-sticky sk-sticky-2">
       <h3 class="sk-padding">Components</h3>
-      <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals"/>
+      <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals" />
       <nav>
         <ul>
-          <!-- Loop for list of available components -->
-          <template v-for="item in availableComponents" :key="item.name">
-            <li v-if="!item.isMandatory" @click="toggleCheckbox(item)">
-              <div class="sk-checkbox">
-                <input class="sk-check-input" type="checkbox" :id="`chkid_${item.name}`" v-model="item.isSelected"
-                  @click.stop />
-                <label class="sk-check-label" :for="`chkid_${item.name}`" @click.stop>{{ item.label }}</label>
-              </div>
+          <template v-for="item in reactiveData.availableComponents" :key="item.name">
+            <li v-if="!item.isMandatory" @click="updateComponentsToAdd(item)">
+              <Skcheckbox :chkid="`chkid_${item.name}`" :labelName="item.label" :isCheckbox="true" :isChecked="item.isSelected"
+                @change="updateComponentsToAdd(item)" @click.stop/>
             </li>
           </template>
         </ul>
       </nav>
     </aside>
     <main class="window">
-      <!-- Dynamically render selected components -->
-      <component :is="component" v-for="(component, index) in componentsToAdd" :key="index" />
+      <component :is="component" v-for="(component, index) in reactiveData.componentsToAdd" :key="index" />
+
+      <Skemptystate :showEmptyState="reactiveData.showEmptyState"
+        content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
+        emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
     </main>
   </div>
 </template>
-
 
 <style scoped>
 .base-layout {
@@ -185,29 +160,19 @@ h6,
 .key nav {
   display: flex;
   flex-flow: column;
-  gap: var(--gutter-base)
+  gap: var(--gutter-base);
 }
 
 .key li {
   gap: .5rem;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  cursor: pointer;
   display: flex;
   padding: var(--gutter-small) var(--gutter-base);
+  cursor: pointer;
 }
 
 .key li:hover {
-  background: var(--color-primary-light)
-}
-
-.key .sk-checkbox .sk-helper-text {
-  color: var(--color-form-elements-helper-text);
-  font-size: 1.4rem;
-  width: 100%;
-  display: block;
-  line-height: normal;
+  background: var(--color-primary-light);
 }
 
 .window {

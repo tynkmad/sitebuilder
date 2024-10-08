@@ -58,6 +58,10 @@ const updateManropeStyles = (addStyles: boolean) => {
   }
 };
 
+const setFontFamily = (fontFamily: listItemType)=>{
+  ReactiveData.fontFamilyValue = fontFamily
+}
+
 // Watcher for dropdown value change
 watch(() => ReactiveData.fontFamilyValue.itemKey, (newFont) => {
   if (newFont === 'inter') {
@@ -257,7 +261,7 @@ onMounted(() => {
 
         <div>
           <SkDropDown :listItems="fontFamilyOptions" :isNativeSelect="false" placeHolderText="Select Font"
-            v-model="ReactiveData.fontFamilyValue" :hasError="ReactiveData.fontFamilyError" />
+           @update:model-value="setFontFamily" :hasError="ReactiveData.fontFamilyError" />
         </div>
 
         <div>
