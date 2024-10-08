@@ -15,27 +15,27 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/WebProfileBuilder',
+      path: '/webprofilebuilder',
       name: 'Website Builder',
       component: WebProfileBuilder
     },
     {
-      path: '/Pricing',
+      path: '/pricing',
       name: 'Pricing',
       component: Pricing
     },
     {
-      path: '/Customers',
+      path: '/customers',
       name: 'Customers',
       component: Customers
     },
     {
-      path: '/Templates',
+      path: '/templates',
       name: 'Templates',
       component: Templates
     },
     {
-      path: '/Integrations',
+      path: '/integrations',
       name: 'Integrations',
       component: Integrations
     },
