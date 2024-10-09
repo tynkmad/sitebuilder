@@ -1,89 +1,109 @@
+<script setup lang="ts">
+import Skappbar from 'rolex/skappbar.vue';
+import Skbutton from 'rolex/skbutton.vue';
+import { MainNavBarType } from 'rolex/skglobaltypes';
+import Skicon from 'rolex/skicon.vue';
+import SkMenuBar from 'rolex/skMenuBar.vue';
+import { reactive } from 'vue';
+
+// Define an interface for the reactive data structure
+interface IReactiveData {
+    showMenuDrawer?: boolean;
+    menuItems: Array<MainNavBarType>
+}
+
+// Create a reactive object for the menu drawer state
+const ReactiveData = reactive<IReactiveData>({
+    showMenuDrawer: false,
+    menuItems: [
+        {
+            menuName: "Home",
+            isActive: true,
+            targetContentID: "Home",
+        },
+        {
+            menuName: "Services",
+            isActive: false,
+            targetContentID: "Services",
+        },
+        {
+            menuName: "Ratings",
+            isActive: false,
+            targetContentID: "Ratings",
+        },
+    ]
+});
+
+const emit = defineEmits(["onHamburgerClick"])
+function onHamburgerClick() {
+    emit("onHamburgerClick");
+}
+
+const setActiveMenu = (menuId: string) => {
+    // ReactiveData.menuItems = ReactiveData.menuItems.map(clickedMenu => {
+    //     const isActive = menu.targetContentID && clickedMenu.targetContentID;
+    //     return { ...menu, isActive }; // Ensure reactivity by returning a new object
+    // });
+};
+</script>
+
 <template>
     <!-- #region Appbar -->
-    <div class="sk-appbar sk-appbar-fixed">
-        <div class="sk-container">
-            <div class="sk-appbar-row">
-                <div class="sk-appbar-section sk-appbar-align-start">
-                    <div class="sk-appbar-logo notranslate">
-                        <a href="/" title="Skyshark travels">
-                            <img src="https://lscdn.azureedge.net/biz-live/img/template-10-logo.jpeg" height="60"
-                                alt="Elder Care" />
-                        </a>
-                    </div>
-                    <div class="sk-text-end sk-menu sk-mobile-hide">
-                        <nav>
-                            <ul>
-                                <li class="sk-active">
-                                    <a class="notranslate" title="Skyshark travels" href="/">Home</a>
-                                    <div class="sk-menu-indicator"></div>
-                                </li>
-                                <li>
-                                    <a title="Our Services" href="javascript:void(0);">Services</a>
-                                    <div class="sk-menu-indicator"></div>
-                                </li>
-                                <li>
-                                    <a title="View Reviews" href="javascript:void(0);">Ratings</a>
-                                    <div class="sk-menu-indicator"></div>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="sk-appbar-section sk-appbar-align-end">
-                    <div class="sk-overflow-menu sk-hide">
-                        <div class="sk-menu-trigger">
-                            <div class="sk-flex-row">
-                                Language
-                                <span class="sk-icons dropdown-icon">
-                                    <svg width="30" height="30">
-                                        <use xlink:href="#skIconsDropDown"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="sk-overflow-list sk-block">
-                            <ul ref="overflowList">
-                                <li>Tamil</li>
-                                <li>Telugu</li>
-                                <li>Kannada</li>
-                                <li>Malayalam</li>
-                                <li>Hindi</li>
-                                <li>Marathi</li>
-                                <li>Bengali</li>
-                                <li>Punjabi</li>
-                                <li>Gujarati</li>
-                                <li>French</li>
-                                <li>German</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a title="Call Skyshark travels" href="tel:9899075951" class="book-appointments sk-mobile-hide">
-                        <span class="sk-icons">
-                            <svg width="18" height="18">
-                                <use xlink:href="#skIconsCall"></use>
-                            </svg>
-                        </span>
-                        <div class="sk-flex sk-flex-column">
-                            <span class="sk-small">Call us on</span>
-                            <b class="phone-number"> 9899075951 </b>
-                        </div>
-                    </a>
-                    <button class="sk-button sk-round">
-                        <svg width="24" height="24">
-                            <use xlink:href="#skIconsHamburger"></use>
-                        </svg>
-                    </button>
-                </div>
+    <Skappbar appBarLeftIconStyle="" appBarTitle="">
+        <template #ableft>
+            <div class="sk-appbar-logo notranslate">
+                <a href="/" title="Elder Care">
+                    <img src="https://lscdn.azureedge.net/biz-live/img/template-10-logo.jpeg" height="60"
+                        alt="Elder Care" />
+                </a>
             </div>
-        </div>
-    </div>
+            <SkMenuBar :MenuItems="ReactiveData.menuItems" scrollable @onClickToTiggerNav="setActiveMenu"
+                class="sk-mobile-hide sk-text-end" />
+        </template>
+        <template #abright>
+            <a title="Call Elder Care" href="tel:9899075951" class="book-appointments sk-mobile-hide">
+                <Skicon svg-icon="skIconsCall" icon-size="" />
+                <div class="sk-flex sk-flex-column">
+                    <span class="sk-small">Call us on</span>
+                    <b class="phone-number"> 9899075951 </b>
+                </div>
+            </a>
+            <Skbutton svg-icon="skIconsHamburger" round @click="onHamburgerClick" />
+        </template>
+    </Skappbar>
     <!-- #endregion Appbar -->
 </template>
-<style scoped >
+<style>
 /* #region APPBAR */
-.sk-appbar {
+.template-preview .sk-appbar {
     border: 0;
     box-shadow: var(--box-shadow-1);
+
+    .sk-menu li {
+        padding: 0;
+
+        &.sk-active {
+            font-weight: bold;
+        }
+
+        &:hover {
+            background: rgb(var(--color-rgb-primary) / 10%);
+            border-radius: var(--radius-base);
+        }
+
+        a {
+            padding: 0 var(--gutter-base);
+            font-size: 1.6rem;
+            text-transform: capitalize;
+            justify-content: center;
+            color: inherit;
+        }
+
+        .sk-menu-indicator {
+            display: none;
+        }
+    }
+
 
     .book-appointments {
         display: flex;
@@ -91,11 +111,8 @@
         align-items: center;
         justify-content: center;
         color: inherit;
-
-        a {
-            color: inherit;
-            font-weight: var(--font-weight-bold, 700);
-        }
+        color: inherit;
+        font-weight: var(--font-weight-bold, 700);
 
         .phone-number {
             font-size: 1.4rem;
@@ -106,7 +123,7 @@
         }
 
         .sk-icons {
-            background-color: rgb(var(--color-primary-rgb) / 70%);
+            background-color: rgb(var(--color-rgb-primary) / 70%);
             background-image: var(--template-gradient);
             width: 3.4rem;
             height: 3.4rem;
@@ -129,17 +146,23 @@
     .sk-button.sk-round {
         border-radius: var(--radius-base);
     }
-}
 
-@media (max-width: 768px) {
     .sk-appbar-logo {
-        margin: 0;
+        flex: 1 1 auto;
+        min-width: 30%;
+    }
 
-        img {
-            max-height: 5.5rem;
+    @media (max-width: 768px) {
+        .sk-appbar-logo {
+            margin: 0;
+
+            img {
+                max-height: 5.5rem;
+            }
         }
     }
 }
+
 
 
 /* #endregion APPBAR */

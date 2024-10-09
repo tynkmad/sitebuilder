@@ -10,9 +10,9 @@ import Skbutton from 'rolex/skbutton.vue';
     </div>
     <!-- #endregion QuickBar Top -->
 </template>
-<style scoped>
+<style>
 /* region Header quick action bar */
-.quick-bar-top {
+.template-preview .quick-bar-top {
     background: var(--color-black);
     justify-content: center;
     gap: 2rem;

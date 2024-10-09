@@ -1,18 +1,24 @@
 <script setup lang="ts">
 import ThemeEditor from '@/components/ThemeEditor.vue';
+
+import { markRaw, reactive, watch } from 'vue';
+import type { Component } from 'vue';
+import Skbutton from 'rolex/skbutton.vue';
+import Skemptystate from 'rolex/skemptystate.vue';
+import Skcheckbox from 'rolex/skcheckbox.vue';
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals/attribution';
+
+//#region import Components
 import WpQuickBarTop from '@/components/WpQuickBarTop.vue';
 import WpHeaderBar from '@/components/WpHeaderBar.vue';
 import WpIcons from '@/components/WpIcons.vue';
 import WpAppbarTop1 from '@/components/WpAppbarTop1.vue';
+import WpMenuDrawer from '@/components/WpMenuDrawer.vue';
 import WpHero1 from '@/components/WpHero1.vue';
 import WpFeaturedCTASection1 from '@/components/WpFeaturedCTASection1.vue';
 import WpAbout1 from '@/components/WpAbout1.vue';
-import { markRaw, reactive, watch } from 'vue';
-import type { Component } from 'vue';
-import Skbutton from 'rolex/skbutton.vue';
-import Skcheckbox from 'rolex/skcheckbox.vue';
-import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals/attribution';
-import Skemptystate from 'rolex/skemptystate.vue';
+//#endregion import Components
+
 
 //#region WebVitals Optimization
 const logWebVital = (name: string, value: number, extra: any) => {
@@ -49,6 +55,7 @@ const reactiveData = reactive<IwebProfileBuilder>({
     { name: 'WpQuickBarTop', component: markRaw(WpQuickBarTop), label: 'Quick Bar Top', isSelected: false },
     { name: 'WpHeaderBar', component: markRaw(WpHeaderBar), label: 'Header', isSelected: false },
     { name: 'WpAppbarTop1', component: markRaw(WpAppbarTop1), label: 'Appbar Top 1', isSelected: false },
+    { name: 'WpMenuDrawer', component: markRaw(WpMenuDrawer), label: 'Drawer', isSelected: false, isMandatory: true },
     { name: 'WpHero1', component: markRaw(WpHero1), label: 'Hero 1', isSelected: false },
     { name: 'WpFeaturedCTASection1', component: markRaw(WpFeaturedCTASection1), label: 'Featured CTA 1', isSelected: false },
     { name: 'WpAbout1', component: markRaw(WpAbout1), label: 'About us 1', isSelected: false },
@@ -92,6 +99,17 @@ const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem
   };
 
 }
+
+const toggleMenuDrawer = () => {
+  const wpMenuDrawer = reactiveData.availableComponents.find(component => component.name === 'WpMenuDrawer');
+  if (wpMenuDrawer) {
+    updateComponentsToAdd(wpMenuDrawer);
+    // Toggle the isSelected state and call updateComponentsToAdd method
+    // wpMenuDrawer.isSelected = !wpMenuDrawer.isSelected;
+
+    // Use updateComponentsToAdd method to handle the logic
+  }
+}
 // Watch for changes in isSelected directly
 watch(
   () => reactiveData.availableComponents.map(item => item.isSelected),
@@ -117,7 +135,10 @@ watch(
       </nav>
     </aside>
     <main class="window">
-      <component :is="component" v-for="(component, index) in reactiveData.componentsToAdd" :key="index" />
+      <div class="template-preview">
+        <component :is="component" v-for="(component, index) in reactiveData.componentsToAdd" :key="index"
+          @onHamburgerClick="toggleMenuDrawer" @closeDrawer="toggleMenuDrawer"/>
+      </div>
       <Skemptystate :showEmptyState="reactiveData.showEmptyState"
         content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
         emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
@@ -160,18 +181,18 @@ watch(
     display: flex;
     flex-flow: column;
     gap: var(--gutter-base);
-  }
 
-  li {
-    gap: 0.5rem;
-    align-items: center;
-    display: flex;
-    padding: var(--gutter-small) var(--gutter-base);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    li {
+      gap: 0.5rem;
+      align-items: center;
+      display: flex;
+      padding: var(--gutter-small) var(--gutter-base);
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
 
-    &:hover {
-      background: rgb(var(--color-rgb-primary) / 10%);
+      &:hover {
+        background: rgb(var(--color-rgb-primary) / 10%);
+      }
     }
   }
 }
