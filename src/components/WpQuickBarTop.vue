@@ -6,7 +6,7 @@ import Skbutton from 'rolex/skbutton.vue';
     <!-- #region QuickBar Top -->
     <div class="quick-bar-top sk-flex sk-flex-align-center sk-text-center">
         <p>Need a consultation, <br class="sk-web-hide">Now its simple and fast on the go.</p>
-        <Skbutton buttonText="Book an Appointment" link small svgIcon="skIconsCalendarAdd" />
+        <Skbutton buttonText="Book an Appointment" link small icon="calendar_add_on" />
     </div>
     <!-- #endregion QuickBar Top -->
 </template>

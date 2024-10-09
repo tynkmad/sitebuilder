@@ -7,13 +7,13 @@ import SkMenuBar from 'rolex/skMenuBar.vue';
 import { reactive } from 'vue';
 
 // Define an interface for the reactive data structure
-interface IReactiveData {
+interface IwpAppbarTop {
     showMenuDrawer?: boolean;
     menuItems: Array<MainNavBarType>
 }
 
 // Create a reactive object for the menu drawer state
-const ReactiveData = reactive<IReactiveData>({
+const ReactiveData = reactive<IwpAppbarTop>({
     showMenuDrawer: false,
     menuItems: [
         {
@@ -49,7 +49,7 @@ const setActiveMenu = (menuId: string) => {
 
 <template>
     <!-- #region Appbar -->
-    <Skappbar appBarLeftIconStyle="" appBarTitle="">
+    <Skappbar appBarLeftIconStyle="" appBarTitle="" sticky>
         <template #ableft>
             <div class="sk-appbar-logo notranslate">
                 <a href="/" title="Elder Care">
@@ -62,13 +62,13 @@ const setActiveMenu = (menuId: string) => {
         </template>
         <template #abright>
             <a title="Call Elder Care" href="tel:9899075951" class="book-appointments sk-mobile-hide">
-                <Skicon svg-icon="skIconsCall" icon-size="" />
+                <Skicon iconType="call" filled />
                 <div class="sk-flex sk-flex-column">
                     <span class="sk-small">Call us on</span>
                     <b class="phone-number"> 9899075951 </b>
                 </div>
             </a>
-            <Skbutton svg-icon="skIconsHamburger" round @click="onHamburgerClick" />
+            <Skbutton icon="menu" round @click="onHamburgerClick" />
         </template>
     </Skappbar>
     <!-- #endregion Appbar -->

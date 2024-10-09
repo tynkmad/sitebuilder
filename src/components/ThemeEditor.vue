@@ -13,13 +13,13 @@ const fontFamilyOptions: Array<listItemType> = [
   { itemKey: 'manrope', itemTitle: 'Manrope' }
 ];
 
-interface IReactiveData {
+interface IthemeEditor {
   showThemeEditor: boolean;
   fontFamilyValue: listItemType;
   fontFamilyError: boolean;
 }
 
-let dataDefaults: IReactiveData = {
+let dataDefaults: IthemeEditor = {
   showThemeEditor: false,
   fontFamilyValue: { itemKey: '', itemTitle: 'Select Font' } as listItemType,
   fontFamilyError: false,

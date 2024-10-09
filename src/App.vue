@@ -9,13 +9,13 @@ import SkDrawer from 'rolex/skdrawer.vue';
 import { ExtendedMainNavBarType } from '@/types/webProfileBuilderTypes';
 
 // Define an interface for the reactive data structure
-interface IReactiveData {
+interface ImainApp {
   showMenuDrawer?: boolean;
   menuItems: Array<ExtendedMainNavBarType>
 }
 
 // Create a reactive object for the menu drawer state
-const ReactiveData = reactive<IReactiveData>({
+const ReactiveData = reactive<ImainApp>({
   showMenuDrawer: false,
   menuItems: [
     {

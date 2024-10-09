@@ -1,105 +1,124 @@
+<script setup lang="ts">
+import Skappbar from 'rolex/skappbar.vue';
+import Skdropdown from 'rolex/skdropdown.vue';
+import { listItemType, skActionItem } from 'rolex/skglobaltypes';
+import Skicon from 'rolex/skicon.vue';
+import Skpopup from 'rolex/skpopup.vue';
+import { reactive } from 'vue';
+import SkChannelImg from 'rolex/channelimg.vue';
+import { MediumType } from 'rolex/SkTypes';
+
+interface IheaaderBar {
+    languageList: Array<skActionItem>;
+    connectedChannelList: Array<{
+        url: string,
+        channelName: string
+    }>
+}
+const reactiveData = reactive<IheaaderBar>(
+    {
+        languageList: [
+            { itemKey: "Tamil", actionlabel: "தமிழ்" },
+            { itemKey: "Telugu", actionlabel: "తెలుగు" },
+            { itemKey: "Kannada", actionlabel: "ಕನ್ನಡ" },
+            { itemKey: "Malayalam", actionlabel: "മലയാളം" },
+            { itemKey: "Hindi", actionlabel: "हिन्दी" },
+            { itemKey: "Marathi", actionlabel: "मराठी" },
+            { itemKey: "Bengali", actionlabel: "বাংলা" },
+            { itemKey: "Punjabi", actionlabel: "ਪੰਜਾਬੀ" },
+            { itemKey: "Gujarati", actionlabel: "ગુજરાતી" },
+            { itemKey: "French", actionlabel: "Français" },
+            { itemKey: "German", actionlabel: "Deutsch" }
+        ],
+        connectedChannelList: [
+            {
+                url: 'https://www.sulekha.com/',
+                channelName: 'sulekha',
+            },
+            {
+                url: 'https://www.facebook.com/',
+                channelName: 'facebook',
+            },
+            {
+                url: 'https://promanage.biz/',
+                channelName: 'promanageapp',
+            },
+            {
+                url: 'https://www.youtube.com/',
+                channelName: 'youtube',
+            },
+            {
+                url: 'https://www.twitter.com/',
+                channelName: 'twitter',
+            },
+        ]
+    }
+)
+
+</script>
+
 <template>
     <!-- #region Header bar -->
-    <div class="sk-appbar header-bar">
-        <div class="sk-container">
-            <div class="sk-appbar-row">
-                <div class="sk-appbar-section sk-appbar-align-start sk-flex-justify-between">
-                    <div class="sk-flex-row">
-                        <span class="sk-icons">
-                            <svg width="20" height="20">
-                                <use xlink:href="#skiconsBranch"></use>
-                            </svg>
-                        </span>
-                        <span>Velachery Branch</span>
-                    </div>
-
-                    <div class="sk-flex-row sk-mobile-hide">
-                        <span class="sk-icons">
-                            <svg width="20" height="20">
-                                <use xlink:href="#skiconsAlaram"></use>
-                            </svg>
-                        </span>
-
-                        <div>
-                            9:00 AM - 5:00 PM </div>
-                    </div>
-                </div>
-                <div class="sk-appbar-section sk-appbar-align-end ">
-                    <div class="sk-overflow-menu sk-mobile-hide">
-                        <div class="sk-menu-trigger">
-                            <div class="sk-flex-row" onclick="fnlantranslatedat('dvtlangtrans')">
-                                Language
-                                <span class="sk-icons dropdown-icon">
-                                    <svg width="30" height="30">
-                                        <use xlink:href="#skIconsDropDown"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div id="dvtlangtrans" class="sk-overflow-list sk-block sk-hide">
-                            <ul ref="overflowList">
-                                <li onclick="fngoogletranslat('ta')">Tamil</li>
-                                <li onclick="fngoogletranslat('te')">Telugu</li>
-                                <li onclick="fngoogletranslat('kn')">Kannada</li>
-                                <li onclick="fngoogletranslat('ml')">Malayalam</li>
-                                <li onclick="fngoogletranslat('hi')">Hindi</li>
-                                <li onclick="fngoogletranslat('mr')">Marathi</li>
-                                <li onclick="fngoogletranslat('bn')">Bengali</li>
-                                <li onclick="fngoogletranslat('pa')">Punjabi</li>
-                                <li onclick="fngoogletranslat('gu')">Gujarati</li>
-                                <li onclick="fngoogletranslat('fr')">French</li>
-                                <li onclick="fngoogletranslat('de')">German</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="sk-flex-row">
-
-                        <a title="" href="" target="_blank">
-                            <span class="sk-icons">
-                                <svg width="24" height="24">
-                                    <use xlink:href="#skIconsLinkedin"></use>
-                                </svg>
-                            </span>
-                        </a>
-                        <a title="" href="" target="_blank">
-                            <span class="sk-icons">
-                                <svg width="24" height="24">
-                                    <use xlink:href="#skIconsInstagram"></use>
-                                </svg>
-                            </span>
-                        </a>
-
-                        <a title="" href="" target="_blank">
-                            <img loading="lazy" alt="" height="24" width="24"
-                                src="https://lscdn.blob.core.windows.net/content/promanage/pm-icon.svg">
-                        </a>
-
-                        <a title="" href="" target="_blank">
-                            <img loading="lazy" alt="" height="24" width="24"
-                                src="https://lscdn.blob.core.windows.net/content/promanage/sulekha-logo.svg">
-                        </a>
-
-                    </div>
-                </div>
-
+    <Skappbar class="header-bar" appBarLeftIconStyle="" appBarTitle="">
+        <template #ableft>
+            <div class="sk-flex-row">
+                <Skicon iconType="store" iconSize="small" />
+                <span>Velachery Branch</span>
             </div>
-        </div>
-    </div>
+
+            <div class="sk-flex-row sk-mobile-hide">
+                <Skicon iconType="schedule" iconSize="small" />
+                <div>9:00 AM - 5:00 PM</div>
+            </div>
+        </template>
+        <template #abright>
+            <!-- <Skdropdown :listItems="reactiveData.languageList" placeHolderText="Site Language" class="sk-mobile-hide" /> -->
+            <Skpopup :popupActionItems="reactiveData.languageList" :triggerButton="{
+                round: true,
+                small: true,
+                noShadow: true,
+                badgeType: 'icon',
+                icon: 'translate',
+                flat: true,
+                outline: true,
+                action: () => { }
+            }" />
+            <div class="sk-flex-row social-links">
+
+                <a v-for="channel in reactiveData.connectedChannelList" :key="channel.channelName" :href="channel.url"
+                    target="_blank" rel="noopener noreferrer">
+                    <SkChannelImg :channel="channel.channelName" />
+                </a>
+            </div>
+        </template>
+    </Skappbar>
     <!-- #endregion Header bar -->
 </template>
-<style scoped >
+<style>
 /* #region Header bar */
 .header-bar {
     height: 4.6rem;
-}
 
-.sk-overflow-menu {
-    cursor: pointer;
+    .sk-appbar-align-start,
+    .sk-title-bar-start {
+        gap: var(--gutter-base);
+    }
 
-    .sk-overflow-list {
-        li {
-            cursor: pointer;
+    .social-links{
+        img{
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+    }
+    .sk-overflow-menu {
+        cursor: pointer;
+
+        .sk-overflow-list {
+            z-index: var(--zindex-4);
+
+            li {
+                cursor: pointer;
+            }
         }
     }
 }

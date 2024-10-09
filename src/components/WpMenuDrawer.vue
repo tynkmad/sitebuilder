@@ -6,11 +6,11 @@ import SkMenuBar from 'rolex/skMenuBar.vue';
 import { reactive } from 'vue';
 
 // Define an interface for the reactive data structure
-interface IReactiveData {
+interface ImenuDrawer {
     menuItems: Array<MainNavBarType>
 }
 // Create a reactive object for the menu drawer state
-const ReactiveData = reactive<IReactiveData>({
+const ReactiveData = reactive<ImenuDrawer>({
     menuItems: [
         {
             menuName: "Home",
