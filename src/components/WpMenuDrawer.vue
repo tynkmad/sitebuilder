@@ -48,10 +48,37 @@ const setActiveMenu = (menuId: string) => {
 <template>
     <Skdrawer showDrawer right @closePanel="closeDrawer">
         <template #skdrawerheader>
-            <Skappbar showLeftActionWeb appBarTitle="Menu" appBarLeftIconStyle="close" @navigationIconClick="closeDrawer"/>
+            <Skappbar showLeftActionWeb appBarTitle="Menu" appBarLeftIconStyle="close"
+                @navigationIconClick="closeDrawer" />
         </template>
         <template #skdrawerbody>
-            <SkMenuBar :MenuItems="ReactiveData.menuItems" @navBarNavigation="closeDrawer" class="sk-vertical"/>
+            <SkMenuBar :MenuItems="ReactiveData.menuItems" @navBarNavigation="closeDrawer" class="sk-vertical" />
         </template>
     </Skdrawer>
 </template>
+<style >
+.template-preview .sk-drawer .sk-menu li {
+    padding: 0;
+
+    &.sk-active {
+        font-weight: bold;
+    }
+
+    &:hover {
+        background: rgb(var(--color-rgb-primary) / 10%);
+        border-radius: var(--radius-base);
+    }
+
+    a {
+        padding: 0 var(--gutter-base);
+        font-size: 1.6rem;
+        text-transform: capitalize;
+        justify-content: flex-start;
+        color: inherit;
+    }
+
+    .sk-menu-indicator {
+        display: none;
+    }
+}
+</style>
