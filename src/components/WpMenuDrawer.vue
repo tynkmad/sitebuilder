@@ -56,7 +56,13 @@ const setActiveMenu = (menuId: string) => {
         </template>
     </Skdrawer>
 </template>
-<style >
+<style>
+.sk-drawer {
+    .sk-appbar {
+        box-shadow: none;
+    }
+}
+
 .template-preview .sk-drawer .sk-menu li {
     padding: 0;
 
