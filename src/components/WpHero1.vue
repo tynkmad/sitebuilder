@@ -50,35 +50,52 @@ const currentDay = ref(daysOfWeek[new Date().getDay()]);
 
 // Function to convert time string (e.g., "10:00 AM") to Date object
 function parseTimeString(timeStr: string) {
-  const [time, modifier] = timeStr.split(' ');
-  let [hours, minutes] = time.split(':').map(Number);
+    const [time, modifier] = timeStr.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
 
-  if (modifier === 'PM' && hours !== 12) hours += 12;
-  if (modifier === 'AM' && hours === 12) hours = 0;
+    if (modifier === 'PM' && hours !== 12) hours += 12;
+    if (modifier === 'AM' && hours === 12) hours = 0;
 
-  const date = new Date();
-  date.setHours(hours, minutes, 0, 0);
-  return date;
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
 }
 
 // Find the corresponding business hour for the current day
 const currentBusinessHour = computed(() => {
-  const currentHour = ReactiveData.businessHours.find((hour) => hour.itemKey === currentDay.value);
-  return currentHour ? currentHour.actionlabel : "Closed";
+    const currentHour = ReactiveData.businessHours.find((hour) => hour.itemKey === currentDay.value);
+    return currentHour ? currentHour.actionlabel : "Closed";
 });
 
 // Check if the business is open based on the current time
 const isOpen = computed(() => {
-  const currentHour = ReactiveData.businessHours.find((hour) => hour.itemKey === currentDay.value);
-  if (!currentHour) return false;
+    const currentHour = ReactiveData.businessHours.find((hour) => hour.itemKey === currentDay.value);
 
-  const [startTime, endTime] = currentHour.actionlabel ? currentHour.actionlabel.split(" - ") : "Saturday: 10:00 AM - 05:00 PM";
-  const now = new Date();
+    // Return "Closed" if no business hours are found for the current day
+    if (!currentHour || !currentHour.actionlabel) return "Closed";
 
-  const start = parseTimeString(startTime);
-  const end = parseTimeString(endTime);
+    // Split actionlabel to get the start and end times
+    const timeParts = currentHour.actionlabel.split(" - "); // Split by " - "
+    
+    // Ensure we capture the start and end times correctly
+    if (timeParts.length !== 2) return "Closed"; // Return "Closed" if the format is unexpected
 
-  return now >= start && now <= end;
+    // Extracting the start and end time correctly
+    const startLabel = timeParts[0].split(': ')[1]; // Get the time after "Monday: "
+    const endLabel = timeParts[1].trim(); // Get the end time, trim in case of extra spaces
+
+    // Continue with parsing and checking if open
+    const now = new Date();
+    const start = parseTimeString(startLabel);
+    const end = parseTimeString(endLabel);
+
+    // Adjust end time if it crosses over midnight
+    if (end < start) {
+        end.setDate(end.getDate() + 1); // Increment end date if it crosses over to the next day
+    }
+
+    // Return the open/closed status based on the current time
+    return now >= start && now <= end ? 'Open' : 'Closed';
 });
 </script>
 <template>
@@ -104,31 +121,34 @@ const isOpen = computed(() => {
                             </div>
 
                             <div class="contact-card">
-                                <Skicon iconType="location_on" filled iconSize="small" />
+                                <Skicon iconType="location_on" filled />
                                 <address>
                                     27/35 First floor, Shankar building, North Avenue, North
                                     avenue road, Velachery, Chennai - 600 026
                                 </address>
                             </div>
                             <div class="contact-card">
-                                <Skicon iconType="schedule" filled iconSize="small" />
+                                <Skicon iconType="schedule" filled />
                                 <Skpopup hasCustomTriggerElement :popupActionItems="ReactiveData.businessHours">
                                     <template #trigger-content>
-                                        <div>{{ currentBusinessHour }} <Skbadge round> <template #badgeinner>{{ isOpen ? 'Open' : 'Closed' }}</template></Skbadge></div>
-                                        
+                                        <div>{{ currentBusinessHour }} <Skbadge round :success="isOpen?true:false"> <template #badgeinner>{{ isOpen ?
+                                            'Now Open' : 'Closed' }}</template>
+                                            </Skbadge>
+                                        </div>
+
                                     </template>
                                 </Skpopup>
                             </div>
                             <div class="book-appointments">
-                                <a title="Call Skyshark travels" href="tel:9899075951"
+                                <a title="Call Elder Care - Velachery" href="tel:9899075951"
                                     class="sk-flex-row prophoneclick">
                                     <Skicon iconType="call" filled />
                                     9899075951
                                 </a>
                             </div>
                             <div class="sk-button-group">
-                                <SkButton icon="directions" filled   primary buttonText="Get Directions" />
-                                <SkButton icon="share" filled   buttonText="Share" />
+                                <SkButton icon="directions" filled primary buttonText="Get Directions" />
+                                <SkButton icon="share" filled buttonText="Share" />
                             </div>
                         </div>
                     </div>
@@ -149,6 +169,10 @@ const isOpen = computed(() => {
     <!-- #endregion Hero -->
 </template>
 <style>
+.template-preview section.hero .sk-container {
+    padding-bottom: 0;
+}
+
 /* # Hero Banner :: BEGIN */
 .hero {
     background: var(--template-gradient);
@@ -179,17 +203,30 @@ const isOpen = computed(() => {
         flex-flow: row nowrap;
         align-items: flex-start;
 
+        .book-appointments,
+        .book-appointments .open-status {
+            font-size: 1.6rem;
+            font-weight: normal;
+        }
+
+        .sk-badge{
+            padding: var(--gutter-xsmall) var(--gutter-small);
+            font-size: 1.2rem;
+        }
+    }
+
+    .contact-card,
+    .book-appointments {
         .sk-icons {
             flex: 0 0 2rem;
             font-size: 1.8rem;
             padding-top: 0.4rem;
         }
+    }
 
-        .book-appointments,
-        .book-appointments .open-status {
-            margin: 0;
-            font-size: 1.6rem;
-            font-weight: normal;
+    .book-appointments {
+        a {
+            color: inherit;
         }
     }
 
@@ -198,16 +235,17 @@ const isOpen = computed(() => {
         margin-bottom: var(--gutter-large);
     }
 
-    .rating-group {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+    .sk-ratings {
+        .rating-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
 
-        .sk-ratings {
-            a {
-                color: inherit;
-                text-decoration: underline;
-            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
         }
     }
 

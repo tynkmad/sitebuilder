@@ -1,6 +1,6 @@
 /* #region Common Styles :: BEGIN */
 
-section .sk-container {
+.template-preview section .sk-container {
     padding: var(--gutter-xlarge) var(--gutter-base);
 }
 

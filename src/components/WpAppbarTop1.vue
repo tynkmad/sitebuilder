@@ -132,6 +132,7 @@ const setActiveMenu = (menuId: string) => {
             justify-content: center;
             border-radius: var(--radius-round);
             transition: 0.3s ease;
+            color: var(--color-on-primary);
 
             &:hover {
                 box-shadow: var(--box-shadow-2);

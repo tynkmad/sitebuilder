@@ -79,7 +79,7 @@ watch(() => route.path, () => {
 });
 
 // Function to navigate to a different route or open an external link based on the selected menu item
-const navTo = (targetContentID: string) => {
+const navTo = async (targetContentID: string) => {
   const routeMap: Record<string, string> = {
     "WebProfileBuilder": '/webprofilebuilder',
     "Pricing": '/pricing',
@@ -93,6 +93,9 @@ const navTo = (targetContentID: string) => {
   if (targetContentID === "Resources") {
     window.open(ReactiveData.menuItems.find(menu => menu.targetContentID === "Resources")?.externalLink, '_blank');
   } else if (route) {
+    if (targetContentID === "WebProfileBuilder") {
+      await import('@/assets/template.css');
+    }
     router.push(route);
   } else {
     router.push('/'); // Navigate to home as a fallback

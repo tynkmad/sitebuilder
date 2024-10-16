@@ -62,12 +62,12 @@ const reactiveData = reactive<IheaaderBar>(
     <Skappbar class="header-bar" appBarLeftIconStyle="" appBarTitle="">
         <template #ableft>
             <div class="sk-flex-row">
-                <Skicon iconType="store" iconSize="small" />
+                <Skicon iconType="store"  />
                 <span>Velachery Branch</span>
             </div>
 
             <div class="sk-flex-row sk-mobile-hide">
-                <Skicon iconType="schedule" iconSize="small" />
+                <Skicon iconType="schedule"  />
                 <div>9:00 AM - 5:00 PM</div>
             </div>
         </template>
