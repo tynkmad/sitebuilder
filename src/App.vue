@@ -60,8 +60,17 @@ const toggleMenuDrawer = () => {
   ReactiveData.showMenuDrawer = !ReactiveData.showMenuDrawer;
 };
 
-const setActiveMenu = () => {
+const setActiveMenu = async () => {
   const currentPath = route.path; // Get the current path
+  // Check if current route is WebProfileBuilder and load CSS if true
+  if (route.path.includes('webprofilebuilder')) {
+    try {
+      await import('@/assets/template.css');
+      console.log('CSS imported');
+    } catch (error) {
+      console.error('Failed to import CSS:', error);
+    }
+  }
   ReactiveData.menuItems = ReactiveData.menuItems.map(menu => {
     const isActive = menu.targetContentID && currentPath.includes(menu.targetContentID.replace(/\s+/g, '-').toLowerCase());
     return { ...menu, isActive }; // Ensure reactivity by returning a new object
@@ -71,6 +80,7 @@ const setActiveMenu = () => {
 // Set active menu on page load
 onMounted(() => {
   setActiveMenu();
+   
 });
 
 // Watch for route changes and update the active menu

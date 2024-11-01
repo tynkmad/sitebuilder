@@ -37,8 +37,8 @@ Set up the carousel components in your template, binding navigation properties a
     :enableNavButton="true"
     customPreviousIcon="chevron_left"
     customNextIcon="chevron_right"
-    @move-previous="() => moveCarousel('#doctorList', 'prev')"
-    @move-next="() => moveCarousel('#doctorList', 'next')"
+    @movePrevious="() => moveCarousel('#doctorList', 'prev')"
+    @moveNext="() => moveCarousel('#doctorList', 'next')"
     :hidePreviousButton="doctorListState.hidePreviousBtn.value"
     :hideNextButton="doctorListState.hideNextBtn.value"
     class="doctor-list"
@@ -60,8 +60,8 @@ Set up the carousel components in your template, binding navigation properties a
     :enableNavButton="true"
     customPreviousIcon="chevron_left"
     customNextIcon="chevron_right"
-    @move-previous="() => moveCarousel('#doctorList1', 'prev')"
-    @move-next="() => moveCarousel('#doctorList1', 'next')"
+    @movePrevious="() => moveCarousel('#doctorList1', 'prev')"
+    @moveNext="() => moveCarousel('#doctorList1', 'next')"
     :hidePreviousButton="doctorList1State.hidePreviousBtn.value"
     :hideNextButton="doctorList1State.hideNextBtn.value"
     class="doctor-list"
@@ -92,7 +92,7 @@ Set up the carousel components in your template, binding navigation properties a
 - `:enableNavButton="true"`: Enables navigation buttons.
   `customPreviousIcon` and `customNextIcon`: Define custom icons for navigation.
 
-- `@move-previous` and `@move-nex`t: Triggered when the respective navigation button is clicked, calling `moveCarousel` with the direction parameter.
+- `@movePrevious` and `@move-nex`t: Triggered when the respective navigation button is clicked, calling `moveCarousel` with the direction parameter.
 
 - `:hidePreviousButton` and `:hideNextButton`: Controls the visibility of navigation buttons, using the reactive state returned from `getCarouselState`.
 

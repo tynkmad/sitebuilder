@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import ThemeEditor from '@/components/ThemeEditor.vue';
+import ThemeEditor from "@/components/ThemeEditor.vue";
 
-import { markRaw, reactive, watch } from 'vue';
-import type { Component } from 'vue';
-import Skbutton from 'rolex/skbutton.vue';
-import Skemptystate from 'rolex/skemptystate.vue';
-import Skcheckbox from 'rolex/skcheckbox.vue';
-import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals/attribution';
+import { markRaw, reactive, watch } from "vue";
+import type { Component } from "vue";
+import Skbutton from "rolex/skbutton.vue";
+import Skemptystate from "rolex/skemptystate.vue";
+import Skcheckbox from "rolex/skcheckbox.vue";
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals/attribution";
 
 //#region import Components
-import WpQuickBarTop from '@/components/WpQuickBarTop.vue';
-import WpHeaderBar from '@/components/WpHeaderBar.vue';
-import WpIcons from '@/components/WpIcons.vue';
-import WpAppbarTop1 from '@/components/WpAppbarTop1.vue';
-import WpMenuDrawer from '@/components/WpMenuDrawer.vue';
-import WpHero1 from '@/components/WpHero1.vue';
-import WpFeaturedCTASection1 from '@/components/WpFeaturedCTASection1.vue';
-import WpAbout1 from '@/components/WpAbout1.vue';
-import WpFeedback1 from '@/components/WpFeedback1.vue';
-import WpDoctorsList from '@/components/WpDoctorsList.vue';
+import WpQuickBarTop from "@/components/WpQuickBarTop.vue";
+import WpHeaderBar from "@/components/WpHeaderBar.vue";
+import WpIcons from "@/components/WpIcons.vue";
+import WpAppbarTop1 from "@/components/WpAppbarTop1.vue";
+import WpMenuDrawer from "@/components/WpMenuDrawer.vue";
+import WpHero1 from "@/components/WpHero1.vue";
+import WpFeaturedCTASection1 from "@/components/WpFeaturedCTASection1.vue";
+import WpAbout1 from "@/components/WpAbout1.vue";
+import WpFeedback1 from "@/components/WpFeedback1.vue";
+import WpDoctorsList from "@/components/WpDoctorsList.vue";
+import WpPhotos from "@/components/WpPhotos.vue";
 //#endregion import Components
-
 
 //#region WebVitals Optimization
 const logWebVital = (name: string, value: number, extra: any) => {
   console.log(`${name}: ${value}`, extra);
 };
 const calculateWebVitals = () => {
-  onLCP(metric => logWebVital('LCP', metric.value, metric));
-  onCLS(metric => logWebVital('CLS', metric.value, metric.entries));
-  onINP(metric => logWebVital('INP', metric.value, metric.delta));
-  onTTFB(metric => logWebVital('TTFB', metric.value, {}));
-  onFCP(metric => logWebVital('FCP', metric.value, metric));
+  onLCP((metric) => logWebVital("LCP", metric.value, metric));
+  onCLS((metric) => logWebVital("CLS", metric.value, metric.entries));
+  onINP((metric) => logWebVital("INP", metric.value, metric.delta));
+  onTTFB((metric) => logWebVital("TTFB", metric.value, {}));
+  onFCP((metric) => logWebVital("FCP", metric.value, metric));
 };
 //#endregion
 
@@ -53,22 +53,82 @@ const reactiveData = reactive<IwebProfileBuilder>({
   showEmptyState: true,
   availableComponents: [
     // { name: 'ThemeEditor', component: markRaw(ThemeEditor), label: 'Theme Editor', isSelected: true, isMandatory: true },
-    { name: 'WpIcons', component: markRaw(WpIcons), label: 'Load Icons', isSelected: true, isMandatory: true },
-    { name: 'WpQuickBarTop', component: markRaw(WpQuickBarTop), label: 'Quick Bar Top', isSelected: false },
-    { name: 'WpHeaderBar', component: markRaw(WpHeaderBar), label: 'Header', isSelected: false },
-    { name: 'WpAppbarTop1', component: markRaw(WpAppbarTop1), label: 'Appbar Top 1', isSelected: false },
-    { name: 'WpMenuDrawer', component: markRaw(WpMenuDrawer), label: 'Drawer', isSelected: false, isMandatory: true },
-    { name: 'WpHero1', component: markRaw(WpHero1), label: 'Hero 1', isSelected: false },
-    { name: 'WpFeaturedCTASection1', component: markRaw(WpFeaturedCTASection1), label: 'Featured CTA 1', isSelected: false },
-    { name: 'WpAbout1', component: markRaw(WpAbout1), label: 'About us 1', isSelected: false },
-    { name: 'WpFeedback1', component: markRaw(WpFeedback1), label: 'Feedback 1', isSelected: false },
-    { name: 'WpDoctorsList', component: markRaw(WpDoctorsList), label: 'Doctors List 1', isSelected: false },
+    {
+      name: "WpIcons",
+      component: markRaw(WpIcons),
+      label: "Load Icons",
+      isSelected: true,
+      isMandatory: true,
+    },
+    {
+      name: "WpQuickBarTop",
+      component: markRaw(WpQuickBarTop),
+      label: "Quick Bar Top",
+      isSelected: false,
+    },
+    {
+      name: "WpHeaderBar",
+      component: markRaw(WpHeaderBar),
+      label: "Header",
+      isSelected: false,
+    },
+    {
+      name: "WpAppbarTop1",
+      component: markRaw(WpAppbarTop1),
+      label: "Appbar Top 1",
+      isSelected: false,
+    },
+    {
+      name: "WpMenuDrawer",
+      component: markRaw(WpMenuDrawer),
+      label: "Drawer",
+      isSelected: false,
+      isMandatory: true,
+    },
+    {
+      name: "WpHero1",
+      component: markRaw(WpHero1),
+      label: "Hero 1",
+      isSelected: false,
+    },
+    {
+      name: "WpFeaturedCTASection1",
+      component: markRaw(WpFeaturedCTASection1),
+      label: "Featured CTA 1",
+      isSelected: false,
+    },
+    {
+      name: "WpAbout1",
+      component: markRaw(WpAbout1),
+      label: "About us 1",
+      isSelected: false,
+    },
+    {
+      name: "WpFeedback1",
+      component: markRaw(WpFeedback1),
+      label: "Feedback 1",
+      isSelected: false,
+    },
+    {
+      name: "WpDoctorsList",
+      component: markRaw(WpDoctorsList),
+      label: "Doctors List 1",
+      isSelected: false,
+    },
+    {
+      name: "WpPhotos",
+      component: markRaw(WpPhotos),
+      label: "Photo Gallery",
+      isSelected: false,
+    },
   ],
   componentsToAdd: [],
 });
 
 // Function to update componentsToAdd based on availableComponents or a default array
-const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem>) => {
+const updateComponentsToAdd = (
+  components: IcomponentItem | Array<IcomponentItem>
+) => {
   if (Array.isArray(components)) {
     components.forEach((item) => {
       // Add only if not already present in the array
@@ -83,7 +143,9 @@ const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem
   // Update the isSelected property based on newValue
   else {
     // Toggle selection state for a single component
-    const index: number = reactiveData.availableComponents.findIndex(comp => comp.name === components.name);
+    const index: number = reactiveData.availableComponents.findIndex(
+      (comp) => comp.name === components.name
+    );
     if (index !== -1) {
       const selected = reactiveData.availableComponents[index];
       selected.isSelected = !selected.isSelected;
@@ -92,7 +154,9 @@ const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem
       if (selected.isSelected) {
         reactiveData.componentsToAdd.push(selected.component);
       } else {
-        const componentIndex = reactiveData.componentsToAdd.indexOf(selected.component);
+        const componentIndex = reactiveData.componentsToAdd.indexOf(
+          selected.component
+        );
         if (componentIndex !== -1) {
           reactiveData.componentsToAdd.splice(componentIndex, 1);
         }
@@ -100,12 +164,13 @@ const updateComponentsToAdd = (components: IcomponentItem | Array<IcomponentItem
     }
     // Handle the empty state logic
     reactiveData.showEmptyState = reactiveData.componentsToAdd.length === 1;
-  };
-
-}
+  }
+};
 
 const toggleMenuDrawer = () => {
-  const wpMenuDrawer = reactiveData.availableComponents.find(component => component.name === 'WpMenuDrawer');
+  const wpMenuDrawer = reactiveData.availableComponents.find(
+    (component) => component.name === "WpMenuDrawer"
+  );
   if (wpMenuDrawer) {
     updateComponentsToAdd(wpMenuDrawer);
     // Toggle the isSelected state and call updateComponentsToAdd method
@@ -113,11 +178,14 @@ const toggleMenuDrawer = () => {
 
     // Use updateComponentsToAdd method to handle the logic
   }
-}
+};
 // Watch for changes in isSelected directly
 watch(
-  () => reactiveData.availableComponents.map(item => item.isSelected),
-  () => updateComponentsToAdd(reactiveData.availableComponents.filter(item => item.isSelected)), // Corrected to pass array of selected components
+  () => reactiveData.availableComponents.map((item) => item.isSelected),
+  () =>
+    updateComponentsToAdd(
+      reactiveData.availableComponents.filter((item) => item.isSelected)
+    ), // Corrected to pass array of selected components
   { deep: true, immediate: true }
 );
 </script>
@@ -129,10 +197,19 @@ watch(
       <!-- <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals" /> -->
       <nav>
         <ul>
-          <template v-for="item in reactiveData.availableComponents" :key="item.name">
+          <template
+            v-for="item in reactiveData.availableComponents"
+            :key="item.name"
+          >
             <li v-if="!item.isMandatory" @click="updateComponentsToAdd(item)">
-              <Skcheckbox :chkid="`chkid_${item.name}`" :labelName="item.label" :isCheckbox="true"
-                :isChecked="item.isSelected" @change="updateComponentsToAdd(item)" @click.stop />
+              <Skcheckbox
+                :chkid="`chkid_${item.name}`"
+                :labelName="item.label"
+                :isCheckbox="true"
+                :isChecked="item.isSelected"
+                @change="updateComponentsToAdd(item)"
+                @click.stop
+              />
             </li>
           </template>
         </ul>
@@ -140,12 +217,38 @@ watch(
     </aside>
     <main class="window">
       <div class="template-preview">
-        <component :is="component" v-for="(component, index) in reactiveData.componentsToAdd" :key="index"
-          @onHamburgerClick="toggleMenuDrawer" @closeDrawer="toggleMenuDrawer"/>
+        <template
+          v-for="(component, index) in reactiveData.componentsToAdd"
+          :key="index"
+        >
+          <component
+            v-if="component === WpAppbarTop1"
+            :is="component"
+            @onHamburgerClick="toggleMenuDrawer"
+          />
+          <component
+            v-else-if="component === WpMenuDrawer"
+            :is="component"
+            @closeDrawer="toggleMenuDrawer"
+          />
+          <component v-else :is="component" />
+        </template>
+        <!-- <div class="sk-hide">
+          <component
+            :is="component"
+            v-for="(component, index) in reactiveData.componentsToAdd"
+            :key="index"
+            @onHamburgerClick="toggleMenuDrawer"
+            @closeDrawer="toggleMenuDrawer"
+          />
+        </div> -->
       </div>
-      <Skemptystate :showEmptyState="reactiveData.showEmptyState"
-        content="Click on the components on the left to add one by one." contentTitle="Select a component to start"
-        emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg" />
+      <Skemptystate
+        :showEmptyState="reactiveData.showEmptyState"
+        content="Click on the components on the left to add one by one."
+        contentTitle="Select a component to start"
+        emptyStateImage="https://lscdn.blob.core.windows.net/content/pro-manage/sme/web-profile-images/web-designing-empty-state.svg"
+      />
     </main>
   </div>
   <ThemeEditor />
@@ -154,7 +257,7 @@ watch(
 <style scoped>
 .base-layout {
   display: flex;
-  font-family: 'sf-pro-text', sans-serif;
+  font-family: "sf-pro-text", sans-serif;
 
   h1,
   h2,
@@ -168,7 +271,7 @@ watch(
   .sk-h4,
   .sk-h5,
   .sk-h6 {
-    font-family: 'sf-pro-text', sans-serif;
+    font-family: "sf-pro-text", sans-serif;
     font-weight: var(--font-weight-medium, 500);
   }
 }

@@ -1,3 +1,5 @@
+<script setup lang="ts">
+</script>
 <template>
     <!-- #region About -->
     <section id="dvaMenuabout" class="about-us">

@@ -308,8 +308,8 @@ onMounted(() => {
         :enableNavButton="true"
         customPreviousIcon="chevron_left"
         customNextIcon="chevron_right"
-        @move-previous="() => moveCarousel('#doctorList', 'prev')"
-        @move-next="() => moveCarousel('#doctorList', 'next')"
+        @movePrevious="() => moveCarousel('#doctorList', 'prev')"
+        @moveNext="() => moveCarousel('#doctorList', 'next')"
         :hidePreviousButton="doctorListState.hidePreviousBtn.value"
         :hideNextButton="doctorListState.hideNextBtn.value"
         class="doctor-list"
@@ -431,19 +431,7 @@ onMounted(() => {
   /* .sk-container {
     padding: 0 var(--gutter-base);
   } */
-  .sk-carousel .sk-carousel-nav .sk-next,
-  .sk-carousel .sk-carousel-nav .sk-prev {
-    background: var(--color-primary);
-    border-radius: var(--radius-round);
-    &:hover {
-      box-shadow: var(--box-shadow-2);
-    }
-  }
-  .sk-carousel .sk-carousel-nav .sk-icons {
-    color: var(--color-on-primary);
-    padding: var(--gutter-xsmall);
-    font-size: 3rem;
-  }
+  
   .more-details {
     gap: var(--gutter-small);
   }

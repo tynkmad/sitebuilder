@@ -1,8 +1,12 @@
-<script lang="ts">
+<script setup lang="ts">
 import SkCarousel from "rolex/skCarousel.vue";
 import SkCarouselItem from "rolex/skCarouselItem.vue";
 import { IBusinessMedia } from "@/types/webProfileBuilderTypes";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
+import { useCarousel } from "@/composables/useCarousel";
+const { moveCarousel, getCarouselState, initObservers } = useCarousel();
+
+const photoListState = getCarouselState("#photoList");
 
 interface IPhotoList {
   photoList: Array<IBusinessMedia>;
@@ -251,27 +255,65 @@ const ReactiveData = reactive<IPhotoList>({
     },
   ],
 });
+
+onMounted(() => {
+  initObservers("#photoList");
+});
+const openPhoto = (item: IBusinessMedia) => {
+  // Define what happens when a photo is clicked
+  console.log("Photo clicked:", item);
+};
 </script>
 <template>
-  <SkCarousel
-    :enableNavButton="true"
-    customPreviousIcon="chevron_left"
-    customNextIcon="chevron_right"
-    @move-previous="() => moveCarousel('prev')"
-    @move-next="() => moveCarousel('next')"
-    :hidePreviousButton="ReactiveData.hidePreviousBtn"
-    :hideNextButton="ReactiveData.hideNextBtn"
-    class="doctor-list"
-    v-if="ReactiveData.profiles.length && ReactiveData.profiles.length > 1"
-  >
-  </SkCarousel>
-  <div class="sk-surface sk-outlined sk-clickable" onclick="openPhotoGallery()">
-    <img
-      src="@Model.ResultSet.ToList()[photo].mediaurl"
-      alt="@ViewBag.heading"
-      loading="lazy"
-      height="380"
-      width="100%"
-    />
-  </div>
+  <section class="gallery-section">
+    <h2 class="sk-text-center">Photos of Elder Care in Adayar</h2>
+    <SkCarousel
+      id="photoList"
+      :enableNavButton="true"
+      customPreviousIcon="chevron_left"
+      customNextIcon="chevron_right"
+      @movePrevious="() => moveCarousel('#photoList', 'prev')"
+      @moveNext="() => moveCarousel('#photoList', 'next')"
+      :hidePreviousButton="photoListState.hidePreviousBtn.value"
+      :hideNextButton="photoListState.hideNextBtn.value"
+      class="photo-list"
+      v-if="ReactiveData.photoList.length && ReactiveData.photoList.length > 1"
+    >
+      <SkCarouselItem
+        class="photo sk-clickable"
+        v-for="(item, index) in ReactiveData.photoList"
+        @click="openPhoto(item)"
+        :key="index"
+      >
+        <img
+          :src="item.mediaUrl"
+          :alt="item.businessId.toString()"
+          loading="lazy"
+          height="380"
+          width="100%"
+        />
+      </SkCarouselItem>
+    </SkCarousel>
+  </section>
 </template>
+<style>
+.gallery-section .photo-list .sk-carousel-inner {
+  padding: var(--gutter-base);
+}
+.gallery-section .photo {
+  overflow: hidden;
+  border-radius: var(--radius-xlarge);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 1.5s ease-in;
+  }
+  &:hover {
+    box-shadow: 0 0 1rem rgb(var(--color-rgb-black) / 10%);
+    img{
+      scale: 3;
+    }
+  }
+}
+</style>
