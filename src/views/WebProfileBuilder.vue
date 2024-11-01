@@ -17,6 +17,8 @@ import WpMenuDrawer from '@/components/WpMenuDrawer.vue';
 import WpHero1 from '@/components/WpHero1.vue';
 import WpFeaturedCTASection1 from '@/components/WpFeaturedCTASection1.vue';
 import WpAbout1 from '@/components/WpAbout1.vue';
+import WpFeedback1 from '@/components/WpFeedback1.vue';
+import WpDoctorsList from '@/components/WpDoctorsList.vue';
 //#endregion import Components
 
 
@@ -59,6 +61,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     { name: 'WpHero1', component: markRaw(WpHero1), label: 'Hero 1', isSelected: false },
     { name: 'WpFeaturedCTASection1', component: markRaw(WpFeaturedCTASection1), label: 'Featured CTA 1', isSelected: false },
     { name: 'WpAbout1', component: markRaw(WpAbout1), label: 'About us 1', isSelected: false },
+    { name: 'WpFeedback1', component: markRaw(WpFeedback1), label: 'Feedback 1', isSelected: false },
+    { name: 'WpDoctorsList', component: markRaw(WpDoctorsList), label: 'Doctors List 1', isSelected: false },
   ],
   componentsToAdd: [],
 });

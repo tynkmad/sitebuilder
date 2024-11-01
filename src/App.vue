@@ -95,6 +95,7 @@ const navTo = async (targetContentID: string) => {
   } else if (route) {
     if (targetContentID === "WebProfileBuilder") {
       await import('@/assets/template.css');
+      console.log('css imported')
     }
     router.push(route);
   } else {

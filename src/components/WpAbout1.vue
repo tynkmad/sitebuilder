@@ -29,7 +29,7 @@
     </section>
     <!-- #endregion About -->
 </template>
-<style scoped >
+<style  >
 /* About us :: BEGIN */
 .about-us {
     text-align: left;
