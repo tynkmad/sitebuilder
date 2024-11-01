@@ -1026,6 +1026,9 @@ small,
   white-space: nowrap !important;
 }
 
+.sk-text-muted{
+  color: var(--color-text-muted) !important;
+}
 /* Break single lengthy word */
 .sk-text-break-word {
   word-wrap: break-word !important;
@@ -1325,6 +1328,9 @@ small,
   margin-bottom: var(--gutter-base) !important;
 }
 
+.sk-margin-bottom-small {
+  margin-bottom: var(--gutter-small) !important;
+}
 .sk-margin-bottom-large {
   margin-bottom: var(--gutter-large) !important;
 }
