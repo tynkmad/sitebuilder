@@ -26,8 +26,6 @@ interface IDoctorProfile {
 }
 interface IDoctorList {
   profiles: Array<IDoctorProfile>;
-  hidePreviousBtn?: boolean;
-  hideNextBtn?: boolean;
 }
 
 const ReactiveData = reactive<IDoctorList>({
@@ -147,15 +145,10 @@ const ReactiveData = reactive<IDoctorList>({
       IsProfileAvailable: true,
     },
   ],
-  hidePreviousBtn: false,
-  hideNextBtn: false,
 });
-
-const currentScrollWidth = ref(0);
 
 const getImageUrl = (url: string) =>
   url || "https://lscdn.azureedge.net/biz-live/img/doctor-thumbnail-avatar.png";
-const formatDescription = (desc: string) => desc;
 const formatTimeSlots = (timeSlots: string[]) =>
   timeSlots[0].replace("to", "-");
 
@@ -229,10 +222,10 @@ onMounted(() => {
               v-if="item.AboutProfile"
               class="sk-margin-bottom-0 sk-line-clamp sk-line-3"
             >
-              {{ formatDescription(item.AboutProfile) }}
+              {{ item.AboutProfile }}
             </p>
             <a
-              v-if="item.AboutProfile"
+              v-if="item.AboutProfile.length > 250"
               :title="`Read More about ${item.ProfileName}`"
               class="sk-link sk-underline sk-clickable"
               :href="`/appointment/doctor-profile/${item.ProfileId}`"
@@ -334,6 +327,63 @@ onMounted(() => {
               <div class="experience sk-bold">
                 {{ item.OverallExperience }} Years Experience Overall
               </div>
+              <div
+                v-if="item.LanguageKnownList && item.LanguageKnownList.length"
+                class="language-known sk-margin-top"
+              >
+                <div class="sk-h6">Language Known:</div>
+                <p>{{ item.LanguageKnownList.join(", ") }}</p>
+              </div>
+              <p
+                v-if="item.AboutProfile"
+                class="sk-margin-top sk-margin-bottom-0 sk-line-clamp sk-line-2 sk-text-start about-doctor"
+              >
+                {{ item.AboutProfile }}
+                <a
+                  v-if="item.AboutProfile.length > 60"
+                  :title="`Read More about ${item.ProfileName}`"
+                  class="sk-link sk-underline sk-clickable"
+                  :href="`/appointment/doctor-profile/${item.ProfileId}`"
+                  >Read more</a
+                >
+              </p>
+
+              <!-- <div
+                v-if="
+                  item.ProfileAvailabilitySlots &&
+                  item.ProfileAvailabilitySlots.length
+                "
+                class="working-hours sk-margin-top"
+              >
+                <div class="sk-h6">Working Hours:</div>
+                <p id="working-hours-display">
+                  {{ selectedTime || "Select a day to see the working hours" }}
+                </p>
+                <ul id="day-list" class="day-list">
+                  <template
+                    v-for="(
+                      availability, index
+                    ) in item.ProfileAvailabilitySlots"
+                    :key="index"
+                  >
+                    <li
+                      v-for="(day, dayIndex) in availability.SelectedDays"
+                      :class="{
+                        'sk-selected': selectedIndex === `${index}-${dayIndex}`,
+                      }"
+                      @click="
+                        selectDay(
+                          index,
+                          dayIndex,
+                          formatTimeSlots(availability.SelectedTimeSlots)
+                        )
+                      "
+                    >
+                      {{ day }}
+                    </li>
+                  </template>
+                </ul>
+              </div> -->
               <a
                 class="sk-flex-row sk-flex-justify-center sk-margin-top book-appointment-button"
                 @click.stop="
@@ -389,8 +439,8 @@ onMounted(() => {
       background-color: var(--color-white);
       border-radius: var(--radius-large);
       color: var(--color-body-color);
-      text-align: center;
-      margin-top: -4rem;
+      /* text-align: center; */
+      margin-top: calc(var(--gutter-large) * -1);
       position: relative;
 
       .sk-icons {
@@ -418,9 +468,13 @@ onMounted(() => {
       }
     }
 
+    &:hover  {
+      box-shadow: 0 0 1rem rgb(var(--color-rgb-black) / 10%);
+    }
     &:hover .book-appointment-text {
       width: 16rem;
       font-size: 1.6rem;
+      
     }
   }
 
@@ -430,6 +484,20 @@ onMounted(() => {
       background-color: rgb(var(--color-primary-rgb) / 5%);
     }
   } */
+
+  .about-doctor{
+    position: relative;
+    a{
+      position: absolute;
+      bottom: 0;
+      background: var(--color-white);
+      padding:0 var(--gutter-small) 0 var(--gutter-base);
+      right: 0;
+      &::before{
+        content: '...';
+      }
+    }
+  }
 
   .working-hours {
     .sk-h6 {
@@ -466,15 +534,20 @@ onMounted(() => {
   }
 }
 
+.doctor-list{
+  .sk-carousel-inner{
+    padding: var(--gutter-base) 0;
+  }
+}
 @media (max-width: 768px) {
-  .doctors-list,
+  .doctor-list,
   .review-section .sk-carousel {
     padding-top: 2rem;
   }
 
-  .about-doctor .doctor {
+  /*.about-doctor .doctor {
     max-width: 40rem;
     padding-bottom: 2rem;
-  }
+  }*/
 }
 </style>
