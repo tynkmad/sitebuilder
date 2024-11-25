@@ -7,7 +7,7 @@ import Templates from '@/views/Templates.vue'
 import Integrations from '@/views/Integrations.vue'
 
 const router = createRouter({
-  history: createWebHistory('/promanage/pmsme/template-builder/'),
+  history: createWebHistory('/sitebuilder/'),
   routes: [
     {
       path: '/',

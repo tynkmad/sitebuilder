@@ -109,7 +109,7 @@ const navTo = async (targetContentID: string) => {
     }
     router.push(route);
   } else {
-    router.push('/'); // Navigate to home as a fallback
+    router.push('./'); // Navigate to home as a fallback
   }
   if (ReactiveData.showMenuDrawer)
     ReactiveData.showMenuDrawer = !ReactiveData.showMenuDrawer // Hide Menu on mobile upon redirection
@@ -121,7 +121,7 @@ const navTo = async (targetContentID: string) => {
   <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
     <template #ableft>
       <div class="sk-appbar-logo">
-        <a href="/">
+        <a href="./">
           <img src="https://lscdn.blob.core.windows.net/content/promanage/logo-color-230x60.png" height="40" width="150"
             alt="ProManage" />
         </a>
