@@ -41,12 +41,13 @@ interface IcomponentItem {
   label: string;
   isSelected: boolean;
   isMandatory?: boolean;
+  order: number | undefined;
 }
 
 interface IwebProfileBuilder {
   showEmptyState: boolean;
   availableComponents: Array<IcomponentItem>;
-  componentsToAdd: Array<Component>;
+  componentsToAdd: Array<IcomponentItem>;
 }
 
 const reactiveData = reactive<IwebProfileBuilder>({
@@ -59,24 +60,28 @@ const reactiveData = reactive<IwebProfileBuilder>({
       label: "Load Icons",
       isSelected: true,
       isMandatory: true,
+      order: 0,
     },
     {
       name: "WpQuickBarTop",
       component: markRaw(WpQuickBarTop),
       label: "Quick Bar Top",
       isSelected: false,
+      order: 1,
     },
     {
       name: "WpHeaderBar",
       component: markRaw(WpHeaderBar),
       label: "Header",
       isSelected: false,
+      order: 2,
     },
     {
       name: "WpAppbarTop1",
       component: markRaw(WpAppbarTop1),
       label: "Appbar Top 1",
       isSelected: false,
+      order: 3,
     },
     {
       name: "WpMenuDrawer",
@@ -84,87 +89,129 @@ const reactiveData = reactive<IwebProfileBuilder>({
       label: "Drawer",
       isSelected: false,
       isMandatory: true,
+      order: 0,
     },
     {
       name: "WpHero1",
       component: markRaw(WpHero1),
       label: "Hero 1",
       isSelected: false,
+      order: 4,
     },
     {
       name: "WpFeaturedCTASection1",
       component: markRaw(WpFeaturedCTASection1),
       label: "Featured CTA 1",
       isSelected: false,
+      order: -1,
     },
     {
       name: "WpAbout1",
       component: markRaw(WpAbout1),
       label: "About us 1",
       isSelected: false,
+      order: -1,
     },
     {
       name: "WpFeedback1",
       component: markRaw(WpFeedback1),
       label: "Feedback 1",
       isSelected: false,
+      order: -1,
     },
     {
       name: "WpDoctorsList",
       component: markRaw(WpDoctorsList),
       label: "Doctors List 1",
       isSelected: false,
+      order: -1,
     },
     {
       name: "WpPhotos",
       component: markRaw(WpPhotos),
       label: "Photo Gallery",
       isSelected: false,
+      order: -1,
     },
   ],
   componentsToAdd: [],
 });
+
+function sortComponents(components: Array<IcomponentItem>): Array<IcomponentItem> {
+  return components.sort((a: IcomponentItem, b: IcomponentItem) => {
+    const orderA = a.order ?? Infinity; // Default to infinity for undefined order
+    const orderB = b.order ?? Infinity;
+
+    // Prioritize order 0 to the end
+    if (orderA === 0) {
+      return 1;
+    } else if (orderB === 0) {
+      return -1;
+    }
+
+    // Prioritize order -1 after positive orders
+    if (orderA === -1 && orderB !== -1) {
+      return 1;
+    } else if (orderB === -1 && orderA !== -1) {
+      return -1;
+    }
+
+    // Sort positive orders in ascending order (optional: handle NaN)
+    return orderA - orderB || NaN; // Handle NaN for invalid orders
+  });
+}
 
 // Function to update componentsToAdd based on availableComponents or a default array
 const updateComponentsToAdd = (
   components: IcomponentItem | Array<IcomponentItem>
 ) => {
   if (Array.isArray(components)) {
+    // Handle adding multiple components
     components.forEach((item) => {
-      // Add only if not already present in the array
-      if (!reactiveData.componentsToAdd.includes(item.component)) {
-        reactiveData.componentsToAdd.push(item.component);
-        // Set the component as selected
+      const existingIndex = reactiveData.componentsToAdd.findIndex(
+        (existing) => existing.name === item.name
+      );
+
+      if (existingIndex === -1) {
+        // Add the component if not already present
+        reactiveData.componentsToAdd.push(item);
         item.isSelected = true;
       }
     });
-  }
-
-  // Update the isSelected property based on newValue
-  else {
-    // Toggle selection state for a single component
-    const index: number = reactiveData.availableComponents.findIndex(
+  } else {
+    // Handle toggling a single component's selection
+    const index = reactiveData.availableComponents.findIndex(
       (comp) => comp.name === components.name
     );
+
     if (index !== -1) {
       const selected = reactiveData.availableComponents[index];
       selected.isSelected = !selected.isSelected;
 
-      // Add or remove the component based on isSelected status
+      // Update componentsToAdd based on isSelected change
+      const componentIndex = reactiveData.componentsToAdd.findIndex(
+        (existing) => existing.name === selected.name
+      );
+
       if (selected.isSelected) {
-        reactiveData.componentsToAdd.push(selected.component);
+        // Add the component if not already present
+        if (componentIndex === -1) {
+          reactiveData.componentsToAdd.push(selected);
+        }
       } else {
-        const componentIndex = reactiveData.componentsToAdd.indexOf(
-          selected.component
-        );
+        // Remove the component if it's selected
         if (componentIndex !== -1) {
           reactiveData.componentsToAdd.splice(componentIndex, 1);
         }
       }
     }
-    // Handle the empty state logic
+
+    // Handle empty state logic based on selected components
     reactiveData.showEmptyState = reactiveData.componentsToAdd.length === 1;
   }
+
+  // Sort the componentsToAdd array based on order
+  reactiveData.componentsToAdd = sortComponents(reactiveData.componentsToAdd);
 };
 
 const toggleMenuDrawer = () => {
@@ -218,20 +265,16 @@ watch(
     <main class="window">
       <div class="template-preview">
         <template
-          v-for="(component, index) in reactiveData.componentsToAdd"
-          :key="index"
+          v-for="componentItem in reactiveData.componentsToAdd"
+          :key="componentItem.name"
         >
           <component
-            v-if="component === WpAppbarTop1"
-            :is="component"
+            :is="componentItem.component"
+            v-if="componentItem.component === WpAppbarTop1"
             @onHamburgerClick="toggleMenuDrawer"
-          />
-          <component
-            v-else-if="component === WpMenuDrawer"
-            :is="component"
             @closeDrawer="toggleMenuDrawer"
           />
-          <component v-else :is="component" />
+          <component v-else :is="componentItem.component" />
         </template>
         <!-- <div class="sk-hide">
           <component
