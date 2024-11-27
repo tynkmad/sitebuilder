@@ -2,19 +2,36 @@
 import router from "@/router";
 import Skappbar from "rolex/skappbar.vue";
 import Skbutton from "rolex/skbutton.vue";
+import { skActionItem } from "rolex/skglobaltypes";
 import SkPanel from "rolex/skpanel.vue";
 import { reactive } from "vue";
 
 interface IWebProfileBuilderHome {
-  showPreForm: boolean;
+  showBasicInfoForm: boolean;
 }
 const reactiveData = reactive<IWebProfileBuilderHome>({
-  showPreForm: true,
+  showBasicInfoForm: false,
 });
-const navigateToTemplateList = (action: string) => {
-  if (action === "view") {
-    router.push("/templates");
+
+const basicInfoFormAppbarActionItems: Array<skActionItem> = [
+  {
+    itemKey: "1",
+    actionIcon: "close",
+  },
+];
+const navigateToTemplateList = (action?: string) => {
+  switch (action) {
+    case "view":
+      router.push("/templates");
+      break;
+
+    default:
+      toggleBasicInfoForm();
+      break;
   }
+};
+const toggleBasicInfoForm = () => {
+  reactiveData.showBasicInfoForm = !reactiveData.showBasicInfoForm;
 };
 </script>
 
@@ -42,7 +59,7 @@ const navigateToTemplateList = (action: string) => {
                   <Skbutton
                     buttonText="Create Now"
                     xlarge
-                    @click="navigateToTemplateList('create')"
+                    @click="navigateToTemplateList()"
                   />
                   <Skbutton
                     buttonText="View Templates"
@@ -68,12 +85,18 @@ const navigateToTemplateList = (action: string) => {
         </div>
       </div>
     </section>
-    <SkPanel :showPanel="reactiveData.showPreForm">
+    <SkPanel :showPanel="reactiveData.showBasicInfoForm">
       <template #skpanelheader>
         <Skappbar
           appBarLeftIconStyle="back"
           appBarTitle="Select Business Type"
+          :appBarActionItems="basicInfoFormAppbarActionItems"
+          @actionItemClick="toggleBasicInfoForm"
+          @navigationIconClick="toggleBasicInfoForm"
         />
+      </template>
+      <template #skpanelbody>
+        
       </template>
     </SkPanel>
   </main>

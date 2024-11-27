@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ThemeEditor from "@/components/ThemeEditor.vue";
 
-import { markRaw, reactive, watch } from "vue";
+import { markRaw, reactive, ref, watch } from "vue";
 import type { Component } from "vue";
 import Skbutton from "rolex/skbutton.vue";
 import Skemptystate from "rolex/skemptystate.vue";
@@ -20,6 +20,11 @@ import WpAbout1 from "@/components/WpAbout1.vue";
 import WpFeedback1 from "@/components/WpFeedback1.vue";
 import WpDoctorsList from "@/components/WpDoctorsList.vue";
 import WpPhotos from "@/components/WpPhotos.vue";
+import {
+  DraggableEvent,
+  UseDraggableReturn,
+  VueDraggable,
+} from "vue-draggable-plus";
 //#endregion import Components
 
 //#region WebVitals Optimization
@@ -137,7 +142,9 @@ const reactiveData = reactive<IwebProfileBuilder>({
   componentsToAdd: [],
 });
 
-function sortComponents(components: Array<IcomponentItem>): Array<IcomponentItem> {
+function sortComponents(
+  components: Array<IcomponentItem>
+): Array<IcomponentItem> {
   return components.sort((a: IcomponentItem, b: IcomponentItem) => {
     const orderA = a.order ?? Infinity; // Default to infinity for undefined order
     const orderB = b.order ?? Infinity;
@@ -235,6 +242,29 @@ watch(
     ), // Corrected to pass array of selected components
   { deep: true, immediate: true }
 );
+
+//#region Draggable components using vue-draggable-plus https://vue-draggable-plus.pages.dev/
+const draggableElementsContainer = ref<UseDraggableReturn>();
+const disabled = ref(false);
+function pause() {
+  draggableElementsContainer.value?.pause();
+}
+
+function start() {
+  draggableElementsContainer.value?.start();
+}
+
+const onStart = (e: DraggableEvent) => {
+  console.log("start", e);
+};
+
+const onEnd = (e: DraggableEvent) => {
+  console.log("onEnd", e);
+};
+
+const onUpdate = () => {
+  console.log("update");
+};
 </script>
 
 <template>
@@ -264,18 +294,24 @@ watch(
     </aside>
     <main class="window">
       <div class="template-preview">
-        <template
-          v-for="componentItem in reactiveData.componentsToAdd"
-          :key="componentItem.name"
+        <VueDraggable
+          ref="draggableElementsContainer"
+          v-model="reactiveData.componentsToAdd"
+          class="draggable-components"
         >
-          <component
-            :is="componentItem.component"
-            v-if="componentItem.component === WpAppbarTop1"
-            @onHamburgerClick="toggleMenuDrawer"
-            @closeDrawer="toggleMenuDrawer"
-          />
-          <component v-else :is="componentItem.component" />
-        </template>
+          <template
+            v-for="componentItem in reactiveData.componentsToAdd"
+            :key="componentItem.name"
+          >
+            <component
+              :is="componentItem.component"
+              v-if="componentItem.component === WpAppbarTop1"
+              @onHamburgerClick="toggleMenuDrawer"
+              @closeDrawer="toggleMenuDrawer"
+            />
+            <component v-else :is="componentItem.component" />
+          </template>
+        </VueDraggable>
         <!-- <div class="sk-hide">
           <component
             :is="component"
@@ -349,5 +385,11 @@ watch(
 
 .window {
   flex: 1 1 auto;
+}
+.draggable-components > * {
+  cursor: move;
+  &:hover {
+    border: 0.1rem dashed;
+  }
 }
 </style>
