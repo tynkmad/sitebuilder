@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ThemeEditor from "@/components/ThemeEditor.vue";
 
-import { markRaw, reactive, ref, watch } from "vue";
+import { markRaw, onMounted, reactive, ref, watch } from "vue";
 import type { Component } from "vue";
 import Skbutton from "rolex/skbutton.vue";
 import Skemptystate from "rolex/skemptystate.vue";
@@ -25,6 +25,9 @@ import {
   UseDraggableReturn,
   VueDraggable,
 } from "vue-draggable-plus";
+import Skdrawer from "rolex/skdrawer.vue";
+import Skappbar from "rolex/skappbar.vue";
+import Skswitch from "rolex/skswitch.vue";
 //#endregion import Components
 
 //#region WebVitals Optimization
@@ -47,18 +50,20 @@ interface IcomponentItem {
   isSelected: boolean;
   isMandatory?: boolean;
   order: number | undefined;
+  description: string;
 }
 
 interface IwebProfileBuilder {
   showEmptyState: boolean;
+  showEditor: boolean;
   availableComponents: Array<IcomponentItem>;
   componentsToAdd: Array<IcomponentItem>;
 }
 
 const reactiveData = reactive<IwebProfileBuilder>({
-  showEmptyState: true,
+  showEmptyState: false,
+  showEditor: false,
   availableComponents: [
-    // { name: 'ThemeEditor', component: markRaw(ThemeEditor), label: 'Theme Editor', isSelected: true, isMandatory: true },
     {
       name: "WpIcons",
       component: markRaw(WpIcons),
@@ -66,27 +71,35 @@ const reactiveData = reactive<IwebProfileBuilder>({
       isSelected: true,
       isMandatory: true,
       order: 0,
+      description:
+        "A collection of SVG icons used across the application to enhance visual representation.",
     },
     {
       name: "WpQuickBarTop",
       component: markRaw(WpQuickBarTop),
       label: "Quick Bar Top",
-      isSelected: false,
+      isSelected: true,
       order: 1,
+      description:
+        "Displays prominent quick action items like 'Book Appointment' and 'Contact Us' to drive user engagement and lead generation.",
     },
     {
       name: "WpHeaderBar",
       component: markRaw(WpHeaderBar),
       label: "Header",
-      isSelected: false,
+      isSelected: true,
       order: 2,
+      description:
+        "A header section that prominently shows critical information such as branch location and store timings for easy access.",
     },
     {
       name: "WpAppbarTop1",
       component: markRaw(WpAppbarTop1),
       label: "Appbar Top 1",
-      isSelected: false,
+      isSelected: true,
       order: 3,
+      description:
+        "The primary app bar that includes the business logo, menu items, and contact information for navigation and branding.",
     },
     {
       name: "WpMenuDrawer",
@@ -95,48 +108,62 @@ const reactiveData = reactive<IwebProfileBuilder>({
       isSelected: false,
       isMandatory: true,
       order: 0,
+      description:
+        "A side navigation drawer that organizes all menu items for easy access and a clean UI.",
     },
     {
       name: "WpHero1",
       component: markRaw(WpHero1),
       label: "Hero 1",
-      isSelected: false,
+      isSelected: true,
       order: 4,
+      description:
+        "A visually striking hero section used to highlight key information, promotions, or messages to engage users.",
     },
     {
       name: "WpFeaturedCTASection1",
       component: markRaw(WpFeaturedCTASection1),
       label: "Featured CTA 1",
-      isSelected: false,
+      isSelected: true,
       order: -1,
+      description:
+        "A call-to-action section designed to encourage user interaction, such as making inquiries or exploring services.",
     },
     {
       name: "WpAbout1",
       component: markRaw(WpAbout1),
       label: "About us 1",
-      isSelected: false,
+      isSelected: true,
       order: -1,
+      description:
+        "An 'About Us' section to provide background information about the business, mission, and values.",
     },
     {
       name: "WpFeedback1",
       component: markRaw(WpFeedback1),
       label: "Feedback 1",
-      isSelected: false,
+      isSelected: true,
       order: -1,
+      description:
+        "A feedback section that allows users to leave reviews, testimonials, or ratings to enhance credibility.",
     },
     {
       name: "WpDoctorsList",
       component: markRaw(WpDoctorsList),
       label: "Doctors List 1",
-      isSelected: false,
+      isSelected: true,
       order: -1,
+      description:
+        "A section displaying a list of doctors, including their names, specializations, and credentials.",
     },
     {
       name: "WpPhotos",
       component: markRaw(WpPhotos),
       label: "Photo Gallery",
-      isSelected: false,
+      isSelected: true,
       order: -1,
+      description:
+        "A photo gallery section showcasing images of the business, services, or events to visually engage users.",
     },
   ],
   componentsToAdd: [],
@@ -265,13 +292,38 @@ const onEnd = (e: DraggableEvent) => {
 const onUpdate = () => {
   console.log("update");
 };
+
+const toggleEditor = () => {
+  reactiveData.showEditor = !reactiveData.showEditor;
+};
+
+onMounted(() => {
+  // Select all the 'sk-expansion-inner' elements
+  const toggleButtons = document.querySelectorAll(".sk-expansion-inner");
+
+  toggleButtons.forEach((button) => {
+    const header = button.querySelector(".sk-expansion-header");
+    if (header) {
+      // Add click event listener to the header
+      header.addEventListener("click", () => {
+        // Toggle the 'sk-active' class on the clicked panel
+        button.classList.toggle("sk-active");
+
+        // Remove 'sk-active' from all sibling elements
+        const siblings = Array.from(button.parentNode!.children).filter(
+          (sibling) => sibling !== button
+        );
+        siblings.forEach((sibling) => sibling.classList.remove("sk-active"));
+      });
+    }
+  });
+});
 </script>
 
 <template>
   <div class="base-layout">
-    <aside class="key sk-sticky sk-sticky-2">
+    <!-- <aside class="key sk-sticky sk-sticky-2">
       <h3 class="sk-padding sk-h6">Components</h3>
-      <!-- <Skbutton primary buttonText="Check web vitals" @click="calculateWebVitals" /> -->
       <nav>
         <ul>
           <template
@@ -291,7 +343,7 @@ const onUpdate = () => {
           </template>
         </ul>
       </nav>
-    </aside>
+    </aside> -->
     <main class="window">
       <div class="template-preview">
         <VueDraggable
@@ -330,10 +382,62 @@ const onUpdate = () => {
       />
     </main>
   </div>
-  <ThemeEditor />
+  <!-- <ThemeEditor /> -->
+  <Skdrawer
+    :showDrawer="reactiveData.showEditor"
+    right
+    drawerstyle="noBG"
+    class="template-editor"
+    @closePanel="toggleEditor"
+  >
+    <template #skdrawerheader>
+      <Skappbar
+        appBarLeftIconStyle=""
+        appBarTitle=""
+        @navigationIconClick="toggleEditor"
+      >
+        <template #ableft>
+          <Skbutton icon="close" round noShadow @click="toggleEditor" />
+          <h6 class="sk-padding-large sk-padding-y sk-margin-bottom-0">
+            Template Editor
+          </h6>
+        </template>
+      </Skappbar>
+    </template>
+    <template #skdrawerbody>
+      <div class="sk-expansion-panels">
+        <template
+          v-for="item in reactiveData.availableComponents"
+          :key="item.name"
+        >
+          <div class="sk-expansion-inner" v-if="!item.isMandatory" @click="">
+            <div class="sk-expansion-header">
+              <button class="sk-expansion-action">
+                <span> {{ item.label }} </span>
+                <span class="sk-icons">expand_circle_down</span>
+              </button>
+            </div>
+
+            <div class="sk-expansion-content" v-if="!item.isMandatory">
+              <p class="sk-text-muted">
+                {{ item.description }}
+              </p>
+              <Skswitch
+                isWide
+                :isChecked="item.isSelected"
+                @change="updateComponentsToAdd(item)"
+                @click.stop
+              />
+            </div>
+          </div>
+        </template>
+      </div>
+    </template>
+  </Skdrawer>
+  <Skbutton fab buttonText="Edit Template" primary pill @click="toggleEditor" />
 </template>
 
-<style scoped>
+<style>
 .base-layout {
   display: flex;
   font-family: "sf-pro-text", sans-serif;
@@ -389,7 +493,22 @@ const onUpdate = () => {
 .draggable-components > * {
   cursor: move;
   &:hover {
-    border: 0.1rem dashed;
+    border: 0.1rem dashed #2ebb32;
   }
+}
+.template-editor .sk-drawer-inner {
+  box-shadow: 0 0 6rem 0px rgba(var(--color-rgb-black) / 20%);
+}
+.sk-expansion-inner{
+  transition: all .5s ease-in-out;
+}
+.sk-expansion-inner.sk-active {
+  background: rgb(var(--color-rgb-primary) / 10%);
+}
+.sk-expansion-inner .sk-expansion-action {
+  background: transparent;
+}
+.sk-expansion-inner.sk-active .sk-expansion-header .sk-icons {
+  transform: rotate(180deg);
 }
 </style>

@@ -8,6 +8,7 @@ import SkMenuBar from 'rolex/skMenuBar.vue';
 import SkDrawer from 'rolex/skdrawer.vue';
 import { ExtendedMainNavBarType } from '@/types/webProfileBuilderTypes';
 
+import '@/assets/template.css';
 // Define an interface for the reactive data structure
 interface ImainApp {
   showMenuDrawer?: boolean;
@@ -65,7 +66,7 @@ const setActiveMenu = async () => {
   // Check if current route is WebProfileBuilder and load CSS if true
   if (route.path.includes('webprofilebuilder')) {
     try {
-      await import('@/assets/template.css');
+      // await import('@/assets/template.css');
       console.log('CSS imported');
     } catch (error) {
       console.error('Failed to import CSS:', error);
@@ -104,7 +105,7 @@ const navTo = async (targetContentID: string) => {
     window.open(ReactiveData.menuItems.find(menu => menu.targetContentID === "Resources")?.externalLink, '_blank');
   } else if (route) {
     if (targetContentID === "WebProfileBuilder") {
-      await import('@/assets/template.css');
+      // await import('@/assets/template.css');
       console.log('css imported')
     }
     router.push(route);
@@ -118,7 +119,7 @@ const navTo = async (targetContentID: string) => {
 
 <template>
   <!-- AppBar with a toggle button for the menu drawer -->
-  <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
+  <!-- <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
     <template #ableft>
       <div class="sk-appbar-logo">
         <a href="./">
@@ -130,7 +131,7 @@ const navTo = async (targetContentID: string) => {
     <template #abright>
       <SkMenuBar useSmallMenu :MenuItems="ReactiveData.menuItems" @navBarNavigation="navTo" class="sk-mobile-hide" />
     </template>
-  </SkAppbar>
+  </SkAppbar> -->
 
   <!-- Main content area -->
   <RouterView />

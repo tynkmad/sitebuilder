@@ -111,3 +111,7 @@ export default {
   },
 };
 </script>
+
+
+for draggable components i am using
+https://vue-draggable-plus.pages.dev/en/demo/tow-list/

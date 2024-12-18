@@ -1,7 +1,10 @@
 import { ref, onUnmounted, Ref } from "vue";
 
 export function useCarousel() {
-  const carouselStates = new Map<string, { hidePreviousBtn: Ref<boolean>; hideNextBtn: Ref<boolean> }>();
+  const carouselStates = new Map<
+    string,
+    { hidePreviousBtn: Ref<boolean>; hideNextBtn: Ref<boolean> }
+  >();
 
   const getCarouselState = (carouselContainerId: string) => {
     if (!carouselStates.has(carouselContainerId)) {
@@ -15,11 +18,17 @@ export function useCarousel() {
 
   const initObservers = (carouselContainerId: string) => {
     const state = getCarouselState(carouselContainerId);
-    const container = document.querySelector(`${carouselContainerId} .sk-carousel-inner`) as HTMLElement;
+    const container = document.querySelector(
+      `${carouselContainerId} .sk-carousel-inner`
+    ) as HTMLElement;
 
     if (container) {
-      const firstItem = container.querySelector(".sk-carousel-item:first-of-type");
-      const lastItem = container.querySelector(".sk-carousel-item:last-of-type");
+      const firstItem = container.querySelector(
+        ".sk-carousel-item:first-of-type"
+      );
+      const lastItem = container.querySelector(
+        ".sk-carousel-item:last-of-type"
+      );
 
       if (firstItem && lastItem) {
         const observerPrev = new IntersectionObserver(
@@ -42,18 +51,26 @@ export function useCarousel() {
     }
   };
 
-  const moveCarousel = async (carouselContainerId: string, direction: "next" | "prev") => {
-    const container = document.querySelector(`${carouselContainerId} .sk-carousel-inner`) as HTMLElement;
+  const moveCarousel = async (
+    carouselContainerId: string,
+    direction: "next" | "prev"
+  ) => {
+    const container = document.querySelector(
+      `${carouselContainerId} .sk-carousel-inner`
+    ) as HTMLElement;
     if (container) {
       const card = getDeviceType() === "Desktop" ? 2 : 1;
-      const scrollAmount = (container.clientWidth / card) * (direction === "next" ? 1 : -1);
+      const scrollAmount =
+        (container.clientWidth / card) * (direction === "next" ? 1 : -1);
       container.scrollLeft += scrollAmount;
     }
   };
 
   const getDeviceType = () => {
     const userAgent = navigator.userAgent;
-    const isMobile = /Mobile|Android|iPhone|iPod|BlackBerry|Kindle|Silk/.test(userAgent);
+    const isMobile = /Mobile|Android|iPhone|iPod|BlackBerry|Kindle|Silk/.test(
+      userAgent
+    );
     const isTablet = /Tablet|iPad/.test(userAgent);
     return isMobile ? "Mobile" : isTablet ? "Tablet" : "Desktop";
   };

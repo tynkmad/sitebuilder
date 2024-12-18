@@ -74,5 +74,9 @@
 /* #endregion common base.css style overrides  */
 
 /* #region styles for ui that won't affect components */
-
+.border-radius-top-0{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
 /* #endregion styles for ui that won't affect components */
+
