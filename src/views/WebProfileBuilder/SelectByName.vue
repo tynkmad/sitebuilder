@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ThemeEditor from "@/components/ThemeEditor.vue";
+import ThemeEditor from "@/components/ui/ThemeEditor.vue";
 
 import { markRaw, onMounted, reactive, ref, watch } from "vue";
 import type { Component } from "vue";
@@ -7,19 +7,20 @@ import Skbutton from "rolex/skbutton.vue";
 import Skemptystate from "rolex/skemptystate.vue";
 import Skcheckbox from "rolex/skcheckbox.vue";
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals/attribution";
+import SkTextField from "rolex/sktextfield.vue";
 
 //#region import Components
-import WpQuickBarTop from "@/components/WpQuickBarTop.vue";
-import WpHeaderBar from "@/components/WpHeaderBar.vue";
-import WpIcons from "@/components/WpIcons.vue";
-import WpAppbarTop1 from "@/components/WpAppbarTop1.vue";
-import WpMenuDrawer from "@/components/WpMenuDrawer.vue";
-import WpHero1 from "@/components/WpHero1.vue";
-import WpFeaturedCTASection1 from "@/components/WpFeaturedCTASection1.vue";
-import WpAbout1 from "@/components/WpAbout1.vue";
-import WpFeedback1 from "@/components/WpFeedback1.vue";
-import WpDoctorsList from "@/components/WpDoctorsList.vue";
-import WpPhotos from "@/components/WpPhotos.vue";
+import WpQuickBarTop from "@/components/template/WpQuickBarTop.vue";
+import WpHeaderBar from "@/components/template/WpHeaderBar.vue";
+import WpIcons from "@/components/template/WpIcons.vue";
+import WpAppbarTop1 from "@/components/template/WpAppbarTop1.vue";
+import WpMenuDrawer from "@/components/template/WpMenuDrawer.vue";
+import WpHero1 from "@/components/template/WpHero1.vue";
+import WpFeaturedCTASection1 from "@/components/template/WpFeaturedCTASection1.vue";
+import WpAbout1 from "@/components/template/WpAbout1.vue";
+import WpFeedback1 from "@/components/template/WpFeedback1.vue";
+import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
+import WpPhotos from "@/components/template/WpPhotos.vue";
 import {
   DraggableEvent,
   UseDraggableReturn,
@@ -28,6 +29,7 @@ import {
 import Skdrawer from "rolex/skdrawer.vue";
 import Skappbar from "rolex/skappbar.vue";
 import Skswitch from "rolex/skswitch.vue";
+import FileUpload from "@/components/ui/FileUpload.vue";
 //#endregion import Components
 
 //#region WebVitals Optimization
@@ -58,6 +60,7 @@ interface IwebProfileBuilder {
   showEditor: boolean;
   availableComponents: Array<IcomponentItem>;
   componentsToAdd: Array<IcomponentItem>;
+  inputList: Array<string>;
 }
 
 const reactiveData = reactive<IwebProfileBuilder>({
@@ -167,6 +170,7 @@ const reactiveData = reactive<IwebProfileBuilder>({
     },
   ],
   componentsToAdd: [],
+  inputList: [],
 });
 
 function sortComponents(
@@ -301,23 +305,64 @@ onMounted(() => {
   // Select all the 'sk-expansion-inner' elements
   const toggleButtons = document.querySelectorAll(".sk-expansion-inner");
 
-  toggleButtons.forEach((button) => {
-    const header = button.querySelector(".sk-expansion-header");
-    if (header) {
-      // Add click event listener to the header
-      header.addEventListener("click", () => {
-        // Toggle the 'sk-active' class on the clicked panel
-        button.classList.toggle("sk-active");
+  // toggleButtons.forEach((button) => {
+  //   // const header = button.querySelector(".sk-expansion-header");
+  //   // if (header) {
+  //   //   // Add click event listener to the header
+  //   //   header.addEventListener("click", () => {
+  //   //     // Toggle the 'sk-active' class on the clicked panel
+  //   //     button.classList.toggle("sk-active");
 
-        // Remove 'sk-active' from all sibling elements
-        const siblings = Array.from(button.parentNode!.children).filter(
-          (sibling) => sibling !== button
-        );
-        siblings.forEach((sibling) => sibling.classList.remove("sk-active"));
-      });
-    }
-  });
+  //   //     // Toggle the class on the corresponding component in `template-preview`
+  //   //     const componentName = button.dataset.component;
+  //   //     if (componentName) {
+  //   //       const componentIndex = reactiveData.componentsToAdd.findIndex(
+  //   //         (item) => item.name === componentName
+  //   //       );
+  //   //       if (componentIndex !== -1) {
+  //   //         const componentEl = document.querySelector(
+  //   //           `.template-preview > component[is=${componentName}]`
+  //   //         );
+  //   //         if (componentEl) {
+  //   //           componentEl.classList.toggle("active-class");
+  //   //         }
+  //   //       }
+  //   //     }
+
+  //   //     // Remove 'sk-active' from all sibling elements
+  //   //     const siblings = Array.from(button.parentNode!.children).filter(
+  //   //       (sibling) => sibling !== button
+  //   //     );
+  //   //     siblings.forEach((sibling) => sibling.classList.remove("sk-active"));
+  //   //   });
+  //   // }
+  // });
 });
+
+// Function to handle the button click logic
+const toggleEditingSpecificComponent = (
+  event: Event,
+  componentName: string
+) => {
+  // Update the class on corresponding element in the template
+  const componentEl = document.getElementById(`${componentName}`);
+  document.querySelectorAll(".currently-editing").forEach((elem) => {
+    elem.classList.remove("currently-editing");
+  });
+  if (componentEl) {
+    componentEl.classList.toggle("currently-editing");
+  }
+
+  // Remove the 'sk-active' class from all sibling elements
+  const parentElement = (event.currentTarget as HTMLElement).closest(
+    ".sk-expansion-inner"
+  );
+  const siblings = Array.from(
+    parentElement?.parentElement?.children || []
+  ).filter((sibling) => sibling !== parentElement);
+  parentElement?.classList.add("sk-active");
+  siblings.forEach((sibling) => sibling.classList.remove("sk-active"));
+};
 </script>
 
 <template>
@@ -355,13 +400,15 @@ onMounted(() => {
             v-for="componentItem in reactiveData.componentsToAdd"
             :key="componentItem.name"
           >
-            <component
-              :is="componentItem.component"
-              v-if="componentItem.component === WpAppbarTop1"
-              @onHamburgerClick="toggleMenuDrawer"
-              @closeDrawer="toggleMenuDrawer"
-            />
-            <component v-else :is="componentItem.component" />
+            <div :id="componentItem.name">
+              <component
+                :is="componentItem.component"
+                v-if="componentItem.component === WpAppbarTop1"
+                @onHamburgerClick="toggleMenuDrawer"
+                @closeDrawer="toggleMenuDrawer"
+              />
+              <component v-else :is="componentItem.component" />
+            </div>
           </template>
         </VueDraggable>
         <!-- <div class="sk-hide">
@@ -412,29 +459,57 @@ onMounted(() => {
         >
           <div class="sk-expansion-inner" v-if="!item.isMandatory" @click="">
             <div class="sk-expansion-header">
-              <button class="sk-expansion-action">
+              <button
+                class="sk-expansion-action"
+                @click="toggleEditingSpecificComponent($event, item.name)"
+              >
                 <span> {{ item.label }} </span>
                 <span class="sk-icons">expand_circle_down</span>
               </button>
             </div>
 
             <div class="sk-expansion-content" v-if="!item.isMandatory">
-              <p class="sk-text-muted">
-                {{ item.description }}
-              </p>
               <Skswitch
                 isWide
                 :isChecked="item.isSelected"
                 @change="updateComponentsToAdd(item)"
                 @click.stop
+                leadingText="Enable Section"
               />
+              <p class="sk-text-muted">
+                {{ item.description }}
+              </p>
+              <div class="editor-group" v-if="item.name == 'WpAppbarTop1'">
+                <div>
+                  <FileUpload label="Logo" />
+                </div>
+              </div>
+              <div class="editor-group" v-if="reactiveData.inputList">
+                <template v-for="label in reactiveData.inputList">
+                  <SkTextField
+                    inputType="text"
+                    label="Enter value"
+                    outlined
+                    class="sk-trailing-icon"
+                    required
+                    actionIcon="delete"
+                  />
+                </template>
+              </div>
             </div>
           </div>
         </template>
       </div>
     </template>
   </Skdrawer>
-  <Skbutton fab buttonText="Edit Template" primary pill @click="toggleEditor" />
+  <Skbutton
+    class="btn-pulse"
+    fab
+    buttonText="Edit Template"
+    pill
+    icon="widgets"
+    @click="toggleEditor"
+  />
 </template>
 
 <style>
@@ -499,16 +574,41 @@ onMounted(() => {
 .template-editor .sk-drawer-inner {
   box-shadow: 0 0 6rem 0px rgba(var(--color-rgb-black) / 20%);
 }
-.sk-expansion-inner{
-  transition: all .5s ease-in-out;
+.sk-expansion-inner {
+  transition: all 0.5s ease-in-out;
 }
 .sk-expansion-inner.sk-active {
   background: rgb(var(--color-rgb-primary) / 10%);
+}
+.sk-expansion-inner .sk-expansion-header {
+  cursor: default;
 }
 .sk-expansion-inner .sk-expansion-action {
   background: transparent;
 }
 .sk-expansion-inner.sk-active .sk-expansion-header .sk-icons {
   transform: rotate(180deg);
+}
+.sk-switch label {
+  justify-content: space-between;
+}
+.sk-switch input[type="checkbox"] + .lever {
+  margin: 0;
+}
+
+.btn-pulse {
+  animation: shadow-pulse 1.5s infinite;
+  background: linear-gradient(90deg, #ff007f, #9b00ff);
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 112, 244, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 7px 25px rgba(0, 112, 244, 0);
+  }
 }
 </style>

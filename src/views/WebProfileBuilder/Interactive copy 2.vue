@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ThemeEditor from "@/components/ThemeEditor.vue";
+import ThemeEditor from "@/components/ui/ThemeEditor.vue";
 import { markRaw, reactive, ref, watch } from "vue";
 import type { Component } from "vue";
 import Skemptystate from "rolex/skemptystate.vue";
@@ -11,17 +11,17 @@ import {
 } from "vue-draggable-plus";
 
 //#region import Components
-import WpQuickBarTop from "@/components/WpQuickBarTop.vue";
-import WpHeaderBar from "@/components/WpHeaderBar.vue";
-import WpIcons from "@/components/WpIcons.vue";
-import WpAppbarTop1 from "@/components/WpAppbarTop1.vue";
-import WpMenuDrawer from "@/components/WpMenuDrawer.vue";
-import WpHero1 from "@/components/WpHero1.vue";
-import WpFeaturedCTASection1 from "@/components/WpFeaturedCTASection1.vue";
-import WpAbout1 from "@/components/WpAbout1.vue";
-import WpFeedback1 from "@/components/WpFeedback1.vue";
-import WpDoctorsList from "@/components/WpDoctorsList.vue";
-import WpPhotos from "@/components/WpPhotos.vue";
+import WpQuickBarTop from "@/components/template/WpQuickBarTop.vue";
+import WpHeaderBar from "@/components/template/WpHeaderBar.vue";
+import WpIcons from "@/components/template/WpIcons.vue";
+import WpAppbarTop1 from "@/components/template/WpAppbarTop1.vue";
+import WpMenuDrawer from "@/components/template/WpMenuDrawer.vue";
+import WpHero1 from "@/components/template/WpHero1.vue";
+import WpFeaturedCTASection1 from "@/components/template/WpFeaturedCTASection1.vue";
+import WpAbout1 from "@/components/template/WpAbout1.vue";
+import WpFeedback1 from "@/components/template/WpFeedback1.vue";
+import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
+import WpPhotos from "@/components/template/WpPhotos.vue";
 //#endregion
 
 interface IcomponentItem {
