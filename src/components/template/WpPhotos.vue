@@ -266,34 +266,38 @@ const openPhoto = (item: IBusinessMedia) => {
 </script>
 <template>
   <section class="gallery-section">
-    <h2 class="sk-text-center">Photos of Elder Care in Adayar</h2>
-    <SkCarousel
-      id="photoList"
-      :enableNavButton="true"
-      customPreviousIcon="chevron_left"
-      customNextIcon="chevron_right"
-      @movePrevious="() => moveCarousel('#photoList', 'prev')"
-      @moveNext="() => moveCarousel('#photoList', 'next')"
-      :hidePreviousButton="photoListState.hidePreviousBtn.value"
-      :hideNextButton="photoListState.hideNextBtn.value"
-      class="photo-list"
-      v-if="ReactiveData.photoList.length && ReactiveData.photoList.length > 1"
-    >
-      <SkCarouselItem
-        class="photo sk-clickable"
-        v-for="(item, index) in ReactiveData.photoList"
-        @click="openPhoto(item)"
-        :key="index"
+    <div class="sk-container">
+      <h2 class="sk-text-center">Photos of Elder Care in Adayar</h2>
+      <SkCarousel
+        id="photoList"
+        :enableNavButton="true"
+        customPreviousIcon="chevron_left"
+        customNextIcon="chevron_right"
+        @movePrevious="() => moveCarousel('#photoList', 'prev')"
+        @moveNext="() => moveCarousel('#photoList', 'next')"
+        :hidePreviousButton="photoListState.hidePreviousBtn.value"
+        :hideNextButton="photoListState.hideNextBtn.value"
+        class="photo-list"
+        v-if="
+          ReactiveData.photoList.length && ReactiveData.photoList.length > 1
+        "
       >
-        <img
-          :src="item.mediaUrl"
-          :alt="item.businessId.toString()"
-          loading="lazy"
-          height="380"
-          width="100%"
-        />
-      </SkCarouselItem>
-    </SkCarousel>
+        <SkCarouselItem
+          class="photo sk-clickable"
+          v-for="(item, index) in ReactiveData.photoList"
+          @click="openPhoto(item)"
+          :key="index"
+        >
+          <img
+            :src="item.mediaUrl"
+            :alt="item.businessId.toString()"
+            loading="lazy"
+            height="380"
+            width="100%"
+          />
+        </SkCarouselItem>
+      </SkCarousel>
+    </div>
   </section>
 </template>
 <style>
@@ -311,7 +315,7 @@ const openPhoto = (item: IBusinessMedia) => {
   }
   &:hover {
     box-shadow: 0 0 1rem rgb(var(--color-rgb-black) / 10%);
-    img{
+    img {
       scale: 3;
     }
   }

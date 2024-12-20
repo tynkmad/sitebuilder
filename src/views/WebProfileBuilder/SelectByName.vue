@@ -5,9 +5,9 @@ import { markRaw, onMounted, reactive, ref, watch } from "vue";
 import type { Component } from "vue";
 import Skbutton from "rolex/skbutton.vue";
 import Skemptystate from "rolex/skemptystate.vue";
-import Skcheckbox from "rolex/skcheckbox.vue";
+// import Skcheckbox from "rolex/skcheckbox.vue";
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals/attribution";
-import SkTextField from "rolex/sktextfield.vue";
+import Skchipset from "rolex/Skchipset.vue";
 
 //#region import Components
 import WpQuickBarTop from "@/components/template/WpQuickBarTop.vue";
@@ -30,6 +30,7 @@ import Skdrawer from "rolex/skdrawer.vue";
 import Skappbar from "rolex/skappbar.vue";
 import Skswitch from "rolex/skswitch.vue";
 import FileUpload from "@/components/ui/FileUpload.vue";
+import { chipProps, MainNavBarType, skActionItem } from "rolex/skglobaltypes";
 //#endregion import Components
 
 //#region WebVitals Optimization
@@ -61,6 +62,11 @@ interface IwebProfileBuilder {
   availableComponents: Array<IcomponentItem>;
   componentsToAdd: Array<IcomponentItem>;
   inputList: Array<string>;
+  AppbarProps: {
+    appbarMenuItems: Array<chipProps>;
+    newMenuName?: string;
+    duplicateMenuError?: string;
+  };
 }
 
 const reactiveData = reactive<IwebProfileBuilder>({
@@ -171,6 +177,40 @@ const reactiveData = reactive<IwebProfileBuilder>({
   ],
   componentsToAdd: [],
   inputList: [],
+  AppbarProps: {
+    appbarMenuItems: [
+      {
+        key: "Home",
+        chipMessage: "Home",
+        selected: true,
+      },
+      {
+        key: "Services",
+        chipMessage: "Services",
+        selected: true,
+      },
+      {
+        key: "About Us",
+        chipMessage: "About Us",
+        selected: true,
+      },
+      {
+        key: "Reviews",
+        chipMessage: "Reviews",
+        selected: true,
+      },
+      {
+        key: "Photos",
+        chipMessage: "Photos",
+        selected: true,
+      },
+      {
+        key: "Videos",
+        chipMessage: "Videos",
+        selected: true,
+      },
+    ],
+  },
 });
 
 function sortComponents(
@@ -363,6 +403,42 @@ const toggleEditingSpecificComponent = (
   parentElement?.classList.add("sk-active");
   siblings.forEach((sibling) => sibling.classList.remove("sk-active"));
 };
+
+//#region Appbar actions
+// Function to remove a menu item
+function removeMenuItem(chip: chipProps) {
+  // Find the index of the chip in appbarMenuItems array
+  const index = reactiveData.AppbarProps.appbarMenuItems.findIndex(
+    (item) => item.key === chip.key
+  );
+
+  if (index >= 0) {
+    // Remove the chip from the array
+    // reactiveData.AppbarProps.appbarMenuItems.splice(index, 1);
+    reactiveData.AppbarProps.appbarMenuItems[index].selected ? false : true;
+  }
+} // Function to add a new menu item
+function addMenuItem() {
+  var isMenuExist = reactiveData.AppbarProps.appbarMenuItems.filter(
+    (x) => x.key == reactiveData.AppbarProps.newMenuName
+  );
+
+  if (isMenuExist.length) {
+    reactiveData.AppbarProps.duplicateMenuError = "Already added this menu!";
+    return;
+  } else reactiveData.AppbarProps.duplicateMenuError = "";
+
+  if (reactiveData.AppbarProps.newMenuName) {
+    reactiveData.AppbarProps.appbarMenuItems.push({
+      key: reactiveData.AppbarProps.newMenuName,
+      chipMessage: reactiveData.AppbarProps.newMenuName,
+      removable: true,
+    } as chipProps);
+
+    reactiveData.AppbarProps.newMenuName = "";
+  }
+}
+//#endregion Appbar actions
 </script>
 
 <template>
@@ -404,6 +480,19 @@ const toggleEditingSpecificComponent = (
               <component
                 :is="componentItem.component"
                 v-if="componentItem.component === WpAppbarTop1"
+                
+                :menuItems="
+                  reactiveData.AppbarProps.appbarMenuItems.filter(chip => chip.selected).map((chip) => ({
+                    menuName: chip.chipMessage,
+                    icon: chip.icon,
+                    isActive: false,
+                    targetContentID: chip.chipId || '',
+                    image: chip.imgUrl || '',
+                    isDisabled: chip.disabled || false,
+                    hide: !chip.selected || false,
+                    subMenuItems: [], // Assuming there are no sub-menu items in this context
+                  }))
+                "
                 @onHamburgerClick="toggleMenuDrawer"
                 @closeDrawer="toggleMenuDrawer"
               />
@@ -484,17 +573,18 @@ const toggleEditingSpecificComponent = (
                   <FileUpload label="Logo" />
                 </div>
               </div>
-              <div class="editor-group" v-if="reactiveData.inputList">
-                <template v-for="label in reactiveData.inputList">
-                  <SkTextField
-                    inputType="text"
-                    label="Enter value"
-                    outlined
-                    class="sk-trailing-icon"
-                    required
-                    actionIcon="delete"
-                  />
-                </template>
+              <div
+                class="editor-group"
+                v-if="
+                  item.name == 'WpAppbarTop1' && reactiveData.AppbarProps.appbarMenuItems
+                "
+              >
+                <div class="sk-h6 sk-margin-bottom">Menu Items</div>
+                <Skchipset
+                  :chips="reactiveData.AppbarProps.appbarMenuItems"
+                  :disableSelect="false"
+                  @onChipClick="removeMenuItem"
+                />
               </div>
             </div>
           </div>
@@ -578,7 +668,7 @@ const toggleEditingSpecificComponent = (
   transition: all 0.5s ease-in-out;
 }
 .sk-expansion-inner.sk-active {
-  background: rgb(var(--color-rgb-primary) / 10%);
+  background: rgb(var(--color-rgb-black) / 3%);
 }
 .sk-expansion-inner .sk-expansion-header {
   cursor: default;
@@ -603,6 +693,11 @@ const toggleEditingSpecificComponent = (
   font-weight: bold;
 }
 
+.editor-group {
+  border-top: 0.1rem solid var(--color-border);
+  padding-top: var(--gutter-base);
+}
+
 @keyframes shadow-pulse {
   0% {
     box-shadow: 0 0 0 0px rgba(0, 112, 244, 0.7);
@@ -610,5 +705,9 @@ const toggleEditingSpecificComponent = (
   100% {
     box-shadow: 0 0 7px 25px rgba(0, 112, 244, 0);
   }
+}
+.sk-text-field.sk-trailing-icon input:disabled ~ .sk-button .sk-icons {
+  color: currentColor;
+  cursor: not-allowed;
 }
 </style>
