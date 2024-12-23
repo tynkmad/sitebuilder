@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import SkAlert from "rolex/skAlert.vue";
+
 import { ref } from "vue";
 
-defineProps({
+const props = defineProps({
   label: {
     type: String,
     default: "Upload File",
+  },
+  alertContent: {
+    type: String,
+    default: "",
   },
   //   onUpload: {
   //     type: Function,
@@ -40,13 +46,30 @@ const saveFile = () => {
     // (onSave as Function)(file.value);
   }
 };
+// Define the emit event with TypeScript
+const emit = defineEmits<{
+  (event: "file-selected", file: File): void;
+}>();
+
+const handleFileChange = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0]; // Get the first file, if any
+  if (file) {
+    emit("file-selected", file); // Emit the file to the parent
+  }
+};
 </script>
 <template>
   <div class="data-group sk-margin-bottom">
     <div class="sk-h6 sk-margin-bottom">{{ label }}</div>
+    <SkAlert v-if="props.alertContent !== ''" info>
+      <span class="sk-small">
+        {{ props.alertContent }}
+      </span>
+    </SkAlert>
     <div class="upload-file">
       <div class="add-image sk-margin-bottom">
-        <input type="file" @change="onFileSelect" />
+        <input type="file" @change="handleFileChange" accept="image/*" />
         <span class="sk-icons">upload_file</span>
         <button class="sk-button sk-pill" @click="uploadFile">
           <span class="sk-button-text">Upload File</span>

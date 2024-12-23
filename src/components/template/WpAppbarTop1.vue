@@ -4,13 +4,16 @@ import Skbutton from "rolex/skbutton.vue";
 import { MainNavBarType } from "rolex/skglobaltypes";
 import Skicon from "rolex/skicon.vue";
 import SkMenuBar from "rolex/skMenuBar.vue";
-import { reactive, watch } from "vue";
+import { reactive, ref, watch } from "vue";
 
 // Define an interface for the reactive data structure
 interface IwpAppbarTop {
+  reactiveLogoURL: string;
   showMenuDrawer?: boolean;
   menuItems: Array<MainNavBarType>;
 }
+
+
 // Props for menuItems
 const props = defineProps({
   logoURL: {
@@ -38,8 +41,10 @@ const props = defineProps({
     ],
   },
 });
+
 // Create a reactive object for the menu drawer state
 const ReactiveData = reactive<IwpAppbarTop>({
+  reactiveLogoURL: props.logoURL,
   showMenuDrawer: false,
   menuItems: [...props.menuItems], // Initialize from props or use default
 });
@@ -63,6 +68,14 @@ watch(
   },
   { immediate: true } // Run immediately on mount
 );
+
+watch(
+  () => props.logoURL,
+  (newLogoURL: string) => {
+    ReactiveData.reactiveLogoURL = newLogoURL; // Update reactive logo URL
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -71,11 +84,7 @@ watch(
     <template #ableft>
       <div class="sk-appbar-logo notranslate">
         <a href="/" title="Elder Care">
-          <img
-            :src="logoURL"
-            height="60"
-            alt="Elder Care"
-          />
+          <img :src="ReactiveData.reactiveLogoURL" height="60" alt="Elder Care" />
         </a>
       </div>
       <SkMenuBar

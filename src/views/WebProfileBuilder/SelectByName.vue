@@ -8,6 +8,17 @@ import Skemptystate from "rolex/skemptystate.vue";
 // import Skcheckbox from "rolex/skcheckbox.vue";
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals/attribution";
 import Skchipset from "rolex/Skchipset.vue";
+import SkAlert from "rolex/skAlert.vue";
+import {
+  DraggableEvent,
+  UseDraggableReturn,
+  VueDraggable,
+} from "vue-draggable-plus";
+import Skdrawer from "rolex/skdrawer.vue";
+import Skappbar from "rolex/skappbar.vue";
+import Skswitch from "rolex/skswitch.vue";
+import FileUpload from "@/components/ui/FileUpload.vue";
+import { chipProps, MainNavBarType, skActionItem } from "rolex/skglobaltypes";
 
 //#region import Components
 import WpQuickBarTop from "@/components/template/WpQuickBarTop.vue";
@@ -21,16 +32,7 @@ import WpAbout1 from "@/components/template/WpAbout1.vue";
 import WpFeedback1 from "@/components/template/WpFeedback1.vue";
 import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
 import WpPhotos from "@/components/template/WpPhotos.vue";
-import {
-  DraggableEvent,
-  UseDraggableReturn,
-  VueDraggable,
-} from "vue-draggable-plus";
-import Skdrawer from "rolex/skdrawer.vue";
-import Skappbar from "rolex/skappbar.vue";
-import Skswitch from "rolex/skswitch.vue";
-import FileUpload from "@/components/ui/FileUpload.vue";
-import { chipProps, MainNavBarType, skActionItem } from "rolex/skglobaltypes";
+
 //#endregion import Components
 
 //#region WebVitals Optimization
@@ -63,6 +65,7 @@ interface IwebProfileBuilder {
   componentsToAdd: Array<IcomponentItem>;
   inputList: Array<string>;
   AppbarProps: {
+    logoURL: string;
     appbarMenuItems: Array<chipProps>;
     newMenuName?: string;
     duplicateMenuError?: string;
@@ -178,6 +181,7 @@ const reactiveData = reactive<IwebProfileBuilder>({
   componentsToAdd: [],
   inputList: [],
   AppbarProps: {
+    logoURL: "",
     appbarMenuItems: [
       {
         key: "Home",
@@ -438,7 +442,36 @@ function addMenuItem() {
     reactiveData.AppbarProps.newMenuName = "";
   }
 }
+
+// Function to handle logo upload (to be passed to FileUpload component)
+function handleLogoUpload(url: string) {
+  reactiveData.AppbarProps.logoURL = url; // Store the uploaded logo URL in the reactiveData object
+  console.log((reactiveData.AppbarProps.logoURL = url));
+}
 //#endregion Appbar actions
+
+const getFileUploadContent = (sectionName: string) => {
+  switch (sectionName) {
+    case "WpAppbarTop1":
+      return {
+        label: "Logo",
+        alertContent:
+          "Please upload your brand logo (250x50 pixels, webp, JPG or PNG format, max 1MB).",
+      };
+    case "WpHero1":
+      return {
+        label: "Hero Banner",
+        alertContent:
+          "Please upload a transparent banner image (650x530 pixels, webp, JPG or PNG format, max 1MB).",
+      };
+    default:
+      return {
+        label: "Image",
+        alertContent:
+          "Please upload a transparent banner image (650x530 pixels, webp, JPG or PNG format, max 1MB).",
+      };
+  }
+};
 </script>
 
 <template>
@@ -480,18 +513,19 @@ function addMenuItem() {
               <component
                 :is="componentItem.component"
                 v-if="componentItem.component === WpAppbarTop1"
-                
                 :menuItems="
-                  reactiveData.AppbarProps.appbarMenuItems.filter(chip => chip.selected).map((chip) => ({
-                    menuName: chip.chipMessage,
-                    icon: chip.icon,
-                    isActive: false,
-                    targetContentID: chip.chipId || '',
-                    image: chip.imgUrl || '',
-                    isDisabled: chip.disabled || false,
-                    hide: !chip.selected || false,
-                    subMenuItems: [], // Assuming there are no sub-menu items in this context
-                  }))
+                  reactiveData.AppbarProps.appbarMenuItems
+                    .filter((chip) => chip.selected)
+                    .map((chip) => ({
+                      menuName: chip.chipMessage,
+                      icon: chip.icon,
+                      isActive: false,
+                      targetContentID: chip.chipId || '',
+                      image: chip.imgUrl || '',
+                      isDisabled: chip.disabled || false,
+                      hide: !chip.selected || false,
+                      subMenuItems: [], // Assuming there are no sub-menu items in this context
+                    }))
                 "
                 @onHamburgerClick="toggleMenuDrawer"
                 @closeDrawer="toggleMenuDrawer"
@@ -568,15 +602,23 @@ function addMenuItem() {
               <p class="sk-text-muted">
                 {{ item.description }}
               </p>
-              <div class="editor-group" v-if="item.name == 'WpAppbarTop1'">
+              <div
+                class="editor-group"
+                v-if="item.name == 'WpAppbarTop1' || item.name == 'WpHero1'"
+              >
                 <div>
-                  <FileUpload label="Logo" />
+                  <FileUpload
+                    :label="getFileUploadContent(item.name).label"
+                    :alertContent="getFileUploadContent(item.name).alertContent"
+                    @fileSelected="handleLogoUpload"
+                  />
                 </div>
               </div>
               <div
                 class="editor-group"
                 v-if="
-                  item.name == 'WpAppbarTop1' && reactiveData.AppbarProps.appbarMenuItems
+                  item.name == 'WpAppbarTop1' &&
+                  reactiveData.AppbarProps.appbarMenuItems
                 "
               >
                 <div class="sk-h6 sk-margin-bottom">Menu Items</div>
