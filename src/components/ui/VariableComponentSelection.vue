@@ -32,7 +32,7 @@ watch(
   <SkDropDown
     :listItems="options"
     :isNativeSelect="true"
-    placeHolderText="Select text"
+    placeHolderText="Select Variant"
     v-model="ReactiveData.dd1Value"
     dropDowninitialValue="1"
     @update:modelValue="ReactiveData.dd1Value.itemKey = ReactiveData.dd1Value.itemKey == '1' ? '2' : '1'"

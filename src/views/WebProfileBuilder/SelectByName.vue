@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import ThemeEditor from "@/components/ui/ThemeEditor.vue";
 
-import { markRaw, onMounted, reactive, ref, watch } from "vue";
+import { markRaw, onMounted, reactive, ref, vModelText, watch } from "vue";
 import type { Component } from "vue";
 import Skbutton from "rolex/skbutton.vue";
 import Skemptystate from "rolex/skemptystate.vue";
 // import Skcheckbox from "rolex/skcheckbox.vue";
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals/attribution";
 import Skchipset from "rolex/Skchipset.vue";
+import SkCheckbox from "rolex/skcheckbox.vue";
 import SkAlert from "rolex/skAlert.vue";
 import {
   DraggableEvent,
@@ -19,6 +20,7 @@ import Skappbar from "rolex/skappbar.vue";
 import Skswitch from "rolex/skswitch.vue";
 import FileUpload from "@/components/ui/FileUpload.vue";
 import { chipProps, MainNavBarType, skActionItem } from "rolex/skglobaltypes";
+import Sktextfield from "rolex/sktextfield.vue";
 
 //#region import Components
 import WpQuickBarTop from "@/components/template/WpQuickBarTop.vue";
@@ -34,6 +36,7 @@ import WpFeedback1 from "@/components/template/WpFeedback1.vue";
 import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
 import WpPhotos from "@/components/template/WpPhotos.vue";
 import VariableSectionSelection from "@/components/ui/VariableComponentSelection.vue";
+import RestOfSetions from "@/components/template/RestOfRegions.vue";
 
 //#endregion import Components
 
@@ -78,6 +81,11 @@ interface IwebProfileBuilder {
     storeAddress?: string;
     businessHours?: Array<skActionItem>;
     selectedComponent: string;
+  };
+  featuredSectionProps: {
+    sectionTitle: string;
+    sectionDescription: string;
+    buttonText: string;
   };
 }
 
@@ -195,6 +203,15 @@ const reactiveData = reactive<IwebProfileBuilder>({
       description:
         "A photo gallery section showcasing images of the business, services, or events to visually engage users.",
     },
+    {
+      name: "RestOfSetions",
+      component: markRaw(RestOfSetions),
+      label: "Rest of the sections",
+      isSelected: true,
+      order: -1,
+      description:
+        "",
+    },
   ],
   componentsToAdd: [],
   inputList: [],
@@ -235,6 +252,46 @@ const reactiveData = reactive<IwebProfileBuilder>({
   },
   heroSectionProps: {
     selectedComponent: "1",
+    showRating: true,
+    contactNumber: ["+1 (800) 555-1234"],
+    storeAddress:
+      "1234 Wellness Avenue, Suite 101, Bright Future Plaza, 5th Floor, City of Serenity, 67890 United States of Euphoria",
+    businessHours: [
+      {
+        itemKey: "Sunday",
+        actionlabel: "Sunday: 10:00 AM - 02:00 PM",
+      },
+      {
+        itemKey: "Monday",
+        actionlabel: "Monday: 10:00 AM - 07:00 PM",
+      },
+      {
+        itemKey: "Tuesday",
+        actionlabel: "Tuesday: 10:00 AM - 07:00 PM",
+      },
+      {
+        itemKey: "Wednesday",
+        actionlabel: "Wednesday: 10:00 AM - 07:00 PM",
+      },
+      {
+        itemKey: "Thursday",
+        actionlabel: "Thursday: 10:00 AM - 07:00 PM",
+      },
+      {
+        itemKey: "Friday",
+        actionlabel: "Friday: 10:00 AM - 07:00 PM",
+      },
+      {
+        itemKey: "Saturday",
+        actionlabel: "Saturday: 10:00 AM - 05:00 PM",
+      },
+    ],
+  },
+  featuredSectionProps: {
+    sectionTitle: "Open for Appointments",
+    sectionDescription:
+      "We are delighted to announce that our doors are open, and we are now accepting appointments to serve to better",
+    buttonText: "Book an Appointment",
   },
 });
 
@@ -494,10 +551,10 @@ const getFileUploadContent = (sectionName: string) => {
   }
 };
 
-const handleComponentSwap = (selectedComponent: string)=>{
-  console.log(selectedComponent)
+const handleComponentSwap = (selectedComponent: string) => {
+  console.log(selectedComponent);
   reactiveData.heroSectionProps.selectedComponent = selectedComponent;
-}
+};
 </script>
 
 <template>
@@ -556,12 +613,29 @@ const handleComponentSwap = (selectedComponent: string)=>{
                 @onHamburgerClick="toggleMenuDrawer"
                 @closeDrawer="toggleMenuDrawer"
               />
-              <WpHero v-else-if="componentItem.component === WpHero" :selectedComponent="parseInt(reactiveData.heroSectionProps.selectedComponent)"/>
+              <WpHero
+                :showRating="reactiveData.heroSectionProps.showRating"
+                :contactNumber="reactiveData.heroSectionProps.contactNumber"
+                :storeAddress="reactiveData.heroSectionProps.storeAddress"
+                :businessHours="reactiveData.heroSectionProps.businessHours"
+                v-else-if="componentItem.component === WpHero"
+                :selectedComponent="
+                  parseInt(reactiveData.heroSectionProps.selectedComponent)
+                "
+              />
               <!-- <component
                 :is="componentItem.component"
                 v-else-if="componentItem.component === WpHero"
                 :selectedComponent="parseInt(reactiveData.heroSectionProps.selectedComponent)"
               /> -->
+
+              <component
+                :sectionTitle="reactiveData.featuredSectionProps.sectionTitle"
+                :sectionDescription="reactiveData.featuredSectionProps.sectionDescription"
+                :buttonText="reactiveData.featuredSectionProps.buttonText"
+                v-else-if="componentItem.component === WpFeaturedCTASection1"
+                :is="componentItem.component"
+              />
               <component v-else :is="componentItem.component" />
             </div>
           </template>
@@ -584,7 +658,7 @@ const handleComponentSwap = (selectedComponent: string)=>{
       />
     </main>
   </div>
-  <!-- <ThemeEditor /> -->
+  
   <Skdrawer
     :showDrawer="reactiveData.showEditor"
     right
@@ -607,6 +681,7 @@ const handleComponentSwap = (selectedComponent: string)=>{
       </Skappbar>
     </template>
     <template #skdrawerbody>
+    <ThemeEditor />
       <div class="sk-expansion-panels">
         <template
           v-for="item in reactiveData.availableComponents"
@@ -636,7 +711,7 @@ const handleComponentSwap = (selectedComponent: string)=>{
               </p>
               <div
                 class="editor-group"
-                v-if="item.name == 'WpAppbarTop1' || item.name == 'WpHero1'"
+                v-if="item.name == 'WpAppbarTop1' || item.name == 'WpHero'"
               >
                 <div>
                   <FileUpload
@@ -664,6 +739,56 @@ const handleComponentSwap = (selectedComponent: string)=>{
                 <VariableSectionSelection
                   @selectedComponent="handleComponentSwap"
                 />
+                <div class="editor-group">
+                  <SkCheckbox
+                    isCheckbox
+                    :isChecked="reactiveData.heroSectionProps.showRating"
+                    chkid="item1"
+                    checkboxName="group1"
+                    labelName="Show Ratings"
+                    @change="
+                      reactiveData.heroSectionProps.showRating =
+                        !reactiveData.heroSectionProps.showRating
+                    "
+                  />
+                </div>
+                <div class="sk-margin-top editor-group">
+                  <Sktextfield
+                    v-for="number in reactiveData.heroSectionProps
+                      .contactNumber"
+                    :placeholder="'Contact Number'"
+                    :modelValue="number"
+                    isDisabled
+                    class="sk-trailing-icon"
+                    actionIcon="edit"
+                    small
+                  />
+                  <Skbutton
+                    icon="add"
+                    buttonText="Add additional number"
+                    linkText
+                  />
+                </div>
+              </div>
+              <div v-if="item.name == 'WpFeaturedCTASection1'">
+                <Sktextfield
+                    label="Section Title"
+                    v-model="reactiveData.featuredSectionProps.sectionTitle"
+                    small
+                    class="sk-margin-bottom"
+                  />
+                <Sktextfield
+                    label="Description"
+                    v-model="reactiveData.featuredSectionProps.sectionDescription"
+                    small
+                    class="sk-margin-bottom"
+                  />
+                <Sktextfield
+                    label="Button Text"
+                    v-model:model-value="reactiveData.featuredSectionProps.buttonText"
+                    small
+                    class="sk-margin-bottom"
+                  />
               </div>
             </div>
           </div>
@@ -786,7 +911,7 @@ const handleComponentSwap = (selectedComponent: string)=>{
   }
 }
 .sk-text-field.sk-trailing-icon input:disabled ~ .sk-button .sk-icons {
-  color: currentColor;
-  cursor: not-allowed;
+  /* color: currentColor;
+  cursor: not-allowed; */
 }
 </style>
