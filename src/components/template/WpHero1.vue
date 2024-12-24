@@ -6,61 +6,62 @@ import Skpopup from "rolex/skpopup.vue";
 import Skrating from "rolex/skRatings.vue";
 import SkButton from "rolex/skbutton.vue";
 import { computed, reactive, ref } from "vue";
+import { IbusinessDetails, businessDetailsProps } from "@/types/webProfileBuilderTypes";
 
-interface IbusinessDetails {
-  contactNumber: Array<String>;
-  storeAddress: String;
-  businessHours: Array<skActionItem>;
-}
-const props = defineProps({
-  showRating: {
-    type: Boolean,
-    default: true,
-  },
-  contactNumber: {
-    type: Array<String>,
-    default: ["+1 (800) 555-1234"],
-  },
-  storeAddress: {
-    type: String,
-    default:
-      "1234 Wellness Avenue, Suite 101, Bright Future Plaza, 5th Floor, City of Serenity, 67890 United States of Euphoria",
-  },
-  businessHours: {
-    type: Array<skActionItem>,
-    default: [
-      {
-        itemKey: "Sunday",
-        actionlabel: "Sunday: 10:00 AM - 02:00 PM",
-      },
-      {
-        itemKey: "Monday",
-        actionlabel: "Monday: 10:00 AM - 07:00 PM",
-      },
-      {
-        itemKey: "Tuesday",
-        actionlabel: "Tuesday: 10:00 AM - 07:00 PM",
-      },
-      {
-        itemKey: "Wednesday",
-        actionlabel: "Wednesday: 10:00 AM - 07:00 PM",
-      },
-      {
-        itemKey: "Thursday",
-        actionlabel: "Thursday: 10:00 AM - 07:00 PM",
-      },
-      {
-        itemKey: "Friday",
-        actionlabel: "Friday: 10:00 AM - 07:00 PM",
-      },
-      {
-        itemKey: "Saturday",
-        actionlabel: "Saturday: 10:00 AM - 05:00 PM",
-      },
-    ],
-  },
-});
-
+// interface IbusinessDetails {
+//   contactNumber: Array<String>;
+//   storeAddress: String;
+//   businessHours: Array<skActionItem>;
+// }
+// const props = defineProps({
+//   showRating: {
+//     type: Boolean,
+//     default: true,
+//   },
+//   contactNumber: {
+//     type: Array<String>,
+//     default: ["+1 (800) 555-1234"],
+//   },
+//   storeAddress: {
+//     type: String,
+//     default:
+//       "1234 Wellness Avenue, Suite 101, Bright Future Plaza, 5th Floor, City of Serenity, 67890 United States of Euphoria",
+//   },
+//   businessHours: {
+//     type: Array<skActionItem>,
+//     default: [
+//       {
+//         itemKey: "Sunday",
+//         actionlabel: "Sunday: 10:00 AM - 02:00 PM",
+//       },
+//       {
+//         itemKey: "Monday",
+//         actionlabel: "Monday: 10:00 AM - 07:00 PM",
+//       },
+//       {
+//         itemKey: "Tuesday",
+//         actionlabel: "Tuesday: 10:00 AM - 07:00 PM",
+//       },
+//       {
+//         itemKey: "Wednesday",
+//         actionlabel: "Wednesday: 10:00 AM - 07:00 PM",
+//       },
+//       {
+//         itemKey: "Thursday",
+//         actionlabel: "Thursday: 10:00 AM - 07:00 PM",
+//       },
+//       {
+//         itemKey: "Friday",
+//         actionlabel: "Friday: 10:00 AM - 07:00 PM",
+//       },
+//       {
+//         itemKey: "Saturday",
+//         actionlabel: "Saturday: 10:00 AM - 05:00 PM",
+//       },
+//     ],
+//   },
+// });
+const props = defineProps(businessDetailsProps);
 const ReactiveData = reactive<IbusinessDetails>({
   contactNumber: props.contactNumber,
   storeAddress: props.storeAddress,
@@ -234,7 +235,7 @@ const isOpen = computed(() => {
   </section>
   <!-- #endregion Hero -->
 </template>
-<style>
+<style scoped>
 .template-preview section.hero .sk-container {
   padding-bottom: 0;
 }

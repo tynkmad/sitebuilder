@@ -26,12 +26,14 @@ import WpHeaderBar from "@/components/template/WpHeaderBar.vue";
 import WpIcons from "@/components/template/WpIcons.vue";
 import WpAppbarTop1 from "@/components/template/WpAppbarTop1.vue";
 import WpMenuDrawer from "@/components/template/WpMenuDrawer.vue";
-import WpHero1 from "@/components/template/WpHero1.vue";
+import WpHero from "@/components/ui/WpHero.vue";
+// import WpHero1 from "@/components/template/WpHero1.vue";
 import WpFeaturedCTASection1 from "@/components/template/WpFeaturedCTASection1.vue";
 import WpAbout1 from "@/components/template/WpAbout1.vue";
 import WpFeedback1 from "@/components/template/WpFeedback1.vue";
 import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
 import WpPhotos from "@/components/template/WpPhotos.vue";
+import VariableSectionSelection from "@/components/ui/VariableComponentSelection.vue";
 
 //#endregion import Components
 
@@ -64,11 +66,18 @@ interface IwebProfileBuilder {
   availableComponents: Array<IcomponentItem>;
   componentsToAdd: Array<IcomponentItem>;
   inputList: Array<string>;
-  AppbarProps: {
+  appbarProps: {
     logoURL: string;
     appbarMenuItems: Array<chipProps>;
     newMenuName?: string;
     duplicateMenuError?: string;
+  };
+  heroSectionProps: {
+    showRating?: boolean;
+    contactNumber?: Array<string>;
+    storeAddress?: string;
+    businessHours?: Array<skActionItem>;
+    selectedComponent: string;
   };
 }
 
@@ -124,14 +133,23 @@ const reactiveData = reactive<IwebProfileBuilder>({
         "A side navigation drawer that organizes all menu items for easy access and a clean UI.",
     },
     {
-      name: "WpHero1",
-      component: markRaw(WpHero1),
-      label: "Hero 1",
+      name: "WpHero",
+      component: markRaw(WpHero),
+      label: "Hero",
       isSelected: true,
       order: 4,
       description:
         "A visually striking hero section used to highlight key information, promotions, or messages to engage users.",
     },
+    // {
+    //   name: "WpHero1",
+    //   component: markRaw(WpHero1),
+    //   label: "Hero 1",
+    //   isSelected: true,
+    //   order: 4,
+    //   description:
+    //     "A visually striking hero section used to highlight key information, promotions, or messages to engage users.",
+    // },
     {
       name: "WpFeaturedCTASection1",
       component: markRaw(WpFeaturedCTASection1),
@@ -180,7 +198,7 @@ const reactiveData = reactive<IwebProfileBuilder>({
   ],
   componentsToAdd: [],
   inputList: [],
-  AppbarProps: {
+  appbarProps: {
     logoURL: "",
     appbarMenuItems: [
       {
@@ -214,6 +232,9 @@ const reactiveData = reactive<IwebProfileBuilder>({
         selected: true,
       },
     ],
+  },
+  heroSectionProps: {
+    selectedComponent: "1",
   },
 });
 
@@ -412,41 +433,41 @@ const toggleEditingSpecificComponent = (
 // Function to remove a menu item
 function removeMenuItem(chip: chipProps) {
   // Find the index of the chip in appbarMenuItems array
-  const index = reactiveData.AppbarProps.appbarMenuItems.findIndex(
+  const index = reactiveData.appbarProps.appbarMenuItems.findIndex(
     (item) => item.key === chip.key
   );
 
   if (index >= 0) {
     // Remove the chip from the array
-    // reactiveData.AppbarProps.appbarMenuItems.splice(index, 1);
-    reactiveData.AppbarProps.appbarMenuItems[index].selected ? false : true;
+    // reactiveData.appbarProps.appbarMenuItems.splice(index, 1);
+    reactiveData.appbarProps.appbarMenuItems[index].selected ? false : true;
   }
 } // Function to add a new menu item
 function addMenuItem() {
-  var isMenuExist = reactiveData.AppbarProps.appbarMenuItems.filter(
-    (x) => x.key == reactiveData.AppbarProps.newMenuName
+  var isMenuExist = reactiveData.appbarProps.appbarMenuItems.filter(
+    (x) => x.key == reactiveData.appbarProps.newMenuName
   );
 
   if (isMenuExist.length) {
-    reactiveData.AppbarProps.duplicateMenuError = "Already added this menu!";
+    reactiveData.appbarProps.duplicateMenuError = "Already added this menu!";
     return;
-  } else reactiveData.AppbarProps.duplicateMenuError = "";
+  } else reactiveData.appbarProps.duplicateMenuError = "";
 
-  if (reactiveData.AppbarProps.newMenuName) {
-    reactiveData.AppbarProps.appbarMenuItems.push({
-      key: reactiveData.AppbarProps.newMenuName,
-      chipMessage: reactiveData.AppbarProps.newMenuName,
+  if (reactiveData.appbarProps.newMenuName) {
+    reactiveData.appbarProps.appbarMenuItems.push({
+      key: reactiveData.appbarProps.newMenuName,
+      chipMessage: reactiveData.appbarProps.newMenuName,
       removable: true,
     } as chipProps);
 
-    reactiveData.AppbarProps.newMenuName = "";
+    reactiveData.appbarProps.newMenuName = "";
   }
 }
 
 // Function to handle logo upload (to be passed to FileUpload component)
 function handleLogoUpload(url: string) {
-  reactiveData.AppbarProps.logoURL = url; // Store the uploaded logo URL in the reactiveData object
-  console.log((reactiveData.AppbarProps.logoURL = url));
+  reactiveData.appbarProps.logoURL = url; // Store the uploaded logo URL in the reactiveData object
+  console.log((reactiveData.appbarProps.logoURL = url));
 }
 //#endregion Appbar actions
 
@@ -472,6 +493,11 @@ const getFileUploadContent = (sectionName: string) => {
       };
   }
 };
+
+const handleComponentSwap = (selectedComponent: string)=>{
+  console.log(selectedComponent)
+  reactiveData.heroSectionProps.selectedComponent = selectedComponent;
+}
 </script>
 
 <template>
@@ -514,7 +540,7 @@ const getFileUploadContent = (sectionName: string) => {
                 :is="componentItem.component"
                 v-if="componentItem.component === WpAppbarTop1"
                 :menuItems="
-                  reactiveData.AppbarProps.appbarMenuItems
+                  reactiveData.appbarProps.appbarMenuItems
                     .filter((chip) => chip.selected)
                     .map((chip) => ({
                       menuName: chip.chipMessage,
@@ -530,6 +556,12 @@ const getFileUploadContent = (sectionName: string) => {
                 @onHamburgerClick="toggleMenuDrawer"
                 @closeDrawer="toggleMenuDrawer"
               />
+              <WpHero v-else-if="componentItem.component === WpHero" :selectedComponent="parseInt(reactiveData.heroSectionProps.selectedComponent)"/>
+              <!-- <component
+                :is="componentItem.component"
+                v-else-if="componentItem.component === WpHero"
+                :selectedComponent="parseInt(reactiveData.heroSectionProps.selectedComponent)"
+              /> -->
               <component v-else :is="componentItem.component" />
             </div>
           </template>
@@ -618,14 +650,19 @@ const getFileUploadContent = (sectionName: string) => {
                 class="editor-group"
                 v-if="
                   item.name == 'WpAppbarTop1' &&
-                  reactiveData.AppbarProps.appbarMenuItems
+                  reactiveData.appbarProps.appbarMenuItems
                 "
               >
                 <div class="sk-h6 sk-margin-bottom">Menu Items</div>
                 <Skchipset
-                  :chips="reactiveData.AppbarProps.appbarMenuItems"
+                  :chips="reactiveData.appbarProps.appbarMenuItems"
                   :disableSelect="false"
                   @onChipClick="removeMenuItem"
+                />
+              </div>
+              <div v-if="item.name == 'WpHero'">
+                <VariableSectionSelection
+                  @selectedComponent="handleComponentSwap"
                 />
               </div>
             </div>
