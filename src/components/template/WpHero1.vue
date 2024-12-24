@@ -180,7 +180,7 @@ const isOpen = computed(() => {
                       <Skicon iconType="arrow_drop_down" />
                       <Skbadge round :success="isOpen === 'Open' ? true : false">
                         <template #badgeinner>{{
-                          isOpen ? "Open Now" : "Closed"
+                          isOpen === "Open" ? "Open Now" : "Closed"
                         }}</template>
                       </Skbadge>
                     </div>
