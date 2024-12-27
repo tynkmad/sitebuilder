@@ -8,8 +8,8 @@ const extendedBusinessDetailsProps = {
 };
 </script>
 <script setup lang="ts">
-import WpHero1 from "@/components/template/WpHero1.vue";
-import WpHero2 from "@/components/template/WpHero2.vue";
+import WpHero1 from "@/components/template/hero/WpHero1.vue";
+import WpHero2 from "@/components/template/hero/WpHero2.vue";
 import {
   businessDetailsProps,
   IbusinessDetails,

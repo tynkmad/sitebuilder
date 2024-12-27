@@ -23,18 +23,18 @@ import { chipProps, MainNavBarType, skActionItem } from "rolex/skglobaltypes";
 import Sktextfield from "rolex/sktextfield.vue";
 
 //#region import Components
-import WpQuickBarTop from "@/components/template/WpQuickBarTop.vue";
-import WpHeaderBar from "@/components/template/WpHeaderBar.vue";
-import WpIcons from "@/components/template/WpIcons.vue";
-import WpAppbarTop1 from "@/components/template/WpAppbarTop1.vue";
-import WpMenuDrawer from "@/components/template/WpMenuDrawer.vue";
+import WpQuickBarTop from "@/components/template/common/WpQuickBarTop.vue";
+import WpHeaderBar from "@/components/template/common/WpHeaderBar.vue";
+import WpIcons from "@/components/template/common/WpIcons.vue";
+import WpAppbarTop1 from "@/components/template/common/WpAppbarTop1.vue";
+import WpMenuDrawer from "@/components/template/common/WpMenuDrawer.vue";
 import WpHero from "@/components/ui/WpHero.vue";
 // import WpHero1 from "@/components/template/WpHero1.vue";
-import WpFeaturedCTASection1 from "@/components/template/WpFeaturedCTASection1.vue";
-import WpAbout1 from "@/components/template/WpAbout1.vue";
-import WpFeedback1 from "@/components/template/WpFeedback1.vue";
-import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
-import WpPhotos from "@/components/template/WpPhotos.vue";
+import WpFeaturedCTASection1 from "@/components/template/featured_cta/WpFeaturedCTASection1.vue";
+import WpAbout1 from "@/components/template/about/WpAbout1.vue";
+import WpFeedback1 from "@/components/template/feedback/WpFeedback1.vue";
+import WpDoctorsList from "@/components/template/doctor_list/WpDoctorsList.vue";
+import WpPhotos from "@/components/template/photos/WpPhotos.vue";
 import VariableSectionSelection from "@/components/ui/VariableComponentSelection.vue";
 import RestOfSetions from "@/components/template/RestOfRegions.vue";
 

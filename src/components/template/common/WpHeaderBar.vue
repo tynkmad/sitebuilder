@@ -7,7 +7,7 @@ import Skpopup from "rolex/skpopup.vue";
 import { reactive } from "vue";
 import SkChannelImg from "rolex/channelimg.vue";
 import { MediumType } from "rolex/SkTypes";
-import GoogleTranslate from "@/components/template/GoogleTranslate.vue";
+import GoogleTranslate from "@/components/template/common/GoogleTranslate.vue";
 
 interface IheaaderBar {
   languageList: Array<skActionItem>;
