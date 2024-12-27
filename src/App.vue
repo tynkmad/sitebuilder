@@ -6,16 +6,17 @@ import { useRoute, useRouter } from 'vue-router';
 import SkAppbar from 'rolex/skappbar.vue';
 import SkMenuBar from 'rolex/skMenuBar.vue';
 import SkDrawer from 'rolex/skdrawer.vue';
-import { ExtendedMainNavBarType } from './types/webProfileCreatorTypes';
+import { ExtendedMainNavBarType } from '@/types/webProfileBuilderTypes';
 
+import '@/assets/template.css';
 // Define an interface for the reactive data structure
-interface IReactiveData {
+interface ImainApp {
   showMenuDrawer?: boolean;
   menuItems: Array<ExtendedMainNavBarType>
 }
 
 // Create a reactive object for the menu drawer state
-const ReactiveData = reactive<IReactiveData>({
+const ReactiveData = reactive<ImainApp>({
   showMenuDrawer: false,
   menuItems: [
     {
@@ -60,8 +61,17 @@ const toggleMenuDrawer = () => {
   ReactiveData.showMenuDrawer = !ReactiveData.showMenuDrawer;
 };
 
-const setActiveMenu = () => {
+const setActiveMenu = async () => {
   const currentPath = route.path; // Get the current path
+  // Check if current route is WebProfileBuilder and load CSS if true
+  if (route.path.includes('webprofilebuilder')) {
+    try {
+      // await import('@/assets/template.css');
+      console.log('CSS imported');
+    } catch (error) {
+      console.error('Failed to import CSS:', error);
+    }
+  }
   ReactiveData.menuItems = ReactiveData.menuItems.map(menu => {
     const isActive = menu.targetContentID && currentPath.includes(menu.targetContentID.replace(/\s+/g, '-').toLowerCase());
     return { ...menu, isActive }; // Ensure reactivity by returning a new object
@@ -71,6 +81,7 @@ const setActiveMenu = () => {
 // Set active menu on page load
 onMounted(() => {
   setActiveMenu();
+   
 });
 
 // Watch for route changes and update the active menu
@@ -79,7 +90,7 @@ watch(() => route.path, () => {
 });
 
 // Function to navigate to a different route or open an external link based on the selected menu item
-const navTo = (targetContentID: string) => {
+const navTo = async (targetContentID: string) => {
   const routeMap: Record<string, string> = {
     "WebProfileBuilder": '/webprofilebuilder',
     "Pricing": '/pricing',
@@ -93,9 +104,13 @@ const navTo = (targetContentID: string) => {
   if (targetContentID === "Resources") {
     window.open(ReactiveData.menuItems.find(menu => menu.targetContentID === "Resources")?.externalLink, '_blank');
   } else if (route) {
+    if (targetContentID === "WebProfileBuilder") {
+      // await import('@/assets/template.css');
+      console.log('css imported')
+    }
     router.push(route);
   } else {
-    router.push('/'); // Navigate to home as a fallback
+    router.push('./'); // Navigate to home as a fallback
   }
   if (ReactiveData.showMenuDrawer)
     ReactiveData.showMenuDrawer = !ReactiveData.showMenuDrawer // Hide Menu on mobile upon redirection
@@ -104,10 +119,10 @@ const navTo = (targetContentID: string) => {
 
 <template>
   <!-- AppBar with a toggle button for the menu drawer -->
-  <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
+  <!-- <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
     <template #ableft>
       <div class="sk-appbar-logo">
-        <a href="/">
+        <a href="./">
           <img src="https://lscdn.blob.core.windows.net/content/promanage/logo-color-230x60.png" height="40" width="150"
             alt="ProManage" />
         </a>
@@ -116,7 +131,7 @@ const navTo = (targetContentID: string) => {
     <template #abright>
       <SkMenuBar useSmallMenu :MenuItems="ReactiveData.menuItems" @navBarNavigation="navTo" class="sk-mobile-hide" />
     </template>
-  </SkAppbar>
+  </SkAppbar> -->
 
   <!-- Main content area -->
   <RouterView />

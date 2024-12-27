@@ -43,7 +43,7 @@
     --font-weight-bold: 700;
 
 
-    --color-text-muted: #666666;
+    --color-text-muted: #999999;
     --template-gradient: radial-gradient(circle at bottom left, rgb(var(--color-rgb-primary) / 20%) 70%, rgb(var(--color-rgb-secondary) / 50%));
 
     --gutter-base: 1.6rem;
@@ -72,3 +72,11 @@
 }
 
 /* #endregion common base.css style overrides  */
+
+/* #region styles for ui that won't affect components */
+.border-radius-top-0{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+/* #endregion styles for ui that won't affect components */
+
