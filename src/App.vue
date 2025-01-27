@@ -119,7 +119,7 @@ const navTo = async (targetContentID: string) => {
 
 <template>
   <!-- AppBar with a toggle button for the menu drawer -->
-  <!-- <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
+  <SkAppbar appBarBoxShadow appBarTitle="" appBarLeftIconStyle="menu" @navigationIconClick="toggleMenuDrawer">
     <template #ableft>
       <div class="sk-appbar-logo">
         <a href="./">
@@ -131,7 +131,7 @@ const navTo = async (targetContentID: string) => {
     <template #abright>
       <SkMenuBar useSmallMenu :MenuItems="ReactiveData.menuItems" @navBarNavigation="navTo" class="sk-mobile-hide" />
     </template>
-  </SkAppbar> -->
+  </SkAppbar>
 
   <!-- Main content area -->
   <RouterView />

@@ -14,25 +14,23 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      // component: HomeView,
-      component: SelectByName,
+      component: HomeView,
+      // component: SelectByName,
     },
     {
       path: "/webprofilebuilder",
       name: "Website Builder",
       component: WebProfileBuilder,
-      children: [
-        {
-          path: "SelectByName",
-          name: "SelectByName",
-          component: SelectByName,
-        },
-        {
-          path: "Interactive",
-          name: "Interactive",
-          component: Interactive,
-        },
-      ],
+    },
+    {
+      path: "/webprofilebuilder/SelectByName",
+      name: "SelectByName",
+      component: SelectByName,
+    },
+    {
+      path: "/webprofilebuilder/Interactive",
+      name: "Interactive",
+      component: Interactive,
     },
     {
       path: "/pricing",
