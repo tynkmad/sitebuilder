@@ -1,27 +1,79 @@
-# Web Profile Builder
+# SiteBuilder
 
-Web Profile Builder is a Vue.js-based application designed to help users create, customize, and manage web profiles effortlessly. With a drag-and-drop interface and modern features, it empowers users to establish their online presence easily and effectively.
+**A dynamic landing page builder utilizing the custom "Rolex" framework by Sulekha, built with Vue.js.**
 
-## Features
-
-- **Drag-and-Drop Interface**: Easily customize the layout and components.
-- **Customizable Templates**: Prebuilt components for quick profile creation.
-- **Responsive Design**: Profiles look great on all devices.
-- **Real-Time Preview**: See your changes instantly as you build.
-- **Integration Ready**: Easily extend with APIs and custom components.
-
-## Technologies Used
-
-- **Vue.js**: Reactive UI framework.
-- **Vue Router**: For page navigation.
-- **TypeScript**: Static typing for robust development.
-- **Vite**: Fast build tool for modern frontend projects.
+![SiteBuilder Banner](https://via.placeholder.com/1200x400?text=SiteBuilder+Banner)
 
 ---
 
-## Folder Structure
+## 🚀 Overview
 
-Here’s an overview of the project’s folder structure:
+SiteBuilder is an intuitive platform that empowers users to create dynamic landing pages effortlessly. Leveraging Vue.js and the proprietary Rolex framework developed by Sulekha, SiteBuilder offers a seamless drag-and-drop interface, enabling rapid development and customization of landing pages without the need for extensive coding knowledge.
+
+---
+
+## 🔧 Features
+
+* **Drag-and-Drop Interface**: Easily add and arrange components to build your landing page.
+* **Rolex Framework Integration**: Utilize Sulekha's custom-built Rolex framework for enhanced functionality.
+* **Responsive Design**: Ensure your landing pages look great on all devices.
+* **Customizable Components**: Tailor each component to fit your brand's identity.
+* **Real-Time Preview**: See changes instantly with live previews.
+* **Export Options**: Download your landing page as static HTML/CSS files for deployment.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend**: Vue.js
+* **Framework**: Rolex (custom framework by Sulekha)
+* **Styling**: Tailwind CSS
+* **Build Tool**: Vite
+* **Version Control**: Git
+
+---
+
+## 📦 Installation
+
+To get started with SiteBuilder locally, follow these steps:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/tynkmad/sitebuilder.git
+   cd sitebuilder
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+   Navigate to `http://localhost:3000` in your browser to view the application.
+
+---
+
+## 🧪 Usage
+
+* **Create a New Project**: Click on "New Project" to start building your landing page.
+* **Add Components**: Drag components from the sidebar and drop them onto the canvas.
+* **Customize Components**: Click on any component to edit its content, style, and settings.
+* **Preview Changes**: Use the "Preview" button to see your landing page in real-time.
+* **Export Project**: Once satisfied, export your project as static HTML/CSS files for deployment.
+
+---
+
+## 📁 Project Structure
+
+Here's an overview of the project's directory structure:
+
 ```
 │   .gitignore                # Specifies intentionally untracked files to ignore
 │   env.d.ts                  # TypeScript environment declaration file
@@ -115,91 +167,52 @@ Here’s an overview of the project’s folder structure:
 
 ---
 
-## Installation
+## 🤝 Contributing
 
-1. **Clone the Repository**:
+We welcome contributions to enhance SiteBuilder! To get started:
+
+1. **Fork the repository**.
+
+2. **Clone your fork**:
+
    ```bash
-   git clone https://github.com/tynkmad/sitebuilder.git
+   git clone https://github.com/your-username/sitebuilder.git
    cd sitebuilder
    ```
 
-2. **Install Dependencies**:
+3. **Create a new branch**:
+
    ```bash
-   npm install
+   git checkout -b feature/your-feature
    ```
 
-3. **Run the Development Server**:
+4. **Make your changes** and **commit** them:
+
    ```bash
-   npm run dev
+   git commit -am 'Add new feature'
    ```
 
-4. **Build for Production**:
+5. **Push to your fork**:
+
    ```bash
-   npm run build
+   git push origin feature/your-feature
    ```
 
-5. **Preview the Production Build**:
-   ```bash
-   npm run preview
-   ```
+6. **Open a Pull Request** to the main repository.
 
 ---
 
-## Scripts
+## 📝 License
 
-- **Development**: Start the development server with Vite:
-  ```bash
-  npm run dev
-  ```
-
-- **Build**: Create a production build:
-  ```bash
-  npm run build
-  ```
-
-- **Deploy**: Deploy the build to GitHub Pages:
-  ```bash
-  npm run deploy
-  ```
-
-- **Preview**: Serve the production build locally:
-  ```bash
-  npm run preview
-  ```
-
-- **Type Checking**: Run TypeScript type checks:
-  ```bash
-  npm run type-check
-  ```
-
-- **Linting**: Run ESLint and fix issues:
-  ```bash
-  npm run lint
-  ```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Contributing
+## 📞 Contact
 
-Contributions are welcome! To contribute:
+For inquiries or support, please reach out to:
 
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature-branch-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m 'Add some feature'
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature-branch-name
-   ```
-5. Open a pull request.
+* **Email**: [karthikeyan.m@example.com](mailto:karthikeyan.m@example.com)
+* **LinkedIn**: [linkedin.com/in/karthikeyan-m](https://www.linkedin.com/in/karthikeyan-m)
+* **GitHub**: [github.com/tynkmad](https://github.com/tynkmad)
 
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
