@@ -301,7 +301,7 @@
     "getBusinessListing": [
         {
             "name": "Google",
-            "url": "https://lscdn.blob.core.windows.net/content/promanage/google-logo.svg",
+            "url": "https://promanagecdn.blob.core.windows.net/promanage/images/google-logo.svg",
             "status": "Initiate Claim",
             "actionUrl": null
         },
@@ -319,7 +319,7 @@
         },
         {
             "name": "Sulekha",
-            "url": "https://lscdn.blob.core.windows.net/content/promanage/sulekha-logo.svg",
+            "url": "https://lscdn.blob.core.windows.net/content/images/sulekha-emblem.png",
             "status": "Live",
             "actionUrl": "https://www.sulekha.com/dr-kvm-nandakumar-perambur-chennai-contact-address"
         },

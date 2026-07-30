@@ -105,18 +105,27 @@ Here's an overview of the project's directory structure:
     │   ├───template          # Template-specific components
     │   │       CoreWebVitals.vue         # Displays core web vitals data
     │   │       GoogleTranslate.vue       # Google Translate integration
-    │   │       RestOfRegions.vue         # Component for additional regions
     │   │       WpAbout1.vue              # About section template
     │   │       WpAppbarTop1.vue          # App bar template
+    │   │       WpAreasServed.vue         # Areas served list component
+    │   │       WpArticles.vue            # Articles/blog section component
+    │   │       WpCategories.vue          # Service categories tabs component
     │   │       WpDoctorsList.vue         # Doctors list component
+    │   │       WpDocuments.vue           # Downloadable documents component
+    │   │       WpFaq.vue                 # FAQ accordion component
     │   │       WpFeaturedCTASection1.vue # Featured call-to-action section
     │   │       WpFeedback1.vue           # Feedback component
+    │   │       WpFooter.vue              # Footer component
     │   │       WpHeaderBar.vue           # Header bar component
     │   │       WpHero1.vue               # Hero section template 1
     │   │       WpHero2.vue               # Hero section template 2
     │   │       WpIcons.vue               # Icons display component
+    │   │       WpLocation.vue            # Location/map component
     │   │       WpMenuDrawer.vue          # Menu drawer component
     │   │       WpPhotos.vue              # Photo gallery component
+    │   │       WpReviews.vue             # Reviews/testimonials carousel component
+    │   │       WpTags.vue                # Tags list component
+    │   │       WpVideos.vue              # Video gallery component
     │   │       WpQuickBarTop.vue         # Quick bar component
     │   │
     │   └───ui               # General-purpose UI components

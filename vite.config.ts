@@ -7,6 +7,7 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
   // base: "/promanage/pmsme/template-builder/",
   base: "/sitebuilder/",
+  // base: "/content/c/site-builder/",
   plugins: [vue()],
   // server: {
   //   host: "local.promanage.biz",

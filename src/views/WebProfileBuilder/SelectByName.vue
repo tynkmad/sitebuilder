@@ -36,7 +36,35 @@ import WpFeedback1 from "@/components/template/WpFeedback1.vue";
 import WpDoctorsList from "@/components/template/WpDoctorsList.vue";
 import WpPhotos from "@/components/template/WpPhotos.vue";
 import VariableSectionSelection from "@/components/ui/VariableComponentSelection.vue";
-import RestOfSetions from "@/components/template/RestOfRegions.vue";
+import WpDocuments from "@/components/template/WpDocuments.vue";
+import WpVideos from "@/components/template/WpVideos.vue";
+import WpReviews from "@/components/template/WpReviews.vue";
+import WpArticles from "@/components/template/WpArticles.vue";
+import WpCategories from "@/components/template/WpCategories.vue";
+import WpLocation from "@/components/template/WpLocation.vue";
+import WpFaq from "@/components/template/WpFaq.vue";
+import WpTags from "@/components/template/WpTags.vue";
+import WpAreasServed from "@/components/template/WpAreasServed.vue";
+import WpFooter from "@/components/template/WpFooter.vue";
+import WpVariantPicker from "@/components/ui/WpVariantPicker.vue";
+import WpQuickBarTop2 from "@/components/template/WpQuickBarTop2.vue";
+import WpHeaderBar2 from "@/components/template/WpHeaderBar2.vue";
+import WpAppbarTop2 from "@/components/template/WpAppbarTop2.vue";
+import WpFeaturedCTASection2 from "@/components/template/WpFeaturedCTASection2.vue";
+import WpAbout2 from "@/components/template/WpAbout2.vue";
+import WpFeedback2 from "@/components/template/WpFeedback2.vue";
+import WpDoctorsList2 from "@/components/template/WpDoctorsList2.vue";
+import WpPhotos2 from "@/components/template/WpPhotos2.vue";
+import WpDocuments2 from "@/components/template/WpDocuments2.vue";
+import WpVideos2 from "@/components/template/WpVideos2.vue";
+import WpReviews2 from "@/components/template/WpReviews2.vue";
+import WpArticles2 from "@/components/template/WpArticles2.vue";
+import WpCategories2 from "@/components/template/WpCategories2.vue";
+import WpLocation2 from "@/components/template/WpLocation2.vue";
+import WpFaq2 from "@/components/template/WpFaq2.vue";
+import WpTags2 from "@/components/template/WpTags2.vue";
+import WpAreasServed2 from "@/components/template/WpAreasServed2.vue";
+import WpFooter2 from "@/components/template/WpFooter2.vue";
 
 //#endregion import Components
 
@@ -61,6 +89,8 @@ interface IcomponentItem {
   isMandatory?: boolean;
   order: number | undefined;
   description: string;
+  variants?: Array<Component>;
+  variantIndex?: number;
 }
 
 interface IwebProfileBuilder {
@@ -106,6 +136,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpQuickBarTop",
       component: markRaw(WpQuickBarTop),
+      variants: [markRaw(WpQuickBarTop), markRaw(WpQuickBarTop2)],
+      variantIndex: 0,
       label: "Quick Bar Top",
       isSelected: true,
       order: 1,
@@ -115,6 +147,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpHeaderBar",
       component: markRaw(WpHeaderBar),
+      variants: [markRaw(WpHeaderBar), markRaw(WpHeaderBar2)],
+      variantIndex: 0,
       label: "Header",
       isSelected: true,
       order: 2,
@@ -124,6 +158,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpAppbarTop1",
       component: markRaw(WpAppbarTop1),
+      variants: [markRaw(WpAppbarTop1), markRaw(WpAppbarTop2)],
+      variantIndex: 0,
       label: "Appbar Top 1",
       isSelected: true,
       order: 3,
@@ -161,6 +197,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpFeaturedCTASection1",
       component: markRaw(WpFeaturedCTASection1),
+      variants: [markRaw(WpFeaturedCTASection1), markRaw(WpFeaturedCTASection2)],
+      variantIndex: 0,
       label: "Featured CTA 1",
       isSelected: true,
       order: -1,
@@ -170,6 +208,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpAbout1",
       component: markRaw(WpAbout1),
+      variants: [markRaw(WpAbout1), markRaw(WpAbout2)],
+      variantIndex: 0,
       label: "About us 1",
       isSelected: true,
       order: -1,
@@ -179,6 +219,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpFeedback1",
       component: markRaw(WpFeedback1),
+      variants: [markRaw(WpFeedback1), markRaw(WpFeedback2)],
+      variantIndex: 0,
       label: "Feedback 1",
       isSelected: true,
       order: -1,
@@ -188,6 +230,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpDoctorsList",
       component: markRaw(WpDoctorsList),
+      variants: [markRaw(WpDoctorsList), markRaw(WpDoctorsList2)],
+      variantIndex: 0,
       label: "Doctors List 1",
       isSelected: true,
       order: -1,
@@ -197,6 +241,8 @@ const reactiveData = reactive<IwebProfileBuilder>({
     {
       name: "WpPhotos",
       component: markRaw(WpPhotos),
+      variants: [markRaw(WpPhotos), markRaw(WpPhotos2)],
+      variantIndex: 0,
       label: "Photo Gallery",
       isSelected: true,
       order: -1,
@@ -204,13 +250,105 @@ const reactiveData = reactive<IwebProfileBuilder>({
         "A photo gallery section showcasing images of the business, services, or events to visually engage users.",
     },
     {
-      name: "RestOfSetions",
-      component: markRaw(RestOfSetions),
-      label: "Rest of the sections",
+      name: "WpDocuments",
+      component: markRaw(WpDocuments),
+      variants: [markRaw(WpDocuments), markRaw(WpDocuments2)],
+      variantIndex: 0,
+      label: "Documents",
       isSelected: true,
       order: -1,
       description:
-        "",
+        "A downloadable documents section for sharing brochures, price lists, or other resources with visitors.",
+    },
+    {
+      name: "WpVideos",
+      component: markRaw(WpVideos),
+      variants: [markRaw(WpVideos), markRaw(WpVideos2)],
+      variantIndex: 0,
+      label: "Videos",
+      isSelected: true,
+      order: -1,
+      description: "A video gallery section for showcasing promotional or informational videos.",
+    },
+    {
+      name: "WpReviews",
+      component: markRaw(WpReviews),
+      variants: [markRaw(WpReviews), markRaw(WpReviews2)],
+      variantIndex: 0,
+      label: "Reviews",
+      isSelected: true,
+      order: -1,
+      description: "A carousel of client testimonials and star ratings to build trust with visitors.",
+    },
+    {
+      name: "WpArticles",
+      component: markRaw(WpArticles),
+      variants: [markRaw(WpArticles), markRaw(WpArticles2)],
+      variantIndex: 0,
+      label: "Articles",
+      isSelected: true,
+      order: -1,
+      description: "A blog/articles section for sharing news and updates related to the business.",
+    },
+    {
+      name: "WpCategories",
+      component: markRaw(WpCategories),
+      variants: [markRaw(WpCategories), markRaw(WpCategories2)],
+      variantIndex: 0,
+      label: "Categories",
+      isSelected: true,
+      order: -1,
+      description: "A tabbed section for browsing services grouped by category.",
+    },
+    {
+      name: "WpLocation",
+      component: markRaw(WpLocation),
+      variants: [markRaw(WpLocation), markRaw(WpLocation2)],
+      variantIndex: 0,
+      label: "Location",
+      isSelected: true,
+      order: -1,
+      description: "An embedded map showing the business location.",
+    },
+    {
+      name: "WpFaq",
+      component: markRaw(WpFaq),
+      variants: [markRaw(WpFaq), markRaw(WpFaq2)],
+      variantIndex: 0,
+      label: "FAQ",
+      isSelected: true,
+      order: -1,
+      description: "A frequently-asked-questions accordion to answer common visitor queries.",
+    },
+    {
+      name: "WpTags",
+      component: markRaw(WpTags),
+      variants: [markRaw(WpTags), markRaw(WpTags2)],
+      variantIndex: 0,
+      label: "Tags",
+      isSelected: true,
+      order: -1,
+      description: "A list of keyword tags relevant to the business's services.",
+    },
+    {
+      name: "WpAreasServed",
+      component: markRaw(WpAreasServed),
+      variants: [markRaw(WpAreasServed), markRaw(WpAreasServed2)],
+      variantIndex: 0,
+      label: "Areas Served",
+      isSelected: true,
+      order: -1,
+      description: "A list of nearby areas the business serves, with distances.",
+    },
+    {
+      name: "WpFooter",
+      component: markRaw(WpFooter),
+      variants: [markRaw(WpFooter), markRaw(WpFooter2)],
+      variantIndex: 0,
+      label: "Footer",
+      isSelected: true,
+      order: 0,
+      description: "The page footer with social links and copyright information.",
     },
   ],
   componentsToAdd: [],
@@ -373,6 +511,12 @@ const updateComponentsToAdd = (
   // Sort the componentsToAdd array based on order
   reactiveData.componentsToAdd = sortComponents(reactiveData.componentsToAdd);
 };
+
+function setVariant(item: IcomponentItem, variantIndex: number) {
+  if (!item.variants || !item.variants[variantIndex]) return;
+  item.variantIndex = variantIndex;
+  item.component = item.variants[variantIndex];
+}
 
 const toggleMenuDrawer = () => {
   const wpMenuDrawer = reactiveData.availableComponents.find(
@@ -595,7 +739,7 @@ const handleComponentSwap = (selectedComponent: string) => {
             <div :id="componentItem.name">
               <component
                 :is="componentItem.component"
-                v-if="componentItem.component === WpAppbarTop1"
+                v-if="componentItem.name === 'WpAppbarTop1'"
                 :menuItems="
                   reactiveData.appbarProps.appbarMenuItems
                     .filter((chip) => chip.selected)
@@ -633,7 +777,7 @@ const handleComponentSwap = (selectedComponent: string) => {
                 :sectionTitle="reactiveData.featuredSectionProps.sectionTitle"
                 :sectionDescription="reactiveData.featuredSectionProps.sectionDescription"
                 :buttonText="reactiveData.featuredSectionProps.buttonText"
-                v-else-if="componentItem.component === WpFeaturedCTASection1"
+                v-else-if="componentItem.name === 'WpFeaturedCTASection1'"
                 :is="componentItem.component"
               />
               <component v-else :is="componentItem.component" />
@@ -709,6 +853,13 @@ const handleComponentSwap = (selectedComponent: string) => {
               <p class="sk-text-muted">
                 {{ item.description }}
               </p>
+              <div class="editor-group" v-if="item.variants && item.variants.length > 1">
+                <div class="sk-h6 sk-margin-bottom">Variant</div>
+                <WpVariantPicker
+                  :variantLabels="item.variants.map((_, i) => `Variant ${i + 1}`)"
+                  @update:modelValue="(index) => setVariant(item, index)"
+                />
+              </div>
               <div
                 class="editor-group"
                 v-if="item.name == 'WpAppbarTop1' || item.name == 'WpHero'"

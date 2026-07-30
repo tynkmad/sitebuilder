@@ -18,6 +18,11 @@ const router = createRouter({
       component: SelectByName,
     },
     {
+      path: "/index.html",
+      name: "home-index",
+      component: SelectByName,
+    },
+    {
       path: "/webprofilebuilder",
       name: "Website Builder",
       component: WebProfileBuilder,
@@ -53,6 +58,11 @@ const router = createRouter({
       path: "/integrations",
       name: "Integrations",
       component: Integrations,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: SelectByName,
     },
   ],
 });
